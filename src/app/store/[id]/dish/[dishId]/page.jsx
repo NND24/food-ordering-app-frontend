@@ -222,7 +222,7 @@ const page = () => {
       return;
     }
 
-    if (dishInfo?.stockStatus === "OUT_OF_STOCK") {
+    if (dishInfo?.status === "OUT_OF_STOCK") {
       toast.error("Món ăn này hiện đang hết hàng, vui lòng quay lại sau!");
       return;
     }

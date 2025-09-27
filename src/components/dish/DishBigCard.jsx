@@ -54,7 +54,7 @@ const DishBigCard = ({ dish, storeInfo, cartItems }) => {
   return (
     <div className='relative group'>
       {/* Overlay trạng thái cửa hàng */}
-      {(storeInfo?.openStatus === "CLOSED" || dish?.stockStatus === "OUT_OF_STOCK") && (
+      {(storeInfo?.openStatus === "CLOSED" || dish?.status === "OUT_OF_STOCK") && (
         <div className='absolute inset-0 bg-black/50 z-20 flex items-center justify-center rounded-2xl backdrop-blur-[2px]'>
           <span className='text-white text-lg font-semibold px-4 text-center'>
             {storeInfo?.openStatus === "CLOSED" ? "Cửa hàng hiện đang đóng" : "Món ăn hiện không còn phục vụ"}
