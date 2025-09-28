@@ -15,9 +15,13 @@ const getDetailCart = async (cartId) => {
 };
 
 const updateCart = async (data) => {
-  const response = await instance.post(`/cart/update`, data, config());
-  if (response.data) {
-    return response.data;
+  try {
+    const response = await instance.post(`/cart/update`, data, config());
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    return error.response?.data || { message: "Unknown error occurred" };
   }
 };
 

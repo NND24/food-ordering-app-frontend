@@ -40,7 +40,7 @@ const FavoriteItem = ({ store }) => {
       {/* Hình ảnh cửa hàng */}
       <div className='relative w-full pt-[55%]'>
         <Image
-          src={store.avatar.url || "/placeholder.png"}
+          src={store?.avatar?.url || "/placeholder.png"}
           alt={store.name}
           fill
           className='object-cover rounded-t-2xl'

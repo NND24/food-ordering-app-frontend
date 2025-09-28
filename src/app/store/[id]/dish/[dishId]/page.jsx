@@ -229,7 +229,7 @@ const page = () => {
 
     if (user) {
       try {
-        await cartService.updateCart({ storeId, dishId, quantity, toppings, note });
+        const res = await cartService.updateCart({ storeId, dishId, quantity, toppings, note });
         // Swal.fire({
         //   toast: true,
         //   icon: "success",
@@ -239,14 +239,19 @@ const page = () => {
         //   timerProgressBar: true,
         // });
 
-        Swal.fire({
-          title: "Cập nhật giỏ hàng thành công",
-          icon: "success",
-        });
+        if (res.success) {
+          Swal.fire({
+            title: "Cập nhật giỏ hàng thành công",
+            icon: "success",
+          });
 
-        refreshCart();
+          refreshCart();
+        } else {
+          toast.error(res.message);
+        }
       } catch (error) {
         console.error(error);
+        toast.error(error.message);
       }
     } else {
       toast.error("Vui lòng đăng nhập để tiếp tục đặt hàng!");
