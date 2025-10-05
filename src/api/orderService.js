@@ -1,9 +1,11 @@
 import { config, instance } from "@/utils/axiosConfig";
 
 const getUserOrder = async () => {
-  const response = await instance.get(`/order/`, config());
-  if (response.data) {
+  try {
+    const response = await instance.get(`/order/`, config());
     return response.data;
+  } catch (error) {
+    return error.response?.data || { message: "Unknown error occurred" };
   }
 };
 

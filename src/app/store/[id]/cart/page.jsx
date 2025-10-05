@@ -234,6 +234,7 @@ const page = () => {
         note: storeLocation.note,
         location: [storeLocation.lon, storeLocation.lat],
         vouchers: selectedVouchers,
+        shippingFee: shippingFee,
       };
 
       // --- Payment flows ---

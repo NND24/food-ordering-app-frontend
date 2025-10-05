@@ -350,7 +350,7 @@ const page = () => {
 
               {allDish && (
                 <div className='mb-6'>
-                  <ListDish storeInfo={storeInfo} allDish={allDish} cartItems={storeCart ? storeCart?.items : []} />
+                  <ListDish storeInfo={storeInfo} cartItems={storeCart ? storeCart?.items : []} />
                 </div>
               )}
 

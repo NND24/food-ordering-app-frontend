@@ -14,7 +14,17 @@ const getDish = async (dishId) => {
   }
 };
 
+const getActiveStoreDishGroups = async (storeId) => {
+  try {
+    const response = await instance.get(`/dish-group/store/${storeId}/active`);
+    return response.data;
+  } catch (error) {
+    return error.response?.data || { message: "Unknown error occurred" };
+  }
+};
+
 export const dishService = {
   getAllDish,
   getDish,
+  getActiveStoreDishGroups,
 };
