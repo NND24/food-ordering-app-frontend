@@ -45,7 +45,6 @@ const page = () => {
   const searchParams = useSearchParams();
 
   const [storeInfo, setStoreInfo] = useState(null);
-  const [allDish, setAllDish] = useState(null);
   const [storeCart, setStoreCart] = useState(null);
   const [storeFavorite, setStoreFavorite] = useState(null);
   const [cartPrice, setCartPrice] = useState(0);
@@ -69,13 +68,6 @@ const page = () => {
     } catch (error) {
       setStoreLoading(false);
     }
-  };
-
-  const getAllDish = async () => {
-    try {
-      const response = await dishService.getAllDish(storeId);
-      setAllDish(response.data);
-    } catch (error) {}
   };
 
   const getAllStoreRating = async () => {
@@ -117,7 +109,6 @@ const page = () => {
   useEffect(() => {
     if (storeId) {
       getStoreInfo();
-      getAllDish();
       getAllStoreRating();
       getPaginationRating();
       getAllStoreRatingDesc();
@@ -341,14 +332,14 @@ const page = () => {
 
             {/* Content */}
             <div className='px-5 md:px-6 mt-[20px] pb-6'>
-              {allDish && (
+              {/* {allDish && (
                 <div className='mb-6'>
                   <h3 className='text-[#4A4B4D] text-xl font-bold mb-3'>Dành cho bạn</h3>
                   <ListDishBig storeInfo={storeInfo} allDish={allDish} cartItems={storeCart ? storeCart?.items : []} />
                 </div>
-              )}
+              )} */}
 
-              {allDish && (
+              {storeInfo && (
                 <div className='mb-6'>
                   <ListDish storeInfo={storeInfo} cartItems={storeCart ? storeCart?.items : []} />
                 </div>

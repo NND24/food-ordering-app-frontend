@@ -14,9 +14,12 @@ import { useAuth } from "@/context/authContext";
 import { cartService } from "@/api/cartService";
 import { Atom } from "react-loading-indicators";
 import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const { id: storeId, dishId } = useParams();
+
+  const router = useRouter();
 
   const [dishInfo, setDishInfo] = useState(null);
   const [storeCart, setStoreCart] = useState(null);
@@ -212,10 +215,6 @@ const page = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(toppings);
-  }, [toppings]);
-
   const handleAddToCart = async () => {
     if (storeCart?.store?.openStatus === "CLOSED") {
       toast.error("Cửa hàng hiện đang đóng cửa, vui lòng quay lại sau!");
@@ -230,25 +229,10 @@ const page = () => {
     if (user) {
       try {
         const res = await cartService.updateCart({ storeId, dishId, quantity, toppings, note });
-        // Swal.fire({
-        //   toast: true,
-        //   icon: "success",
-        //   title: "Cập nhật giỏ hàng thành công",
-        //   showConfirmButton: false,
-        //   timer: 2000,
-        //   timerProgressBar: true,
-        // });
 
-        if (res.success) {
-          Swal.fire({
-            title: "Cập nhật giỏ hàng thành công",
-            icon: "success",
-          });
-
-          refreshCart();
-        } else {
-          toast.error(res.message);
-        }
+        toast.success("Cập nhật giỏ hàng thành công");
+        refreshCart();
+        router.push(`/store/${storeId}`);
       } catch (error) {
         console.error(error);
         toast.error(error.message);
@@ -264,6 +248,7 @@ const page = () => {
         await cartService.updateCart({ storeId, dishId, quantity: 0, toppings: [] });
         toast.success("Cập nhật giỏ hàng thành công");
         refreshCart();
+        router.push(`/store/${storeId}`);
       } catch (error) {
         console.error(error);
       }
