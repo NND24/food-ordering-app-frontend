@@ -40,8 +40,15 @@ export const SocketProvider = ({ children }) => {
     };
   }, [user]);
 
+  const sendNotification = ({ storeId, title, message, type, orderId }) => {
+    if (!socket) return;
+    socket.emit("sendNotification", { storeId, title, message, type, orderId });
+  };
+
   return (
-    <SocketContext.Provider value={{ socket, notifications, setNotifications }}>{children}</SocketContext.Provider>
+    <SocketContext.Provider value={{ socket, notifications, setNotifications, sendNotification }}>
+      {children}
+    </SocketContext.Provider>
   );
 };
 

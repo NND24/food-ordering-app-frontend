@@ -20,7 +20,6 @@ export const FavoriteProvider = ({ children }) => {
       }
     } catch (error) {
       setFavorite(null);
-      console.error("Lỗi khi lấy giỏ hàng:", error);
     } finally {
       setLoading(false);
     }

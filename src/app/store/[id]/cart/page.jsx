@@ -17,6 +17,7 @@ import { useVoucher } from "@/context/voucherContext";
 import { paymentService } from "@/api/paymentService";
 import { shippingFeeService } from "@/api/shippingFeeService";
 import { useSearchParams } from "next/navigation";
+import { useSocket } from "@/context/socketContext";
 
 const page = () => {
   const router = useRouter();
@@ -35,6 +36,7 @@ const page = () => {
   const { refreshCart, cart } = useCart();
   const { refreshOrder } = useOrder();
   const { storeVouchers } = useVoucher();
+  const { sendNotification } = useSocket();
 
   const selectedVouchers = storeVouchers[storeId] || [];
 
@@ -271,6 +273,13 @@ const page = () => {
         toast.success("Đặt thành công");
         refreshOrder?.();
         refreshCart?.();
+        sendNotification({
+          storeId: storeId,
+          title: "Có đơn hàng mới",
+          message: `Vui lòng xác nhận đơn hàng`,
+          orderId: response?.orderId,
+          type: "order",
+        });
         router.push(`/orders/detail-order/${response.orderId}`);
       } else {
         toast.error("Lỗi phương thức thanh toán tiền mặt");

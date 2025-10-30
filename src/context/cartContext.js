@@ -20,7 +20,6 @@ export const CartProvider = ({ children }) => {
       }
     } catch (error) {
       setCart(null);
-      console.error("Lỗi khi lấy giỏ hàng:", error);
     } finally {
       setLoading(false);
     }

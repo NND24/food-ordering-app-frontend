@@ -22,16 +22,18 @@ const ListDish = ({ storeInfo, cartItems }) => {
   return (
     <>
       {allDishGroups?.length > 0 &&
-        allDishGroups.map((group) => (
-          <div key={group._id} className='mb-[20px]'>
-            <h3 className='text-[#4A4B4D] text-[24px] font-bold mb-[5px] line-clamp-2'>{group.name}</h3>
-            <div className='grid grid-cols-1 gap-[20px] md:grid-cols-2'>
-              {group.dishes?.map((dish) => (
-                <DishCard key={dish._id} dish={dish} storeInfo={storeInfo} cartItems={cartItems} />
-              ))}
+        allDishGroups.map((group) =>
+          group.dishes.length > 0 ? (
+            <div key={group._id} className='mb-[20px]'>
+              <h3 className='text-[#4A4B4D] text-[24px] font-bold mb-[5px] line-clamp-2'>{group.name}</h3>
+              <div className='grid grid-cols-1 gap-[20px] md:grid-cols-2'>
+                {group.dishes?.map((dish) => (
+                  <DishCard key={dish._id} dish={dish} storeInfo={storeInfo} cartItems={cartItems} />
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ) : null
+        )}
     </>
   );
 };

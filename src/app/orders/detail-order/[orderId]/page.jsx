@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { useOrder } from "@/context/orderContext";
 import { useCart } from "@/context/cartContext";
 import { useSearchParams } from "next/navigation";
+import { useSocket } from "@/context/socketContext";
 
 const Page = () => {
   const router = useRouter();
@@ -28,6 +29,7 @@ const Page = () => {
   const { user } = useAuth();
   const { refreshOrder } = useOrder();
   const { refreshCart } = useCart();
+  const { sendNotification } = useSocket();
 
   const getOrderDetail = async () => {
     try {
@@ -83,6 +85,13 @@ const Page = () => {
     if (result.isConfirmed) {
       try {
         await orderService.cancelOrder(orderId);
+        sendNotification({
+          storeId: orderDetail.storeId,
+          title: "Đơn hàng đã bị hủy",
+          message: `Đơn hàng (#${orderId}) đã bị hủy bởi khách hàng.`,
+          orderId: orderId,
+          type: "order",
+        });
         toast.success("Hủy đơn hàng thành công!");
         refreshOrder();
         router.push("/orders");
@@ -123,6 +132,13 @@ const Page = () => {
     if (result.isConfirmed) {
       try {
         await orderService.updateOrderStatus({ orderId, data: { status: "done" } });
+        sendNotification({
+          storeId: orderDetail.storeId,
+          title: "Đơn hàng đã hoàn tất",
+          message: `Đơn hàng (#${orderId}) đã được khách hàng xác nhận.`,
+          orderId: orderId,
+          type: "order_done",
+        });
         toast.success("Xác nhận đơn hàng thành công!");
         getOrderDetail();
       } catch (error) {}
