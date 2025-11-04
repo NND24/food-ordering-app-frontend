@@ -80,7 +80,7 @@ const Page = () => {
   };
 
   return (
-    <div className='px-4 md:pt-[110px] pb-[100px] bg-white'>
+    <div className='px-4 md:pt-[110px] pb-[100px] bg-white dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300'>
       <Heading title='Thêm đánh giá' description='' keywords='' />
       <div className='hidden md:block'>
         <Header />
@@ -88,7 +88,7 @@ const Page = () => {
 
       {orderDetail ? (
         <>
-          <div className='bg-white lg:w-[60%] md:w-[80%] md:mx-auto rounded-xl shadow-md p-4 md:p-6'>
+          <div className='bg-white dark:bg-gray-800 dark:border dark:border-gray-700 lg:w-[60%] md:w-[80%] md:mx-auto rounded-xl shadow-md dark:shadow-gray-800 p-4 md:p-6 transition-colors'>
             {/* Back Button */}
             <div className='flex items-center gap-4 pt-4 md:hidden'>
               <Image
@@ -96,27 +96,28 @@ const Page = () => {
                 alt=''
                 width={30}
                 height={30}
-                className='cursor-pointer hover:scale-110 transition-transform'
+                className='cursor-pointer hover:scale-110 transition-transform dark:invert'
                 onClick={() => router.back()}
               />
-              <h3 className='flex-1 text-[#4A4B4D] text-2xl font-bold'>Đánh giá</h3>
+              <h3 className='flex-1 text-[#4A4B4D] dark:text-gray-100 text-2xl font-bold'>Đánh giá</h3>
             </div>
 
             {/* Store Avatar */}
             <div className='flex flex-col items-center mt-6'>
-              <div className='relative w-32 h-32 rounded-xl overflow-hidden shadow-lg'>
+              <div className='relative w-32 h-32 rounded-xl overflow-hidden shadow-lg dark:shadow-gray-900'>
                 <Image src={orderDetail?.data?.store?.avatar?.url || ""} alt='' fill className='object-cover' />
               </div>
             </div>
 
             {/* Store Name & Ordered Dishes */}
             <div className='text-center mt-6 space-y-2'>
-              <span className='text-[#4A4B4D] text-2xl font-semibold'>Đánh giá bữa ăn này</span>
-              <p className='text-gray-600 text-lg'>
-                Bạn thấy món ăn từ <span className='font-bold text-[#fc6011]'>{orderDetail.data.store.name}</span> như
+              <span className='text-[#4A4B4D] dark:text-gray-100 text-2xl font-semibold'>Đánh giá bữa ăn này</span>
+              <p className='text-gray-600 dark:text-gray-300 text-lg'>
+                Bạn thấy món ăn từ{" "}
+                <span className='font-bold text-[#fc6011] dark:text-orange-400'>{orderDetail.data.store.name}</span> như
                 thế nào?
               </p>
-              <p className='text-gray-600 text-base'>
+              <p className='text-gray-600 dark:text-gray-400 text-base'>
                 Đã đặt:{" "}
                 {orderDetail?.data?.items?.map((item, index) => (
                   <span key={index}>
@@ -133,10 +134,10 @@ const Page = () => {
             </div>
 
             {/* Comment */}
-            <div className='bg-[#f2f3f5] text-gray-700 p-4 rounded-lg shadow-inner'>
+            <div className='bg-[#f2f3f5] dark:bg-gray-700 text-gray-700 dark:text-gray-200 p-4 rounded-lg shadow-inner'>
               <textarea
                 placeholder='Vui lòng nhập đánh giá của bạn'
-                className='bg-transparent w-full resize-none focus:outline-none text-base'
+                className='bg-transparent w-full resize-none focus:outline-none text-base dark:placeholder-gray-400'
                 rows={4}
                 onChange={(e) => setComment(e.target.value)}
               ></textarea>
@@ -152,8 +153,8 @@ const Page = () => {
                 {({ getRootProps, getInputProps }) => (
                   <div {...getRootProps()} className='flex items-center gap-2 cursor-pointer'>
                     <input {...getInputProps()} />
-                    <Image src='/assets/camera.png' alt='' width={28} height={28} className='rounded-lg' />
-                    <span className='text-[#fc6011] font-medium hover:underline'>Thêm ảnh</span>
+                    <Image src='/assets/camera.png' alt='' width={28} height={28} className='rounded-lg dark:invert' />
+                    <span className='text-[#fc6011] dark:text-orange-400 font-medium hover:underline'>Thêm ảnh</span>
                   </div>
                 )}
               </Dropzone>
@@ -165,7 +166,10 @@ const Page = () => {
                 {uploadedFile
                   .map((file) => Object.assign(file, { preview: URL.createObjectURL(file) }))
                   .map((file, index) => (
-                    <div className='relative w-[120px] h-[120px] rounded-lg overflow-hidden shadow-md' key={file.name}>
+                    <div
+                      className='relative w-[120px] h-[120px] rounded-lg overflow-hidden shadow-md dark:shadow-gray-900'
+                      key={file.name}
+                    >
                       <Image
                         loading='lazy'
                         fill
@@ -185,11 +189,11 @@ const Page = () => {
           </div>
 
           {/* Submit Button */}
-          <div className='fixed bottom-0 left-0 right-0 p-4 bg-white shadow-md'>
+          <div className='fixed bottom-0 left-0 right-0 p-4 bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-900 transition'>
             <button
               onClick={handleAddRating}
               name='submitBtn'
-              className='w-full md:w-[80%] mx-auto block rounded-lg bg-[#fc6011] text-white py-3 text-lg font-semibold shadow-md hover:shadow-lg transition-transform hover:scale-105'
+              className='w-full md:w-[80%] mx-auto block rounded-lg bg-[#fc6011] dark:bg-orange-500 text-white py-3 text-lg font-semibold shadow-md hover:shadow-lg transition-transform hover:scale-105'
             >
               Gửi đánh giá
             </button>

@@ -68,7 +68,9 @@ const DishBigCard = ({ dish, storeInfo, cartItems }) => {
         className={storeInfo?.openStatus === "CLOSED" ? "pointer-events-none" : ""}
       >
         <div
-          className='relative flex flex-col gap-2 pt-[75%] w-full rounded-2xl overflow-hidden shadow-md bg-white transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl'
+          className='relative flex flex-col gap-2 pt-[75%] w-full rounded-2xl overflow-hidden shadow-md 
+                 bg-white dark:bg-gray-900 transition-transform duration-300 
+                 hover:scale-[1.02] hover:shadow-xl dark:hover:shadow-gray-800'
           name='bigDishCard'
         >
           <Image
@@ -81,7 +83,10 @@ const DishBigCard = ({ dish, storeInfo, cartItems }) => {
 
           {/* Nút giỏ hàng */}
           {cartItem?.quantity > 0 ? (
-            <div className='absolute bottom-3 right-3 flex items-center bg-white gap-2 border border-[#fc6011] rounded-full px-3 py-1 shadow-lg z-10'>
+            <div
+              className='absolute bottom-3 right-3 flex items-center bg-white dark:bg-gray-800 
+                        gap-2 border border-[#fc6011] rounded-full px-3 py-1 shadow-lg z-10'
+            >
               <Image
                 src='/assets/minus.png'
                 alt='minus'
@@ -93,7 +98,9 @@ const DishBigCard = ({ dish, storeInfo, cartItems }) => {
                 }}
                 className='cursor-pointer hover:scale-110 transition'
               />
-              <span className='text-[#4A4B4D] text-lg font-bold w-[30px] text-center'>{cartItem?.quantity}</span>
+              <span className='text-[#4A4B4D] dark:text-gray-100 text-lg font-bold w-[30px] text-center'>
+                {cartItem?.quantity}
+              </span>
               <Image
                 src='/assets/plus_active.png'
                 alt='plus'
@@ -113,7 +120,8 @@ const DishBigCard = ({ dish, storeInfo, cartItems }) => {
               alt='add'
               width={42}
               height={42}
-              className='absolute bottom-3 right-3 bg-white rounded-full shadow-lg cursor-pointer hover:scale-110 transition'
+              className='absolute bottom-3 right-3 bg-white dark:bg-gray-800 
+                     rounded-full shadow-lg cursor-pointer hover:scale-110 transition'
               onClick={(e) => {
                 e.preventDefault();
                 handleChangeQuantity(1);
@@ -124,11 +132,13 @@ const DishBigCard = ({ dish, storeInfo, cartItems }) => {
 
         {/* Thông tin món ăn */}
         <div className='mt-2'>
-          <h4 className='text-[#4A4B4D] text-lg font-semibold truncate' name='dishName'>
+          <h4 className='text-[#4A4B4D] dark:text-gray-100 text-lg font-semibold truncate' name='dishName'>
             {dish?.name}
           </h4>
-          {dish?.description && <p className='text-[#a4a5a8] text-sm truncate'>{dish?.description}</p>}
-          <p className='text-black font-bold mt-1' name='dishPrice'>
+          {dish?.description && (
+            <p className='text-[#a4a5a8] dark:text-gray-400 text-sm truncate'>{dish?.description}</p>
+          )}
+          <p className='text-black dark:text-white font-bold mt-1' name='dishPrice'>
             {Number(dish?.price).toLocaleString("vi-VN")}đ
           </p>
         </div>

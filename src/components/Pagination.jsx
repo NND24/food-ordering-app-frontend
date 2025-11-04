@@ -25,25 +25,33 @@ const Pagination = ({ page, limit, total }) => {
   const pages = getPageNumbers();
 
   return (
-    <div className='mt-5 w-full flex items-center justify-center'>
+    <div className='mt-5 w-full flex items-center justify-center transition-colors duration-300'>
+      {/* Nút Previous */}
       {page > 1 && (
         <button
-          className='pr-3 pl-2 py-2 mr-2 text-[#e0e0e0] border-[#e0e0e0] border-[1px] border-solid rounded-[6px] h-[40px]'
+          className='pr-3 pl-2 py-2 mr-2 text-[#4a4b4d] dark:text-gray-300 
+                 border border-[#e0e0e0] dark:border-gray-700 
+                 rounded-[6px] h-[40px] bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition'
           onClick={() => handlePageChange(page - 1)}
         >
           <Image src='/assets/arrow_left.png' alt='Prev' width={16} height={16} />
         </button>
       )}
 
+      {/* Các trang */}
       {pages.map((p, index) => (
         <React.Fragment key={index}>
           {p === "..." ? (
-            <span className='px-3 py-2 mr-2 text-[#4a4b4d]'>...</span>
+            <span className='px-3 py-2 mr-2 text-[#4a4b4d] dark:text-gray-300'>...</span>
           ) : (
             <button
-              className={`px-3 py-2 mr-2 border-[#e0e0e0] border-[1px] border-solid rounded-[6px] h-[40px] ${
-                p == page ? "bg-[#fc6011] text-[#fff]" : "bg-[#fff] text-[#4a4b4d]"
-              }`}
+              className={`px-3 py-2 mr-2 border border-[#e0e0e0] dark:border-gray-700 rounded-[6px] h-[40px] 
+                      transition-all duration-200 
+                      ${
+                        p == page
+                          ? "bg-[#fc6011] text-white dark:bg-[#fc6011] dark:text-white"
+                          : "bg-white text-[#4a4b4d] dark:bg-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      }`}
               onClick={() => handlePageChange(p)}
             >
               {p}
@@ -52,9 +60,12 @@ const Pagination = ({ page, limit, total }) => {
         </React.Fragment>
       ))}
 
+      {/* Nút Next */}
       {page < totalPages && (
         <button
-          className='pr-2 pl-3 py-2 mr-2 text-[#e0e0e0] border-[#e0e0e0] border-[1px] border-solid rounded-[6px] h-[40px]'
+          className='pr-2 pl-3 py-2 mr-2 text-[#4a4b4d] dark:text-gray-300 
+                 border border-[#e0e0e0] dark:border-gray-700 
+                 rounded-[6px] h-[40px] bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition'
           onClick={() => handlePageChange(page + 1)}
         >
           <Image src='/assets/arrow_right.png' alt='Next' width={16} height={16} />

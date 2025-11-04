@@ -38,18 +38,19 @@ const page = () => {
   });
 
   return (
-    <div className='bg-[#fff] md:bg-[#f9f9f9] md:pt-[110px]'>
+    <div className='bg-[#fff] dark:bg-gray-900 dark:text-gray-100 md:bg-[#f9f9f9] md:pt-[110px] transition-colors duration-300'>
       <Heading title='Quên mật khẩu' description='' keywords='' />
       <div className='hidden md:block'>
         <Header />
       </div>
-      <div className='bg-[#fff] lg:w-[60%] md:w-[90%] md:mx-auto md:border md:border-[#a3a3a3a3] md:border-solid md:rounded-[10px] md:shadow-[rgba(0,0,0,0.24)_0px_3px_8px] md:overflow-hidden md:h-full'>
-        <div className='flex flex-col items-center justify-between py-[30px] h-screen'>
+
+      <div className='bg-[#fff] dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-700/30 lg:w-[60%] md:w-[90%] md:mx-auto md:border md:border-[#a3a3a3a3] md:border-solid md:rounded-[10px] md:shadow-[rgba(0,0,0,0.24)_0px_3px_8px] md:overflow-hidden md:h-full transition-colors duration-300'>
+        <div className='flex flex-col items-center justify-between py-[30px] h-screen md:h-full'>
           <div className='flex flex-col items-center w-full'>
-            <h3 className='text-[#4A4B4D] text-[30px] font-bold pb-[20px]'>Quên mật khẩu</h3>
+            <h3 className='text-[#4A4B4D] dark:text-gray-100 text-[30px] font-bold pb-[20px]'>Quên mật khẩu</h3>
             <Image src='/assets/logo_app.png' alt='' height={150} width={150} className='mb-[10px]' />
 
-            <div className='text-[#636464] text-center my-[20px]'>
+            <div className='text-[#636464] dark:text-gray-300 text-center my-[20px]'>
               <span>Vui lòng nhập email của bạn</span> <br />
               <span>vào ô bên dưới để có thể tạo mật khẩu mới</span> <br />
             </div>
@@ -57,12 +58,14 @@ const page = () => {
             <form onSubmit={formik.handleSubmit} className='flex flex-col items-center w-full'>
               <div className='w-[90%] my-[10px]'>
                 <div
-                  className={`relative flex items-center bg-[#f5f5f5] text-[#636464] rounded-[12px] gap-[8px] border border-solid overflow-hidden ${
-                    formik.touched.email && formik.errors.email ? "border-red-500" : "border-[#7a7a7a]"
+                  className={`relative flex items-center bg-[#f5f5f5] dark:bg-gray-700 text-[#636464] dark:text-gray-100 rounded-[12px] gap-[8px] border border-solid overflow-hidden ${
+                    formik.touched.email && formik.errors.email
+                      ? "border-red-500"
+                      : "border-[#7a7a7a] dark:border-gray-600"
                   }`}
                 >
                   <div className='relative w-[25px] h-[25px] ml-[20px]'>
-                    <Image src='/assets/email.png' alt='' layout='fill' loading='lazy' className='' />
+                    <Image src='/assets/email.png' alt='' layout='fill' loading='lazy' className='object-contain' />
                   </div>
                   <input
                     type='email'
@@ -71,17 +74,17 @@ const page = () => {
                     onChange={formik.handleChange("email")}
                     onBlur={formik.handleBlur("email")}
                     placeholder='Nhập email của bạn'
-                    className='bg-[#f5f5f5] text-[18px] py-[20px] pr-[20px] pl-[10px] w-full'
+                    className='bg-transparent text-[18px] py-[20px] pr-[20px] pl-[10px] w-full focus:outline-none'
                   />
                 </div>
-                {formik.touched.email && formik.errors.email ? (
+                {formik.touched.email && formik.errors.email && (
                   <div className='text-red-500 text-sm mt-[5px] ml-[20px]'>{formik.errors.email}</div>
-                ) : null}
+                )}
               </div>
 
               <button
                 type='submit'
-                className={`text-center text-[#fff] font-semibold w-[90%] p-[20px] rounded-full my-[10px] shadow-md hover:shadow-lg ${
+                className={`text-center text-[#fff] font-semibold w-[90%] p-[20px] rounded-full my-[10px] shadow-md hover:shadow-lg transition-all ${
                   formik.isValid && formik.dirty ? "bg-[#fc6011] cursor-pointer" : "bg-[#f5854d] cursor-not-allowed"
                 }`}
               >
@@ -90,9 +93,9 @@ const page = () => {
             </form>
           </div>
 
-          <p className='text-[#636464] font-semibold mt-[30px] mb-[10px]'>
+          <p className='text-[#636464] dark:text-gray-300 font-semibold mt-[30px] mb-[10px]'>
             Đã có tài khoản{" "}
-            <Link href='/auth/login' className='text-[#fc6011] cursor-pointer'>
+            <Link href='/auth/login' className='text-[#fc6011] dark:text-orange-400 cursor-pointer'>
               Đăng nhập
             </Link>
           </p>

@@ -7,14 +7,20 @@ const StoreBigCard = ({ store }) => {
     <Link
       href={`/store/${store._id}`}
       data-testid='store-card'
-      className='block bg-white rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden'
+      className='block 
+             bg-white dark:bg-gray-800 
+             rounded-2xl 
+             shadow-md dark:shadow-[0_4px_15px_rgba(0,0,0,0.5)]
+             hover:shadow-lg dark:hover:shadow-[0_6px_20px_rgba(0,0,0,0.6)]
+             hover:-translate-y-1 
+             transition-all duration-300 overflow-hidden'
     >
       {/* Ảnh cửa hàng */}
       <div className='relative w-full pt-[55%] rounded-t-2xl overflow-hidden'>
         <Image src={store?.avatar?.url || "/placeholder.png"} alt={store.name} fill className='object-cover' />
 
         {/* Overlay gradient */}
-        <div className='absolute inset-0 bg-gradient-to-t from-black/50 to-transparent' />
+        <div className='absolute inset-0 bg-gradient-to-t from-black/60 to-transparent' />
 
         {/* Rating */}
         {store.avgRating > 0 && store.amountRating > 0 && (
@@ -31,8 +37,9 @@ const StoreBigCard = ({ store }) => {
 
       {/* Nội dung */}
       <div className='p-3'>
-        <h4 className='text-gray-800 text-lg font-semibold truncate'>{store.name}</h4>
-        <div className='mt-1 text-sm text-gray-500 line-clamp-1'>
+        <h4 className='text-gray-800 dark:text-gray-100 text-lg font-semibold truncate'>{store.name}</h4>
+
+        <div className='mt-1 text-sm text-gray-500 dark:text-gray-400 line-clamp-1'>
           {store.storeCategory &&
             store.storeCategory.map((category, index) => (
               <div key={category._id || index} className='inline'>

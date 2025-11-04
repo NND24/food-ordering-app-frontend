@@ -38,8 +38,9 @@ const RatingItem = ({ rating, userId, refetchAllStoreRating, refetchPaginationRa
   };
 
   return (
-    <div className='my-[15px]'>
+    <div className='my-[15px] transition-colors duration-300'>
       <div className='relative'>
+        {/* Header người dùng + sao */}
         <div className='flex items-center gap-[10px]'>
           <div className='relative w-[65px] h-[65px] pt-[65px] rounded-full overflow-hidden'>
             <Image layout='fill' src={rating.user.avatar.url} alt='' objectFit='cover' />
@@ -47,14 +48,19 @@ const RatingItem = ({ rating, userId, refetchAllStoreRating, refetchPaginationRa
 
           <div className='flex flex-1 items-center justify-between'>
             <div className='flex flex-col flex-start h-full'>
-              <h4 className='text-[#4A4B4D] text-[24px] font-semibold md:text-[20px]'>{rating.user.name}</h4>
+              <h4 className='text-[#4A4B4D] dark:text-gray-100 text-[24px] font-semibold md:text-[20px]'>
+                {rating.user.name}
+              </h4>
               <div className='flex items-center gap-[8px]'>
                 <StarRating ratingValue={rating.ratingValue} />
-                <div className='w-[4px] h-[4px] rounded-full bg-[#636464]'></div>
-                <span className='text-[#636464]'>{moment.utc(rating?.createdAt).local().fromNow()}</span>
+                <div className='w-[4px] h-[4px] rounded-full bg-[#636464] dark:bg-gray-500'></div>
+                <span className='text-[#636464] dark:text-gray-400'>
+                  {moment.utc(rating?.createdAt).local().fromNow()}
+                </span>
               </div>
             </div>
 
+            {/* Nút menu tùy chọn */}
             {userId && rating.user?._id === userId && (
               <Image
                 src='/assets/dots.png'
@@ -62,22 +68,28 @@ const RatingItem = ({ rating, userId, refetchAllStoreRating, refetchPaginationRa
                 alt=''
                 width={30}
                 height={30}
-                onClick={() => {
-                  setShowOptionBox(!showOptionBox);
-                }}
+                onClick={() => setShowOptionBox(!showOptionBox)}
               />
             )}
+
+            {/* Hộp chọn sửa / xóa */}
             {showOptionBox && (
-              <div className='absolute top-[0px] right-[35px] p-[10px] border border-[#a3a3a3a3] border-solid rounded-[6px] w-[150px] flex flex-col bg-white'>
+              <div
+                className='absolute top-[0px] right-[35px] p-[10px] border border-[#a3a3a3a3] 
+                       dark:border-gray-700 rounded-[6px] w-[150px] flex flex-col 
+                       bg-white dark:bg-gray-800 shadow-md'
+              >
                 <Link
                   href={`/store/${rating.storeId}/rating/edit-rating/${rating?._id}`}
-                  className='text-[#4A4B4D] font-medium p-[6px] w-full rounded-[4px] hover:bg-[#00000011] cursor-pointer'
+                  className='text-[#4A4B4D] dark:text-gray-200 font-medium p-[6px] 
+                         w-full rounded-[4px] hover:bg-[#00000011] dark:hover:bg-gray-700 cursor-pointer'
                 >
                   Chỉnh sửa
                 </Link>
                 <span
                   onClick={confirmDeleteRating}
-                  className='text-[#4A4B4D] font-medium p-[6px] w-full rounded-[4px] hover:bg-[#00000011] cursor-pointer'
+                  className='text-[#4A4B4D] dark:text-gray-200 font-medium p-[6px] 
+                         w-full rounded-[4px] hover:bg-[#00000011] dark:hover:bg-gray-700 cursor-pointer'
                 >
                   Xóa
                 </span>
@@ -86,6 +98,7 @@ const RatingItem = ({ rating, userId, refetchAllStoreRating, refetchPaginationRa
           </div>
         </div>
 
+        {/* Ảnh trong đánh giá */}
         {rating.images.length > 0 && (
           <div className='flex flex-row gap-[10px] mt-[10px]'>
             {rating.images.map((img) => (
@@ -96,9 +109,12 @@ const RatingItem = ({ rating, userId, refetchAllStoreRating, refetchPaginationRa
           </div>
         )}
 
-        <p className='text-[#000] text-[18px] md:text-[16px] mt-[10px]'>{rating.comment}</p>
+        {/* Nội dung bình luận */}
+        <p className='text-[#000] dark:text-gray-100 text-[18px] md:text-[16px] mt-[10px]'>{rating.comment}</p>
+
+        {/* Danh sách món đã đặt */}
         {rating.order && rating.order.items.length > 0 && (
-          <p className='text-[#636464] pb-[10px] pt-[6px] md:text-[14px] overflow-hidden text-ellipsis whitespace-nowrap'>
+          <p className='text-[#636464] dark:text-gray-400 pb-[10px] pt-[6px] md:text-[14px] overflow-hidden text-ellipsis whitespace-nowrap'>
             Đã đặt:{" "}
             {rating.order.items.map((dish, index) => (
               <span key={index}>
@@ -110,13 +126,13 @@ const RatingItem = ({ rating, userId, refetchAllStoreRating, refetchPaginationRa
         )}
       </div>
 
+      {/* Phản hồi từ quán */}
       {rating.storeReply && (
-        <div className='px-[20px] py-[15px] bg-[#e6e6e6] rounded-[8px]'>
+        <div className='px-[20px] py-[15px] bg-[#e6e6e6] dark:bg-gray-800 rounded-[8px]'>
           <div className='flex items-center justify-between'>
-            <p className='text-[#000] font-bold md:text-[14px]'>Phản hồi từ quán</p>
-            {/* <p className='text-[#636464] text-[15px] md:text-[13px]'>6 ngày trước</p> */}
+            <p className='text-[#000] dark:text-gray-100 font-bold md:text-[14px]'>Phản hồi từ quán</p>
           </div>
-          <p className='text-[#636464] md:text-[14px]'>{rating.storeReply}</p>
+          <p className='text-[#636464] dark:text-gray-300 md:text-[14px]'>{rating.storeReply}</p>
         </div>
       )}
     </div>

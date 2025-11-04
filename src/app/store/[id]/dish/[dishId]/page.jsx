@@ -199,12 +199,11 @@ const page = () => {
       setPrice((prev) => prev + priceChange);
     } else {
       let priceChange = 0;
-      console.log(topping);
 
       if (toppings.includes(topping._id)) {
         priceChange = -toppingPrice * quantity;
         setToppings((prev) => prev.filter((id) => id !== topping._id));
-        setToppingsValue((prev) => prev.filter((tp) => tp.toppingId !== topping._id));
+        setToppingsValue((prev) => prev.filter((tp) => tp._id !== topping._id));
       } else {
         priceChange = toppingPrice * quantity;
         setToppings((prev) => [...prev, topping._id]);
@@ -267,7 +266,7 @@ const page = () => {
 
   return (
     <>
-      <div className='pb-[120px] md:pt-[75px] md:mt-[20px] bg-[#fff]'>
+      <div className='pb-[120px] md:pt-[75px] md:mt-[20px] bg-white dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300'>
         <Heading title={dishInfo?.name} description='' keywords='' />
         <div className='hidden md:block'>
           <Header />
@@ -275,43 +274,50 @@ const page = () => {
 
         {dishInfo ? (
           <div className='lg:w-[60%] md:w-[80%] md:mx-auto'>
-            <div className='relative bg-white flex flex-col p-5 border border-gray-100 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
+            <div className='relative bg-white dark:bg-gray-800 flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
+              {/* Nút back */}
               <div className='absolute top-0 right-0 left-0 z-10 flex items-center justify-between px-[20px] pt-[20px]'>
                 <Link
                   href={`/store/${storeId}`}
-                  className='relative w-[40px] pt-[40px] rounded-full bg-[#e0e0e0a3] overflow-hidden'
+                  className='relative w-[40px] pt-[40px] rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden'
                 >
                   <Image src='/assets/arrow_left_white.png' alt='' layout='fill' className='p-[8px]' />
                 </Link>
               </div>
 
+              {/* Ảnh món ăn */}
               <div className='relative pt-[50%] z-0 md:pt-[40%] lg:pt-[35%]'>
                 <Image src={dishInfo?.image.url || ""} alt='' layout='fill' objectFit='contain' />
               </div>
 
-              <div className='bg-white flex flex-col p-5 border border-gray-100 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
+              {/* Thông tin món */}
+              <div className='bg-white dark:bg-gray-800 flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
                 <div className='flex justify-between'>
-                  <h3 className='text-[#4A4B4D] text-[28px] font-bold line-clamp-2' name='dishName'>
+                  <h3 className='text-[#4A4B4D] dark:text-gray-100 text-[28px] font-bold line-clamp-2' name='dishName'>
                     {dishInfo?.name}
                   </h3>
-                  <span className='text-[#4A4B4D] text-[28px] font-bold' name='dishPrice'>
+                  <span className='text-[#4A4B4D] dark:text-gray-100 text-[28px] font-bold' name='dishPrice'>
                     {Number(dishInfo?.price).toLocaleString("vi-VN")}đ
                   </span>
                 </div>
-                <p className='text-[#a4a5a8]'>{dishInfo?.description}</p>
+                <p className='text-[#a4a5a8] dark:text-gray-400'>{dishInfo?.description}</p>
               </div>
 
-              <div className='h-[6px] w-full bg-gray-100 my-4 rounded-full'></div>
+              {/* Divider */}
+              <div className='h-[6px] w-full bg-gray-100 dark:bg-gray-700 my-4 rounded-full'></div>
 
+              {/* Topping */}
               {dishInfo.toppingGroups && dishInfo.toppingGroups.length > 0 && (
                 <>
-                  <div className='bg-white flex flex-col p-5 border border-gray-100 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
+                  <div className='bg-white dark:bg-gray-800 flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
                     {dishInfo.toppingGroups.map(
                       (toppingGroup, index) =>
                         toppingGroup.toppings.length > 0 && (
                           <div key={`${toppingGroup._id}-${index}`}>
                             <div className='flex gap-[10px]'>
-                              <h3 className='text-[#4A4B4D] text-[20px] font-bold'>{toppingGroup.name}</h3>
+                              <h3 className='text-[#4A4B4D] dark:text-gray-100 text-[20px] font-bold mb-2'>
+                                {toppingGroup.name}
+                              </h3>
                             </div>
                             {toppingGroup.onlyOnce
                               ? toppingGroup.toppings.map((topping) => (
@@ -339,28 +345,31 @@ const page = () => {
                     )}
                   </div>
 
-                  {/* Divider */}
-                  <div className='h-[6px] w-full bg-gray-100 my-4 rounded-full'></div>
+                  <div className='h-[6px] w-full bg-gray-100 dark:bg-gray-700 my-4 rounded-full'></div>
                 </>
               )}
 
-              <div className='bg-white flex flex-col p-5 border border-gray-100 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
+              {/* Ghi chú */}
+              <div className='bg-white dark:bg-gray-800 flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
                 <div className='pb-[20px]'>
-                  <h3 className='text-[#4A4B4D] text-[20px] font-bold'>
-                    Thêm lưu ý cho quán <span className='text-[#a4a5a8] text-[16px] font-normal'>(Không bắt buộc)</span>
+                  <h3 className='text-[#4A4B4D] dark:text-gray-100 text-[20px] font-bold'>
+                    Thêm lưu ý cho quán{" "}
+                    <span className='text-[#a4a5a8] dark:text-gray-400 text-[16px] font-normal'>(Không bắt buộc)</span>
                   </h3>
                 </div>
                 <textarea
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
-                  className='p-[10px] w-full border border-solid border-[#a3a3a3a3] rounded-[10px] focus:ring-2 focus:ring-[#fc6011] resize-none'
+                  className='p-[10px] w-full border border-solid border-[#a3a3a3a3] dark:border-gray-600 rounded-[10px] focus:ring-2 focus:ring-[#fc6011] resize-none bg-white dark:bg-gray-900 dark:text-gray-100'
                   placeholder='Việc thực hiện yêu cầu còn tùy thuộc vào khả năng của quán'
                 />
               </div>
 
-              <div className='h-[6px] w-full bg-gray-100 my-4 rounded-full'></div>
+              {/* Divider */}
+              <div className='h-[6px] w-full bg-gray-100 dark:bg-gray-700 my-4 rounded-full'></div>
 
-              <div className='flex items-center justify-center gap-4 bg-white p-5 border border-gray-100 rounded-2xl shadow-md md:p-6 hover:shadow-lg transition-all duration-200'>
+              {/* Chọn số lượng */}
+              <div className='flex items-center justify-center gap-4 bg-white dark:bg-gray-800 p-5 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-md md:p-6 hover:shadow-lg transition-all duration-200'>
                 {/* Nút giảm */}
                 <button
                   name='decreaseQuantityBtn'
@@ -368,8 +377,8 @@ const page = () => {
                     e.preventDefault();
                     handleChangeQuantity(-1);
                   }}
-                  className='w-[50px] h-[50px] flex items-center justify-center rounded-full bg-gradient-to-r from-gray-100 to-gray-200 
-               border border-gray-300 shadow-md cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg active:scale-95'
+                  className='w-[50px] h-[50px] flex items-center justify-center rounded-full bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 
+               border border-gray-300 dark:border-gray-600 shadow-md cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg active:scale-95'
                 >
                   <Image
                     src='/assets/minus.png'
@@ -385,7 +394,7 @@ const page = () => {
                   type='number'
                   value={quantity}
                   onChange={handleQuantityInputChange}
-                  className='text-[#4A4B4D] text-2xl font-bold w-[70px] text-center bg-gray-50 border border-gray-200 rounded-lg py-2 focus:outline-none focus:ring-2 focus:ring-[#fc6011] transition-all duration-200'
+                  className='text-[#4A4B4D] dark:text-gray-100 text-2xl font-bold w-[70px] text-center bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg py-2 focus:outline-none focus:ring-2 focus:ring-[#fc6011] transition-all duration-200'
                 />
 
                 {/* Nút tăng */}
@@ -423,13 +432,19 @@ const page = () => {
         )}
       </div>
 
-      <div className='fixed bottom-0 left-0 right-0 bg-white px-5 md:px-0 py-4 z-[100] flex items-center justify-center shadow-[0_-2px_10px_rgba(0,0,0,0.1)]'>
+      <div
+        className='fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 
+             px-5 md:px-0 py-4 z-[100] flex items-center justify-center 
+             shadow-[0_-2px_10px_rgba(0,0,0,0.1)] dark:shadow-[0_-2px_10px_rgba(255,255,255,0.1)]'
+      >
         {quantity > 0 ? (
           <div
             name='addCartBtn'
-            className='flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-[#fc6011] to-[#ff7a33] text-white py-4 px-6 
-                 lg:w-[60%] md:w-[80%] w-full md:mx-auto cursor-pointer shadow-md hover:shadow-lg 
-                 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]'
+            className='flex items-center justify-center gap-3 rounded-2xl 
+                 bg-gradient-to-r from-[#fc6011] to-[#ff7a33] text-white 
+                 py-4 px-6 lg:w-[60%] md:w-[80%] w-full md:mx-auto cursor-pointer 
+                 shadow-md hover:shadow-lg transition-all duration-200 
+                 hover:scale-[1.02] active:scale-[0.98]'
             onClick={handleAddToCart}
           >
             <span className='text-white text-xl font-semibold'>Thêm vào giỏ hàng</span>
@@ -442,20 +457,24 @@ const page = () => {
           <div className='flex items-center gap-4 lg:w-[60%] md:w-[80%] w-full md:mx-auto'>
             <Link
               href={`/store/${storeId}`}
-              className='flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#fc6011] to-[#ff7a33] text-white py-4 px-4 sm:px-6 
-                   cursor-pointer w-[65%] md:w-[80%] shadow-md hover:shadow-lg 
-                   transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]'
+              className='flex items-center justify-center gap-2 rounded-2xl 
+                   bg-gradient-to-r from-[#fc6011] to-[#ff7a33] text-white 
+                   py-4 px-4 sm:px-6 cursor-pointer w-[65%] md:w-[80%] 
+                   shadow-md hover:shadow-lg transition-all duration-200 
+                   hover:scale-[1.02] active:scale-[0.98]'
             >
               <span className='text-white text-xl font-semibold'>Quay lại cửa hàng</span>
             </Link>
 
             <div
-              className='flex items-center justify-center gap-2 rounded-2xl bg-gray-300 text-gray-700 py-4 px-4 sm:px-6 
-                   cursor-pointer w-[35%] md:w-[20%] shadow-md hover:shadow-lg 
+              className='flex items-center justify-center gap-2 rounded-2xl 
+                   bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-100 
+                   py-4 px-4 sm:px-6 cursor-pointer w-[35%] md:w-[20%] 
+                   shadow-md hover:shadow-lg dark:shadow-gray-800 
                    transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]'
               onClick={handleRemoveFromCart}
             >
-              <span className='text-gray-700 text-xl font-semibold whitespace-nowrap'>Bỏ chọn</span>
+              <span className='text-gray-700 dark:text-gray-100 text-xl font-semibold whitespace-nowrap'>Bỏ chọn</span>
             </div>
           </div>
         )}

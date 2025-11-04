@@ -94,31 +94,26 @@ const page = () => {
   });
 
   return (
-    <div className='pt-[85px] pb-[90px] md:pt-[75px] md:mt-[20px] md:px-0 bg-[#fff] md:bg-[#f9f9f9]'>
+    <div className='pt-[85px] pb-[90px] md:pt-[75px] md:mt-[20px] md:px-0 bg-[#fff] dark:bg-gray-900 dark:text-gray-100 md:bg-[#f9f9f9]'>
       <Heading title='Chỉnh sửa địa điểm' />
       <div className='hidden md:block'>
         <Header page='account' />
       </div>
 
-      <div className='bg-[#fff] lg:w-[60%] md:w-[80%] md:mx-auto md:border md:border-[#a3a3a3a3] md:border-solid md:rounded-[10px] md:shadow-[rgba(0,0,0,0.24)_0px_3px_8px] md:overflow-hidden md:p-[20px]'>
-        <div
-          className='fixed top-0 right-0 left-0 z-10 flex items-center gap-[40px] bg-[#fff] h-[85px] px-[10px] md:static'
-          style={{ borderBottom: "6px solid #e0e0e0a3" }}
-        >
+      <div className='bg-[#fff] dark:bg-gray-800 dark:border-gray-700 lg:w-[60%] md:w-[80%] md:mx-auto md:border md:border-[#a3a3a3a3] md:border-solid md:rounded-[10px] md:shadow-[rgba(0,0,0,0.24)_0px_3px_8px] md:overflow-hidden md:p-[20px]'>
+        <div className='fixed top-0 right-0 left-0 z-10 flex items-center gap-[40px] bg-[#fff] dark:bg-gray-800 h-[85px] px-[10px] md:static border-b-[6px] border-b-[#e0e0e0a3] dark:border-b-gray-700'>
           <Link href='/account/location' className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px]'>
             <Image src='/assets/arrow_left_long.png' alt='' layout='fill' objectFit='contain' />
           </Link>
-          <h3 className='text-[#4A4B4D] text-[24px] font-bold'>Chỉnh sửa địa điểm</h3>
+          <h3 className='text-[#4A4B4D] dark:text-gray-100 text-[24px] font-bold'>Chỉnh sửa địa điểm</h3>
         </div>
 
         <form onSubmit={formik.handleSubmit}>
-          <div
-            className='relative flex items-center bg-[#fff] text-[#636464] w-full px-[10px] pt-[30px] pb-[12px] gap-[8px]'
-            style={{ borderBottom: "1px solid #e0e0e0a3" }}
-          >
+          {/* Ô nhập tên */}
+          <div className='relative flex items-center bg-[#fff] dark:bg-gray-800 text-[#636464] dark:text-gray-100 w-full px-[10px] pt-[30px] pb-[12px] gap-[8px] border-b border-[#e0e0e0a3] dark:border-gray-700'>
             <div className='flex absolute top-[10px] left-[10px]'>
               <span className='text-[14px] text-red-500 md:text-[12px]'>*</span>
-              <span className='text-[14px] md:text-[12px] text-[#000]'>Tên</span>
+              <span className='text-[14px] md:text-[12px] text-[#000] dark:text-gray-100'>Tên</span>
             </div>
             <input
               type='text'
@@ -128,22 +123,22 @@ const page = () => {
               onBlur={formik.handleBlur("name")}
               placeholder=''
               readOnly={type === "home" || type === "company"}
-              className='bg-transparent text-[18px] md:text-[14px] w-full'
+              className='bg-transparent text-[18px] md:text-[14px] w-full outline-none dark:placeholder-gray-400'
             />
           </div>
           {formik.touched.name && formik.errors.name ? (
             <div className='text-red-500 text-sm mt-[5px] ml-[20px]'>{formik.errors.name}</div>
           ) : null}
 
+          {/* Địa chỉ */}
           <Link
             href={`/account/location/choose-location`}
-            className='relative flex items-center justify-between gap-[10px] bg-[#fff] text-[#636464] w-full px-[10px] pt-[30px] pb-[12px] cursor-pointer'
-            style={{ borderBottom: "1px solid #e0e0e0a3" }}
+            className='relative flex items-center justify-between gap-[10px] bg-[#fff] dark:bg-gray-800 text-[#636464] dark:text-gray-100 w-full px-[10px] pt-[30px] pb-[12px] cursor-pointer border-b border-[#e0e0e0a3] dark:border-gray-700'
           >
             <div className='flex-1 line-clamp-1'>
               <div className='flex absolute top-[10px] left-[10px]'>
                 <span className='text-[14px] text-red-500 md:text-[12px]'>*</span>
-                <span className='text-[14px] md:text-[12px] text-[#000]'>Địa chỉ</span>
+                <span className='text-[14px] md:text-[12px] text-[#000] dark:text-gray-100'>Địa chỉ</span>
               </div>
               <input
                 type='text'
@@ -153,7 +148,7 @@ const page = () => {
                 onBlur={formik.handleBlur("address")}
                 placeholder=''
                 readOnly
-                className='bg-transparent text-[18px] md:text-[14px] w-full cursor-pointer'
+                className='bg-transparent text-[18px] md:text-[14px] w-full cursor-pointer outline-none dark:placeholder-gray-400'
               />
             </div>
             <div className='relative w-[20px] pt-[20px] md:w-[20px] md:pt-[20px]'>
@@ -164,82 +159,37 @@ const page = () => {
             <div className='text-red-500 text-sm mt-[5px] ml-[20px]'>{formik.errors.address}</div>
           ) : null}
 
-          <div
-            className='relative flex items-center bg-[#fff] text-[#636464] w-full px-[10px] pt-[30px] pb-[12px] gap-[8px]'
-            style={{ borderBottom: "1px solid #e0e0e0a3" }}
-          >
-            <div className='flex absolute top-[10px] left-[10px]'>
-              <span className='text-[14px] md:text-[12px] text-[#000]'>Địa chỉ chi tiết</span>
+          {/* Các input khác — cùng pattern dark mode */}
+          {[
+            { name: "detailAddress", label: "Địa chỉ chi tiết", placeholder: "Vd: tên tòa nhà / địa điểm gần đó" },
+            { name: "note", label: "Ghi chú cho tài xế", placeholder: "Chỉ dẫn chi tiết địa điểm cho tài xế" },
+            { name: "contactName", label: "Tên người liên lạc", placeholder: "" },
+            { name: "contactPhonenumber", label: "Số điện thoại liên lạc", placeholder: "" },
+          ].map((field) => (
+            <div
+              key={field.name}
+              className='relative flex items-center bg-[#fff] dark:bg-gray-800 text-[#636464] dark:text-gray-100 w-full px-[10px] pt-[30px] pb-[12px] gap-[8px] border-b border-[#e0e0e0a3] dark:border-gray-700'
+            >
+              <div className='flex absolute top-[10px] left-[10px]'>
+                <span className='text-[14px] md:text-[12px] text-[#000] dark:text-gray-100'>{field.label}</span>
+              </div>
+              <input
+                type='text'
+                name={field.name}
+                value={formik.values[field.name]}
+                onChange={formik.handleChange(field.name)}
+                onBlur={formik.handleBlur(field.name)}
+                placeholder={field.placeholder}
+                className='bg-transparent text-[18px] md:text-[14px] w-full outline-none dark:placeholder-gray-400'
+              />
             </div>
-            <input
-              type='text'
-              name='detailAddress'
-              value={formik.values.detailAddress}
-              onChange={formik.handleChange("detailAddress")}
-              onBlur={formik.handleBlur("detailAddress")}
-              placeholder='Vd: tên toàn nhà / địa điểm gần đó'
-              className='bg-transparent text-[18px] md:text-[14px] w-full'
-            />
-          </div>
+          ))}
 
-          <div
-            className='relative flex items-center bg-[#fff] text-[#636464] w-full px-[10px] pt-[30px] pb-[12px] gap-[8px]'
-            style={{ borderBottom: "1px solid #e0e0e0a3" }}
-          >
-            <div className='flex absolute top-[10px] left-[10px]'>
-              <span className='text-[14px] md:text-[12px] text-[#000]'>Ghi chú cho tài xế</span>
-            </div>
-            <input
-              type='text'
-              name='note'
-              value={formik.values.note}
-              onChange={formik.handleChange("note")}
-              onBlur={formik.handleBlur("note")}
-              placeholder='Chỉ dẫn chi tiết địa điểm cho tài xế'
-              className='bg-transparent text-[18px] md:text-[14px] w-full'
-            />
-          </div>
-
-          <div
-            className='relative flex items-center bg-[#fff] text-[#636464] w-full px-[10px] pt-[30px] pb-[12px] gap-[8px]'
-            style={{ borderBottom: "1px solid #e0e0e0a3" }}
-          >
-            <div className='flex absolute top-[10px] left-[10px]'>
-              <span className='text-[14px] md:text-[12px] text-[#000]'>Tên người liên lạc</span>
-            </div>
-            <input
-              type='text'
-              name='contactName'
-              value={formik.values.contactName}
-              onChange={formik.handleChange("contactName")}
-              onBlur={formik.handleBlur("contactName")}
-              placeholder=''
-              className='bg-transparent text-[18px] md:text-[14px] w-full'
-            />
-          </div>
-
-          <div
-            className='relative flex items-center bg-[#fff] text-[#636464] w-full px-[10px] pt-[30px] pb-[12px] gap-[8px]'
-            style={{ borderBottom: "1px solid #e0e0e0a3" }}
-          >
-            <div className='flex absolute top-[10px] left-[10px]'>
-              <span className='text-[14px] md:text-[12px] text-[#000]'>Số điện thoại liên lạc</span>
-            </div>
-            <input
-              type='text'
-              name='contactPhonenumber'
-              value={formik.values.contactPhonenumber}
-              onChange={formik.handleChange("contactPhonenumber")}
-              onBlur={formik.handleBlur("contactPhonenumber")}
-              placeholder=''
-              className='bg-transparent text-[18px] md:text-[14px] w-full'
-            />
-          </div>
-
-          <div className='fixed bottom-0 left-0 right-0 bg-[#fff] px-[10px] py-[15px] z-[100]'>
+          {/* Nút submit */}
+          <div className='fixed bottom-0 left-0 right-0 bg-[#fff] dark:bg-gray-800 px-[10px] py-[15px] z-[100]'>
             <button
               type='submit'
-              className={`flex items-center justify-center lg:w-[60%] md:w-[80%] md:mx-auto rounded-[8px] text-[#fff] py-[15px] px-[10px] w-full shadow-md hover:shadow-lg bg-[#fc6011] cursor-pointer`}
+              className='flex items-center justify-center lg:w-[60%] md:w-[80%] md:mx-auto rounded-[8px] text-[#fff] py-[15px] px-[10px] w-full shadow-md hover:shadow-lg bg-[#fc6011] cursor-pointer'
             >
               <span className='text-[#fff] text-[20px] font-semibold'>Lưu địa chỉ này</span>
             </button>

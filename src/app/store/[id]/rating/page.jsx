@@ -54,7 +54,7 @@ const page = () => {
         <Link href={`/store/${storeId}`}>
           <Image src='/assets/arrow_left.png' alt='' width={30} height={30} />
         </Link>
-        <h3 className='text-[#4A4B4D] text-[28px] font-bold'>Đánh giá và nhận xét</h3>
+        <h3 className='text-[#4A4B4D] dark:text-gray-100 text-[28px] font-bold'>Đánh giá và nhận xét</h3>
       </div>
 
       <RatingBar ratings={ratings} />

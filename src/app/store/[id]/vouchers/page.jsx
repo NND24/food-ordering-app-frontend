@@ -106,14 +106,14 @@ const Page = () => {
   };
 
   return (
-    <div className='min-h-screen py-[85px] md:bg-[#f9f9f9] md:pt-[110px]'>
+    <div className='min-h-screen py-[85px] md:bg-[#f9f9f9] dark:md:bg-gray-900 md:pt-[110px] dark:text-gray-100'>
       <Heading title='Phiếu giảm giá' description='' keywords='' />
       <div className='hidden md:block'>
         <Header />
       </div>
 
       {/* Mobile Header */}
-      <div className='fixed top-0 right-0 left-0 z-10 flex items-center gap-5 bg-white h-[85px] px-5 shadow-md md:hidden'>
+      <div className='fixed top-0 right-0 left-0 z-10 flex items-center gap-5 bg-white dark:bg-gray-900 h-[85px] px-5 shadow-md md:hidden'>
         <Image
           src='/assets/arrow_left_long.png'
           alt='Back'
@@ -122,13 +122,13 @@ const Page = () => {
           className='cursor-pointer hover:scale-105 transition'
           onClick={() => router.back()}
         />
-        <h3 className='text-[#4A4B4D] text-xl font-bold'>Ưu đãi</h3>
+        <h3 className='text-[#4A4B4D] dark:text-gray-100 text-xl font-bold'>Ưu đãi</h3>
       </div>
 
       {!loading ? (
         <>
           {/* Content */}
-          <div className='bg-white lg:w-[60%] md:w-[80%] md:mx-auto md:border md:border-gray-200 md:rounded-2xl md:shadow-md'>
+          <div className='bg-white dark:bg-gray-900 lg:w-[60%] md:w-[80%] md:mx-auto md:border md:border-gray-200 dark:md:border-gray-700 md:rounded-2xl md:shadow-md'>
             <div className='px-5 py-4'>
               {storeVouchersList.length > 0 ? (
                 storeVouchersList.map((voucher) => {
@@ -173,18 +173,20 @@ const Page = () => {
                         toggleVoucher(storeId, voucher);
                       }}
                       className={`flex gap-4 items-start p-4 mb-3 border rounded-xl shadow-sm transition 
-          ${
-            valid
-              ? isSelected
-                ? "border-[#fc6011] bg-[#fff5f0] cursor-pointer hover:shadow-md"
-                : "border-gray-200 cursor-pointer hover:shadow-md hover:scale-[1.01]"
-              : "opacity-50 cursor-not-allowed border-gray-200"
-          }`}
+                    ${
+                      valid
+                        ? isSelected
+                          ? "border-[#fc6011] bg-[#fff5f0] dark:bg-gray-800 dark:border-[#fc6011] cursor-pointer hover:shadow-md"
+                          : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 cursor-pointer hover:shadow-md hover:scale-[1.01]"
+                        : "opacity-50 cursor-not-allowed border-gray-200 dark:border-gray-700"
+                    }`}
                     >
                       <div className='flex justify-between flex-1 items-center'>
                         <div className='flex flex-col'>
-                          <h4 className='text-[#4A4B4D] text-lg font-semibold line-clamp-1'>{voucher.code}</h4>
-                          <p className='text-gray-500 text-sm'>{voucher.description}</p>
+                          <h4 className='text-[#4A4B4D] dark:text-gray-100 text-lg font-semibold line-clamp-1'>
+                            {voucher.code}
+                          </h4>
+                          <p className='text-gray-500 dark:text-gray-400 text-sm'>{voucher.description}</p>
                         </div>
                         {valid && (
                           <div className='relative w-[26px] h-[26px]'>
@@ -203,23 +205,27 @@ const Page = () => {
               ) : (
                 <div className='flex flex-col items-center text-center py-10'>
                   <Image src='/assets/no_voucher.png' alt='empty cart' width={150} height={150} />
-                  <h3 className='text-[#4A4B4D] text-2xl font-bold mt-4'>Quán hiện không có ưu đãi nào</h3>
+                  <h3 className='text-[#4A4B4D] dark:text-gray-100 text-2xl font-bold mt-4'>
+                    Quán hiện không có ưu đãi nào
+                  </h3>
                 </div>
               )}
             </div>
           </div>
 
           {/* Footer */}
-          <div className='fixed bottom-0 left-0 right-0 bg-white flex items-center justify-between p-5 shadow-lg'>
-            <h4 className='text-[#4A4B4D] text-lg font-semibold'>Đã chọn {selectedVouchers.length} ưu đãi</h4>
+          <div className='fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 flex items-center justify-between p-5 shadow-lg border-t border-gray-200 dark:border-gray-700'>
+            <h4 className='text-[#4A4B4D] dark:text-gray-100 text-lg font-semibold'>
+              Đã chọn {selectedVouchers.length} ưu đãi
+            </h4>
             <div
               onClick={handleApply}
               className={`flex items-center justify-center rounded-lg px-6 py-3 shadow-md transition-all duration-300 
-              ${
-                selectedVouchers.length > 0
-                  ? "bg-[#fc6011] text-white hover:bg-[#e0560f] hover:shadow-lg hover:scale-[1.02] cursor-pointer"
-                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
-              }`}
+          ${
+            selectedVouchers.length > 0
+              ? "bg-[#fc6011] text-white hover:bg-[#e0560f] hover:shadow-lg hover:scale-[1.02] cursor-pointer"
+              : "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed"
+          }`}
             >
               <span className='text-[18px] font-semibold'>Áp dụng</span>
             </div>

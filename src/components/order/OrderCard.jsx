@@ -21,15 +21,18 @@ const OrderCard = ({ order }) => {
     setStatus(statusMap[order.status] || "");
   }, [order]);
 
-  console.log(order);
-
   return (
     <Link
       href={`/orders/detail-order/${order._id}`}
-      className='flex gap-4 p-4 bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300'
+      className={`flex gap-4 p-4 rounded-2xl border border-gray-200 dark:border-gray-700 
+    bg-white dark:bg-gray-900 shadow-sm hover:shadow-lg hover:-translate-y-1 
+    transition-all duration-300 group relative overflow-hidden`}
     >
-      {/* Ảnh món ăn động theo số lượng món */}
-      <div className='relative w-32 h-32 rounded-xl overflow-hidden'>
+      {/* Hiệu ứng viền sáng khi hover */}
+      <div className='absolute inset-0 rounded-2xl bg-gradient-to-r from-orange-400 to-pink-500 opacity-0 group-hover:opacity-20 blur transition-opacity duration-300'></div>
+
+      {/* Ảnh món ăn */}
+      <div className='relative w-32 h-32 rounded-xl overflow-hidden flex-shrink-0'>
         {order.items.slice(0, 4).map((item, index) => {
           const total = order.items.length;
           const imageUrl = item.dish?.image?.url || "/assets/logo_app.png";
@@ -40,11 +43,8 @@ const OrderCard = ({ order }) => {
               index === 0 ? "top-0 left-0 z-0" : "bottom-0 right-0 z-10 shadow-md"
             }`;
           } else if (total === 3) {
-            if (index === 0) {
-              className = "absolute top-0 left-0 w-full h-1/2";
-            } else {
-              className = `absolute bottom-0 w-1/2 h-1/2 ${index === 1 ? "left-0" : "right-0"}`;
-            }
+            if (index === 0) className = "absolute top-0 left-0 w-full h-1/2";
+            else className = `absolute bottom-0 w-1/2 h-1/2 ${index === 1 ? "left-0" : "right-0"}`;
           } else if (total >= 4) {
             const positions = ["top-0 left-0", "top-0 right-0", "bottom-0 left-0", "bottom-0 right-0"];
             className = `absolute w-1/2 h-1/2 ${positions[index]}`;
@@ -59,9 +59,11 @@ const OrderCard = ({ order }) => {
       </div>
 
       {/* Nội dung */}
-      <div className='flex flex-col justify-between flex-1 overflow-hidden'>
-        <h4 className='text-gray-800 text-lg font-bold line-clamp-1'>{order.store.name}</h4>
-        <span className='text-gray-600 text-sm line-clamp-1'>
+      <div className='flex flex-col justify-between flex-1 overflow-hidden relative z-10'>
+        <h4 className='text-gray-800 dark:text-gray-100 text-lg font-bold line-clamp-1 group-hover:text-orange-500 transition-colors'>
+          {order.store.name}
+        </h4>
+        <span className='text-gray-600 dark:text-gray-400 text-sm line-clamp-1'>
           Đã đặt:{" "}
           {order.items.map((dish, index) => (
             <span key={index}>
@@ -81,8 +83,10 @@ const OrderCard = ({ order }) => {
         >
           Trạng thái: {status}
         </span>
-        <span className='text-gray-600 text-sm line-clamp-1'>Giao tới: {order?.shipInfo?.address}</span>
-        <span className='text-gray-800 font-semibold text-base'>
+        <span className='text-gray-600 dark:text-gray-400 text-sm line-clamp-1'>
+          Giao tới: {order?.shipInfo?.address}
+        </span>
+        <span className='text-gray-800 dark:text-gray-100 font-semibold text-base'>
           Đơn giá: {Number(order.finalTotal).toLocaleString("vi-VN")}đ
         </span>
       </div>

@@ -35,7 +35,7 @@ const FavoriteItem = ({ store }) => {
   return (
     <Link
       href={`/store/${store._id}`}
-      className='relative block bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg'
+      className='relative block bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-sm overflow-hidden transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg dark:hover:bg-gray-800'
     >
       {/* Hình ảnh cửa hàng */}
       <div className='relative w-full pt-[55%]'>
@@ -48,11 +48,11 @@ const FavoriteItem = ({ store }) => {
       </div>
 
       {/* Nội dung */}
-      <div className='flex flex-col gap-1 p-4'>
-        <h4 className='text-gray-800 text-lg font-semibold line-clamp-1'>{store.name}</h4>
+      <div className='flex flex-col gap-1 p-4 text-gray-800 dark:text-gray-100'>
+        <h4 className='text-lg font-semibold line-clamp-1'>{store.name}</h4>
 
         {/* Danh mục */}
-        <div className='mt-1 text-sm text-gray-500 line-clamp-1'>
+        <div className='mt-1 text-sm text-gray-500 dark:text-gray-400 line-clamp-1'>
           {store.storeCategory &&
             store.storeCategory.map((category, index) => (
               <div key={category._id || index} className='inline'>
@@ -76,13 +76,15 @@ const FavoriteItem = ({ store }) => {
               <span className='text-orange-500 text-sm font-medium'>{store.avgRating.toFixed(1)}</span>
             </>
           )}
-          {store.amountRating > 0 && <span className='text-gray-500 text-sm'>({store.amountRating} đánh giá)</span>}
+          {store.amountRating > 0 && (
+            <span className='text-gray-500 dark:text-gray-400 text-sm'>({store.amountRating} đánh giá)</span>
+          )}
         </div>
       </div>
 
       {/* Nút xóa */}
       <div
-        className='absolute top-3 right-3 z-10 p-2 bg-gray-200 hover:bg-gray-300 rounded-full cursor-pointer transition'
+        className='absolute top-3 right-3 z-10 p-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-full cursor-pointer transition'
         onClick={(e) => {
           e.preventDefault();
           confirmRemoveFavorite();

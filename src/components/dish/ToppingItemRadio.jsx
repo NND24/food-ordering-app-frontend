@@ -6,8 +6,12 @@ const ToppingItemRadio = ({ topping, toppingGroup, selectedTopping, handleChoose
 
   return (
     <div
-      className={`flex mb-[2px] items-center justify-between p-4 rounded-lg border transition cursor-pointer 
-        ${isSelected ? "bg-orange-50 border-[#fc6011]" : "bg-white border-gray-200 hover:shadow-md"}`}
+      className={`flex mb-[2px] items-center justify-between p-4 rounded-lg border transition cursor-pointer
+    ${
+      isSelected
+        ? "bg-orange-50 dark:bg-orange-900/30 border-[#fc6011]"
+        : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:shadow-md dark:hover:shadow-gray-800"
+    }`}
       onClick={() => handleChooseTopping(topping, topping.price, toppingGroup)}
       name='checkedBtn'
     >
@@ -18,13 +22,16 @@ const ToppingItemRadio = ({ topping, toppingGroup, selectedTopping, handleChoose
           width={22}
           height={22}
         />
-        <h3 className='text-[#333] text-[16px] md:text-[18px] font-medium' name='toppingName'>
+        <h3 className='text-[#333] dark:text-gray-100 text-[16px] md:text-[18px] font-medium' name='toppingName'>
           {topping.name}
         </h3>
       </div>
 
       {topping.price !== 0 && (
-        <span className='text-[#4A4B4D] text-[16px] md:text-[18px] font-semibold' name='toppingPrice'>
+        <span
+          className='text-[#4A4B4D] dark:text-gray-200 text-[16px] md:text-[18px] font-semibold'
+          name='toppingPrice'
+        >
           +{Number(topping.price).toLocaleString("vi-VN")}đ
         </span>
       )}

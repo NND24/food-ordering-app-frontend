@@ -14,6 +14,7 @@ import { StoreLocationProvider } from "@/context/storeLocationContext";
 import { LocationProvider } from "@/context/locationContext";
 import { VoucherProvider } from "@/context/voucherContext";
 import { CartProvider } from "@/context/cartContext";
+import { ThemeProvider } from "next-themes";
 
 function AppProviders({ children }) {
   const { loading: authLoading } = useAuth();
@@ -31,44 +32,46 @@ function AppProviders({ children }) {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang='en'>
-      <body>
+    <html lang='en' suppressHydrationWarning>
+      <body className='bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-300'>
         <HelmetProvider>
-          <ForgotPassEmailProvider>
-            <AuthProvider>
-              <SocketProvider>
-                <StoreLocationProvider>
-                  <LocationProvider>
-                    <ProvinceProvider>
-                      <CartProvider>
-                        <OrderProvider>
-                          <FavoriteProvider>
-                            <VoucherProvider>
-                              <AppProviders>
-                                {children}
-                                <ToastContainer
-                                  position='top-right'
-                                  autoClose={5000}
-                                  hideProgressBar={false}
-                                  newestOnTop={false}
-                                  closeOnClick
-                                  rtl={false}
-                                  pauseOnFocusLoss
-                                  draggable
-                                  pauseOnHover
-                                  theme='light'
-                                />
-                              </AppProviders>
-                            </VoucherProvider>
-                          </FavoriteProvider>
-                        </OrderProvider>
-                      </CartProvider>
-                    </ProvinceProvider>
-                  </LocationProvider>
-                </StoreLocationProvider>
-              </SocketProvider>
-            </AuthProvider>
-          </ForgotPassEmailProvider>
+          <ThemeProvider attribute='class' defaultTheme='light' enableSystem={true}>
+            <ForgotPassEmailProvider>
+              <AuthProvider>
+                <SocketProvider>
+                  <StoreLocationProvider>
+                    <LocationProvider>
+                      <ProvinceProvider>
+                        <CartProvider>
+                          <OrderProvider>
+                            <FavoriteProvider>
+                              <VoucherProvider>
+                                <AppProviders>
+                                  {children}
+                                  <ToastContainer
+                                    position='top-right'
+                                    autoClose={5000}
+                                    hideProgressBar={false}
+                                    newestOnTop={false}
+                                    closeOnClick
+                                    rtl={false}
+                                    pauseOnFocusLoss
+                                    draggable
+                                    pauseOnHover
+                                    theme='light'
+                                  />
+                                </AppProviders>
+                              </VoucherProvider>
+                            </FavoriteProvider>
+                          </OrderProvider>
+                        </CartProvider>
+                      </ProvinceProvider>
+                    </LocationProvider>
+                  </StoreLocationProvider>
+                </SocketProvider>
+              </AuthProvider>
+            </ForgotPassEmailProvider>
+          </ThemeProvider>
         </HelmetProvider>
       </body>
     </html>

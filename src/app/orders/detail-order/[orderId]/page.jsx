@@ -146,7 +146,7 @@ const Page = () => {
   };
 
   return (
-    <div className='pb-36 bg-white md:bg-white md:pt-28'>
+    <div className='pb-36 bg-white dark:bg-gray-900 dark:text-gray-100 md:bg-white md:dark:bg-gray-900 md:pt-28'>
       <Heading title='Chi tiết đơn hàng' description='' keywords='' />
       <div className='hidden md:block'>
         <Header />
@@ -163,16 +163,16 @@ const Page = () => {
                   alt=''
                   width={40}
                   height={40}
-                  className='p-2 rounded-full bg-gray-200 hover:bg-gray-300 cursor-pointer transition'
+                  className='p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer transition'
                   onClick={() => router.back()}
                 />
-                <h3 className='text-[#333] text-2xl font-bold'>Chi tiết đơn hàng</h3>
+                <h3 className='text-[#333] dark:text-gray-100 text-2xl font-bold'>Chi tiết đơn hàng</h3>
               </div>
 
               {/* Order Card */}
-              <div className='bg-white flex flex-col p-5 border border-gray-100 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
+              <div className='bg-white dark:bg-gray-800 flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
                 {/* Store Info + Cancel */}
-                <div className='flex justify-between gap-3 items-center p-3 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow'>
+                <div className='flex justify-between gap-3 items-center p-3 bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow'>
                   <div className='flex gap-3 items-center'>
                     <Link
                       href={`/store/${orderDetail?.store._id}`}
@@ -187,10 +187,12 @@ const Page = () => {
                       />
                     </Link>
                     <Link href={`/store/${orderDetail?.store._id}`} className='flex flex-col flex-1 gap-1 group'>
-                      <span className='text-[#333] text-xl font-bold line-clamp-1 group-hover:text-[#fc6011] transition-colors'>
+                      <span className='text-[#333] dark:text-gray-100 text-xl font-bold line-clamp-1 group-hover:text-[#fc6011] transition-colors'>
                         {orderDetail?.store.name}
                       </span>
-                      <span className='text-gray-500 text-sm line-clamp-1'>{orderDetail?.store.description}</span>
+                      <span className='text-gray-500 dark:text-gray-400 text-sm line-clamp-1'>
+                        {orderDetail?.store.description}
+                      </span>
                     </Link>
                   </div>
                   {orderDetail?.status === "pending" && (
@@ -226,18 +228,18 @@ const Page = () => {
                 </div>
 
                 {/* Divider */}
-                <div className='h-[6px] w-full bg-gray-100 my-4 rounded-full'></div>
+                <div className='h-[6px] w-full bg-gray-100 dark:bg-gray-700 my-4 rounded-full'></div>
 
                 {/* Status */}
-                <div className='bg-white flex flex-col p-5 border border-gray-100 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
-                  <span className='text-[#333] text-lg font-medium block mb-2'>{status}</span>
+                <div className='bg-white dark:bg-gray-800 flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
+                  <span className='text-[#333] dark:text-gray-100 text-lg font-medium block mb-2'>{status}</span>
 
                   {orderDetail?.status !== "cancelled" && (
                     <div className='relative flex items-center justify-between py-4'>
                       <Image src={`/assets/start_active.png`} alt='' width={25} height={25} />
                       <div
                         className={`absolute top-[50%] left-[9%] h-[4px] w-[20%] rounded-full ${
-                          !["preorder"].includes(orderDetail?.status) ? "bg-[#fc6011]" : "bg-gray-300"
+                          !["preorder"].includes(orderDetail?.status) ? "bg-[#fc6011]" : "bg-gray-300 dark:bg-gray-600"
                         }`}
                       ></div>
 
@@ -260,7 +262,7 @@ const Page = () => {
                             orderDetail?.status
                           )
                             ? "bg-[#fc6011]"
-                            : "bg-gray-300"
+                            : "bg-gray-300 dark:bg-gray-600"
                         }`}
                       ></div>
 
@@ -277,7 +279,7 @@ const Page = () => {
                         className={`absolute top-[50%] right-[10%] h-[4px] w-[20%] rounded-full ${
                           ["delivering", "delivered", "done"].includes(orderDetail?.status)
                             ? "bg-[#fc6011]"
-                            : "bg-gray-300"
+                            : "bg-gray-300 dark:bg-gray-600"
                         }`}
                       ></div>
 
@@ -292,11 +294,11 @@ const Page = () => {
                 </div>
 
                 {/* Divider */}
-                <div className='h-[6px] w-full bg-gray-100 my-4 rounded-full'></div>
+                <div className='h-[6px] w-full bg-gray-100 dark:bg-gray-700 my-4 rounded-full'></div>
 
                 {/* Delivery Info */}
-                <div className='bg-white flex flex-col p-5 border border-gray-100 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
-                  <p className='text-[#333] text-lg font-bold pb-4'>Giao tới</p>
+                <div className='bg-white dark:bg-gray-800 flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
+                  <p className='text-[#333] dark:text-gray-100 text-lg font-bold pb-4'>Giao tới</p>
                   {[
                     { icon: "/assets/account.png", value: orderDetail?.shipInfo?.contactName },
                     { icon: "/assets/phone.png", value: orderDetail?.shipInfo?.contactPhonenumber },
@@ -304,7 +306,7 @@ const Page = () => {
                   ].map((item, idx) => (
                     <div
                       key={idx}
-                      className='relative flex items-center bg-gray-50 text-gray-600 rounded-xl border border-gray-200 overflow-hidden mb-3'
+                      className='relative flex items-center bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-200 rounded-xl border border-gray-200 dark:border-gray-600 overflow-hidden mb-3'
                     >
                       <Image
                         src={item.icon}
@@ -317,19 +319,19 @@ const Page = () => {
                         type='text'
                         readOnly
                         value={item.value}
-                        className='bg-gray-50 text-base py-2 pr-3 pl-9 w-full'
+                        className='bg-gray-50 dark:bg-gray-700 text-base py-2 pr-3 pl-9 w-full text-gray-700 dark:text-gray-200'
                       />
                     </div>
                   ))}
                 </div>
 
                 {/* Divider */}
-                <div className='h-[6px] w-full bg-gray-100 my-4 rounded-full'></div>
+                <div className='h-[6px] w-full bg-gray-100 dark:bg-gray-700 my-4 rounded-full'></div>
 
                 {/* Payment Info */}
-                <div className='bg-white flex flex-col p-5 border border-gray-100 rounded-xl shadow-md md:p-6 hover:shadow-lg transition space-y-4'>
+                <div className='bg-white dark:bg-gray-800 flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md md:p-6 hover:shadow-lg transition space-y-4'>
                   <div className='pb-5 flex items-center justify-between'>
-                    <span className='text-[#333] text-lg font-bold'>Thông tin thanh toán</span>
+                    <span className='text-[#333] dark:text-gray-100 text-lg font-bold'>Thông tin thanh toán</span>
                   </div>
 
                   {/* Tiền mặt */}
@@ -338,7 +340,7 @@ const Page = () => {
                       <Image src='/assets/money.png' alt='' layout='fill' objectFit='contain' />
                     </div>
                     <div className='flex flex-1 items-center justify-between'>
-                      <h3 className='text-[#333] text-lg font-bold'>Tiền mặt</h3>
+                      <h3 className='text-[#333] dark:text-gray-100 text-lg font-bold'>Tiền mặt</h3>
                       <div className='relative w-7 pt-7'>
                         <Image
                           src={
@@ -360,7 +362,7 @@ const Page = () => {
                       <Image src='/assets/vnpay.jpg' alt='' layout='fill' objectFit='contain' />
                     </div>
                     <div className='flex flex-1 items-center justify-between'>
-                      <h3 className='text-[#333] text-lg font-bold'>VNPay</h3>
+                      <h3 className='text-[#333] dark:text-gray-100 text-lg font-bold'>VNPay</h3>
                       <div className='relative w-7 pt-7'>
                         <Image
                           src={
@@ -377,10 +379,10 @@ const Page = () => {
                   </div>
                 </div>
 
-                <div className='h-[6px] w-full bg-gray-100 my-4 rounded-full'></div>
+                <div className='h-[6px] w-full bg-gray-100 dark:bg-gray-700 my-4 rounded-full'></div>
 
-                <div className='bg-white flex flex-col p-5 border border-gray-100 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
-                  <span className='text-[#4A4B4D] text-[18px] font-bold'>Ưu đãi</span>
+                <div className='bg-white dark:bg-gray-800 flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
+                  <span className='text-[#4A4B4D] dark:text-gray-100 text-[18px] font-bold'>Ưu đãi</span>
 
                   {/* Hiển thị danh sách voucher đã chọn */}
                   {orderDetail.vouchers.length > 0 ? (
@@ -401,10 +403,10 @@ const Page = () => {
                 </div>
 
                 {/* Divider */}
-                <div className='h-[6px] w-full bg-gray-100 my-4 rounded-full'></div>
+                <div className='h-[6px] w-full bg-gray-100 dark:bg-gray-700 my-4 rounded-full'></div>
 
                 {/* Order Summary */}
-                <div className='bg-white flex flex-col p-5 border border-gray-100 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
+                <div className='bg-white dark:bg-gray-800 flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
                   <OrderSummary
                     detailItems={orderDetail?.items}
                     subtotalPrice={orderDetail?.subtotalPrice}

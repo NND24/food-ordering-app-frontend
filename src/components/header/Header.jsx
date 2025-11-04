@@ -38,7 +38,13 @@ const Header = ({ page }) => {
   }, []);
 
   return (
-    <header className='fixed top-0 right-0 left-0 z-[99] bg-white/80 backdrop-blur-md shadow-md border-b border-gray-200 transition-all duration-300'>
+    <header
+      className='fixed top-0 right-0 left-0 z-[99] 
+  bg-white/80 dark:bg-gray-900/80 
+  backdrop-blur-md shadow-md 
+  border-b border-gray-200 dark:border-gray-700 
+  transition-all duration-300'
+    >
       {/* Mobile Header */}
       <div className='pt-[10px] md:pt-[30px] h-fit md:h-[180px] md:hidden'>
         <MobileHeader />
@@ -51,8 +57,8 @@ const Header = ({ page }) => {
       <div className='w-[90%] mx-auto hidden md:block'>
         <div className='flex items-center justify-between'>
           {/* Logo + Search */}
-          <div className='flex items-center gap-6 md:w-[45%] lg:w-[40%]'>
-            <Link href='/home' className='relative w-[60px] h-[60px] flex-shrink-0'>
+          <div className='flex items-center gap-6 md:w-[45%] lg:w-[40%] py-2'>
+            <Link href='/home' className='relative w-[50px] h-[50px] flex-shrink-0'>
               <Image
                 src='/assets/logo_app.png'
                 layout='fill'
@@ -74,7 +80,10 @@ const Header = ({ page }) => {
             {/* Province Selector */}
             <div className='relative ml-4'>
               <button
-                className='flex items-center gap-2 p-2 bg-gradient-to-r from-[#fc6011] to-[#ff8533] rounded-full text-white font-medium shadow-md hover:shadow-lg transition'
+                className='flex items-center gap-2 p-2 
+              bg-gradient-to-r from-[#fc6011] to-[#ff8533] 
+              rounded-full text-white font-medium shadow-md 
+              hover:shadow-lg transition'
                 onClick={() => setOpenSelectProvince(!openSelectProvince)}
               >
                 <Image src='/assets/star_yellow.png' alt='Location' width={18} height={18} className='drop-shadow-md' />
@@ -82,7 +91,14 @@ const Header = ({ page }) => {
               </button>
 
               {openSelectProvince && (
-                <div className='absolute top-[60px] right-0 z-[100] h-[350px] w-[220px] bg-white rounded-lg overflow-y-auto shadow-xl border border-gray-200 animate-fadeIn'>
+                <div
+                  className='absolute top-[60px] right-0 z-[100] 
+              h-[350px] w-[220px] 
+              bg-white dark:bg-gray-800 
+              rounded-lg overflow-y-auto shadow-xl 
+              border border-gray-200 dark:border-gray-700 
+              animate-fadeIn'
+                >
                   {provinces.map((prov) => (
                     <div
                       key={prov.name}
@@ -90,9 +106,13 @@ const Header = ({ page }) => {
                         setOpenSelectProvince(false);
                         handleProvinceChange(prov);
                       }}
-                      className={`py-3 px-4 cursor-pointer hover:bg-[#fc6011]/10 ${
-                        prov.name === province.name ? "bg-[#fc6011]/20 font-bold text-[#fc6011]" : "text-gray-700"
-                      }`}
+                      className={`py-3 px-4 cursor-pointer 
+                    hover:bg-[#fc6011]/10 dark:hover:bg-[#fc6011]/20 
+                    ${
+                      prov.name === province.name
+                        ? "bg-[#fc6011]/20 font-bold text-[#fc6011]"
+                        : "text-gray-700 dark:text-gray-200"
+                    }`}
                     >
                       {prov.name}
                     </div>

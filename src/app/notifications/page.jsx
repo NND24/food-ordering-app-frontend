@@ -48,7 +48,7 @@ const page = () => {
         ) : (
           <div className='flex flex-col items-center text-center py-10'>
             <Image src='/assets/no_notification.png' alt='empty cart' width={150} height={150} />
-            <h3 className='text-[#4A4B4D] text-2xl font-bold mt-4'>Không có thông báo nào!</h3>
+            <h3 className='text-[#4A4B4D] dark:text-gray-100 text-2xl font-bold mt-4'>Không có thông báo nào!</h3>
           </div>
         )}
       </div>

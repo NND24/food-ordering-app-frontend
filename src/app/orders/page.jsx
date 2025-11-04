@@ -26,20 +26,23 @@ const Page = () => {
   };
 
   return (
-    <div className='pt-[10px] pb-[100px] md:pt-[90px] md:px-0'>
+    <div className='pt-[10px] pb-[100px] md:pt-[90px] md:px-0 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-300'>
       <Heading title='Đơn hàng' description='' keywords='' />
+
+      {/* Header */}
       <div className='hidden md:block'>
         <Header page='orders' />
       </div>
-
       <MobileHeader />
 
       {/* Tabs */}
       <div className='px-[20px] md:w-[90%] md:mx-auto'>
-        <div className='flex items-center justify-center mb-6 bg-gray-100 rounded-full p-1'>
+        <div className='flex items-center justify-center mb-6 bg-gray-100 dark:bg-gray-800 rounded-full p-1 transition-colors'>
           <button
             className={`flex-1 text-center py-2 text-lg font-semibold rounded-full transition-all duration-300 ${
-              activeTab === "current" ? "bg-[#fc6011] text-white shadow-md" : "text-gray-600 hover:text-[#fc6011]"
+              activeTab === "current"
+                ? "bg-[#fc6011] text-white shadow-md"
+                : "text-gray-600 dark:text-gray-300 hover:text-[#fc6011]"
             }`}
             onClick={() => setActiveTab("current")}
           >
@@ -47,7 +50,9 @@ const Page = () => {
           </button>
           <button
             className={`flex-1 text-center py-2 text-lg font-semibold rounded-full transition-all duration-300 ${
-              activeTab === "history" ? "bg-[#fc6011] text-white shadow-md" : "text-gray-600 hover:text-[#fc6011]"
+              activeTab === "history"
+                ? "bg-[#fc6011] text-white shadow-md"
+                : "text-gray-600 dark:text-gray-300 hover:text-[#fc6011]"
             }`}
             onClick={() => setActiveTab("history")}
           >
@@ -70,8 +75,8 @@ const Page = () => {
               return (
                 <div className='flex flex-col items-center text-center py-10'>
                   <Image src='/assets/no_order.jfif' alt='empty cart' width={150} height={150} />
-                  <h3 className='text-[#4A4B4D] text-2xl font-bold mt-4'>Đơn hàng hiện tại trống</h3>
-                  <p className='text-gray-500 mt-2'>Hãy chọn vài món ăn ngon ngay nào!</p>
+                  <h3 className='text-2xl font-bold mt-4 text-gray-800 dark:text-gray-100'>Đơn hàng hiện tại trống</h3>
+                  <p className='text-gray-500 dark:text-gray-400 mt-2'>Hãy chọn vài món ăn ngon ngay nào!</p>
                   <button
                     onClick={() => router.push("/search")}
                     className='mt-5 px-6 py-3 bg-[#fc6011] text-white rounded-full shadow hover:scale-105 transition-transform'
@@ -108,7 +113,8 @@ const Page = () => {
                     width={150}
                     height={150}
                   />
-                  <h3 className='text-[#4A4B4D] text-2xl font-bold mt-4'>Lịch sử đơn hàng trống</h3>
+                  <h3 className='text-2xl font-bold mt-4 text-gray-800 dark:text-gray-100'>Lịch sử đơn hàng trống</h3>
+                  <p className='text-gray-500 dark:text-gray-400 mt-2'>Bạn chưa có đơn hàng nào trong lịch sử.</p>
                 </div>
               );
             }
@@ -121,6 +127,7 @@ const Page = () => {
           })()}
       </div>
 
+      {/* Footer Nav */}
       <div className='block md:hidden'>
         <NavBar page='orders' />
       </div>

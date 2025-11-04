@@ -10,14 +10,18 @@ const NotificationItem = ({ notification, handleNotificationStatusChange }) => {
       href={`/orders/detail-order/${notification.orderId}`}
       onClick={() => handleNotificationStatusChange(notification._id)}
       className={`flex items-start gap-4 p-4 mb-[2px] rounded-lg transition-all duration-200 
-        ${isRead ? "bg-white hover:bg-gray-50" : "bg-orange-50 hover:bg-orange-100"}
-      `}
+    ${
+      isRead
+        ? "bg-white hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800"
+        : "bg-orange-50 hover:bg-orange-100 dark:bg-gray-800 dark:hover:bg-gray-700"
+    }
+  `}
     >
       {/* Chấm trạng thái */}
       <div
         className={`mt-1 w-3 h-3 rounded-full flex-shrink-0 
-          ${isRead ? "bg-gray-300" : "bg-orange-500"}
-        `}
+      ${isRead ? "bg-gray-300 dark:bg-gray-600" : "bg-orange-500"}
+    `}
       />
 
       {/* Nội dung */}
@@ -25,8 +29,8 @@ const NotificationItem = ({ notification, handleNotificationStatusChange }) => {
         {/* Tiêu đề */}
         <p
           className={`font-semibold text-base line-clamp-1 
-            ${isRead ? "text-gray-500" : "text-gray-900"}
-          `}
+        ${isRead ? "text-gray-500 dark:text-gray-400" : "text-gray-900 dark:text-gray-100"}
+      `}
         >
           {notification.title}
         </p>
@@ -34,8 +38,8 @@ const NotificationItem = ({ notification, handleNotificationStatusChange }) => {
         {/* Tin nhắn */}
         <p
           className={`text-sm line-clamp-2 
-            ${isRead ? "text-gray-400" : "text-gray-700"}
-          `}
+        ${isRead ? "text-gray-400 dark:text-gray-500" : "text-gray-700 dark:text-gray-200"}
+      `}
         >
           {notification.message}
         </p>
@@ -43,8 +47,8 @@ const NotificationItem = ({ notification, handleNotificationStatusChange }) => {
         {/* Thời gian */}
         <p
           className={`text-xs 
-            ${isRead ? "text-gray-400" : "text-gray-500"}
-          `}
+        ${isRead ? "text-gray-400 dark:text-gray-500" : "text-gray-500 dark:text-gray-400"}
+      `}
         >
           {moment(notification.createdAt).format("DD/MM/YYYY HH:mm")}
         </p>

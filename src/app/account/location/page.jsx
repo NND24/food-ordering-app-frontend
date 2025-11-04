@@ -87,30 +87,29 @@ const page = () => {
   }, [deleteLocationId]);
 
   return (
-    <div className='pt-[85px] px-[20px] pb-[200px] md:pt-[75px] md:mt-[20px] md:px-0 bg-[#fff] md:bg-[#f9f9f9]'>
+    <div className='pt-[85px] px-[20px] pb-[200px] md:pt-[75px] md:mt-[20px] md:px-0 bg-[#fff] md:bg-[#f9f9f9] dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300'>
       <Heading title='Địa chỉ đã lưu' description='' keywords='' />
       <div className='hidden md:block'>
         <Header page='account' />
       </div>
 
-      <div className='bg-[#fff] lg:w-[60%] md:w-[80%] md:mx-auto md:border md:border-[#a3a3a3a3] md:border-solid md:rounded-[10px] md:shadow-[rgba(0,0,0,0.24)_0px_3px_8px] md:overflow-hidden md:p-[20px]'>
-        <div className='fixed top-0 right-0 left-0 z-10 px-[20px] md:px-[0px] flex items-center gap-[40px] bg-[#fff] h-[85px] md-[0px] md:static'>
+      <div className='bg-[#fff] dark:bg-gray-900 lg:w-[60%] md:w-[80%] md:mx-auto md:border md:border-[#a3a3a3a3] dark:md:border-gray-700 md:border-solid md:rounded-[10px] md:shadow-[rgba(0,0,0,0.24)_0px_3px_8px] md:overflow-hidden md:p-[20px] transition-colors duration-300'>
+        {/* Header cố định */}
+        <div className='fixed top-0 right-0 left-0 z-10 px-[20px] md:px-[0px] flex items-center gap-[40px] bg-[#fff] dark:bg-gray-900 h-[85px] md-[0px] md:static'>
           <div
             onClick={() => {
-              if (storeId) {
-                router.push(`/store/${storeId}/cart`);
-              } else {
-                router.push(`/account`);
-              }
+              if (storeId) router.push(`/store/${storeId}/cart`);
+              else router.push(`/account`);
             }}
-            className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px]'
+            className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px] cursor-pointer'
           >
             <Image src='/assets/arrow_left_long.png' alt='' layout='fill' objectFit='contain' />
           </div>
-          <h3 className='text-[#4A4B4D] text-[24px] font-bold'>Địa chỉ đã lưu</h3>
+          <h3 className='text-[#4A4B4D] dark:text-gray-100 text-[24px] font-bold'>Địa chỉ đã lưu</h3>
         </div>
 
-        <div className=''>
+        <div>
+          {/* Nhà */}
           {homeLocation && homeLocation.length > 0 ? (
             <div
               onClick={() => {
@@ -124,34 +123,34 @@ const page = () => {
                   lat: homeLocation[0].location.coordinates[1],
                   lon: homeLocation[0].location.coordinates[0],
                 });
-                if (storeId) {
-                  router.push(`/store/${storeId}/cart`);
-                }
+                if (storeId) router.push(`/store/${storeId}/cart`);
               }}
               className='flex items-center gap-[15px] mb-[20px] cursor-pointer'
             >
-              <div className='p-[8px] bg-[#e0e0e0a3] rounded-full h-fit'>
-                <div className='relative w-[20px] pt-[20px] md:w-[20px] md:pt-[20px]'>
+              <div className='p-[8px] bg-[#e0e0e0a3] dark:bg-gray-700 rounded-full h-fit'>
+                <div className='relative w-[20px] pt-[20px]'>
                   <Image src='/assets/home_green.png' alt='' layout='fill' objectFit='contain' />
                 </div>
               </div>
               <div className='flex flex-1 items-center justify-between'>
                 <div className='flex flex-col mr-[10px]'>
-                  <h3 className='text-[#4a4b4d] text-[20px] font-bold'>{homeLocation[0].name}</h3>
+                  <h3 className='text-[#4a4b4d] dark:text-gray-100 text-[20px] font-bold'>{homeLocation[0].name}</h3>
                   <div className='flex items-center gap-[4px]'>
                     {currentPosition && (
                       <>
-                        <span className='text-[#a4a5a8] text-[15px]'>
+                        <span className='text-[#a4a5a8] dark:text-gray-400 text-[15px]'>
                           {haversineDistance(currentPosition, [
                             homeLocation[0].location.coordinates[1],
                             homeLocation[0].location.coordinates[0],
-                          ]).toFixed(2)}
+                          ]).toFixed(2)}{" "}
                           km
                         </span>
-                        <div className='w-[4px] h-[4px] rounded-full bg-[#a4a5a8]'></div>
+                        <div className='w-[4px] h-[4px] rounded-full bg-[#a4a5a8] dark:bg-gray-500'></div>
                       </>
                     )}
-                    <span className='text-[#a4a5a8] text-[15px] line-clamp-1'>{homeLocation[0].address}</span>
+                    <span className='text-[#a4a5a8] dark:text-gray-400 text-[15px] line-clamp-1'>
+                      {homeLocation[0].address}
+                    </span>
                   </div>
                 </div>
                 <div className='flex gap-[15px]'>
@@ -163,9 +162,7 @@ const page = () => {
                   </Link>
 
                   <div
-                    onClick={() => {
-                      setDeleteLocationId(homeLocation[0]?._id);
-                    }}
+                    onClick={() => setDeleteLocationId(homeLocation[0]?._id)}
                     className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px] cursor-pointer'
                   >
                     <Image src='/assets/trash.png' alt='' layout='fill' objectFit='contain' />
@@ -175,19 +172,18 @@ const page = () => {
             </div>
           ) : (
             <Link href='/account/location/add-location/home' className='flex gap-[15px] mb-[20px] cursor-pointer'>
-              <div className='p-[8px] bg-[#e0e0e0a3] rounded-full h-fit'>
-                <div className='relative w-[20px] pt-[20px] md:w-[20px] md:pt-[20px] '>
+              <div className='p-[8px] bg-[#e0e0e0a3] dark:bg-gray-700 rounded-full h-fit'>
+                <div className='relative w-[20px] pt-[20px]'>
                   <Image src='/assets/add_home.png' alt='' layout='fill' objectFit='contain' />
                 </div>
               </div>
               <div className='flex flex-1 items-center justify-between'>
-                <div className='flex items-center gap-[8px]'>
-                  <h3 className='text-[#0054ff] text-[18px] font-semibold'>Thêm nhà</h3>
-                </div>
+                <h3 className='text-[#0054ff] dark:text-blue-400 text-[18px] font-semibold'>Thêm nhà</h3>
               </div>
             </Link>
           )}
 
+          {/* Công ty */}
           {companyLocation && companyLocation.length > 0 ? (
             <div
               onClick={() => {
@@ -201,34 +197,34 @@ const page = () => {
                   lat: companyLocation[0].location.coordinates[1],
                   lon: companyLocation[0].location.coordinates[0],
                 });
-                if (storeId) {
-                  router.push(`/store/${storeId}/cart`);
-                }
+                if (storeId) router.push(`/store/${storeId}/cart`);
               }}
               className='flex items-center gap-[15px] mb-[20px] cursor-pointer'
             >
-              <div className='p-[8px] bg-[#e0e0e0a3] rounded-full h-fit'>
-                <div className='relative w-[20px] pt-[20px] md:w-[20px] md:pt-[20px]'>
+              <div className='p-[8px] bg-[#e0e0e0a3] dark:bg-gray-700 rounded-full h-fit'>
+                <div className='relative w-[20px] pt-[20px]'>
                   <Image src='/assets/briefcase_green.png' alt='' layout='fill' objectFit='contain' />
                 </div>
               </div>
               <div className='flex flex-1 items-center justify-between'>
                 <div className='flex flex-col mr-[10px]'>
-                  <h3 className='text-[#4a4b4d] text-[20px] font-bold'>{companyLocation[0].name}</h3>
+                  <h3 className='text-[#4a4b4d] dark:text-gray-100 text-[20px] font-bold'>{companyLocation[0].name}</h3>
                   <div className='flex items-center gap-[4px]'>
                     {currentPosition && (
                       <>
-                        <span className='text-[#a4a5a8] text-[15px]'>
+                        <span className='text-[#a4a5a8] dark:text-gray-400 text-[15px]'>
                           {haversineDistance(currentPosition, [
                             companyLocation[0].location.coordinates[1],
                             companyLocation[0].location.coordinates[0],
-                          ]).toFixed(2)}
+                          ]).toFixed(2)}{" "}
                           km
                         </span>
-                        <div className='w-[4px] h-[4px] rounded-full bg-[#a4a5a8]'></div>
+                        <div className='w-[4px] h-[4px] rounded-full bg-[#a4a5a8] dark:bg-gray-500'></div>
                       </>
                     )}
-                    <span className='text-[#a4a5a8] text-[15px] line-clamp-1'>{companyLocation[0].address}</span>
+                    <span className='text-[#a4a5a8] dark:text-gray-400 text-[15px] line-clamp-1'>
+                      {companyLocation[0].address}
+                    </span>
                   </div>
                 </div>
                 <div className='flex gap-[15px]'>
@@ -240,9 +236,7 @@ const page = () => {
                   </Link>
 
                   <div
-                    onClick={() => {
-                      setDeleteLocationId(companyLocation[0]._id);
-                    }}
+                    onClick={() => setDeleteLocationId(companyLocation[0]._id)}
                     className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px] cursor-pointer'
                   >
                     <Image src='/assets/trash.png' alt='' layout='fill' objectFit='contain' />
@@ -252,22 +246,20 @@ const page = () => {
             </div>
           ) : (
             <Link href='/account/location/add-location/company' className='flex gap-[15px] mb-[20px] cursor-pointer'>
-              <div className='p-[8px] bg-[#e0e0e0a3] rounded-full'>
-                <div className='relative w-[20px] pt-[20px] md:w-[20px] md:pt-[20px]'>
+              <div className='p-[8px] bg-[#e0e0e0a3] dark:bg-gray-700 rounded-full'>
+                <div className='relative w-[20px] pt-[20px]'>
                   <Image src='/assets/briefcase.png' alt='' layout='fill' objectFit='contain' />
                 </div>
               </div>
               <div className='flex flex-1 items-center justify-between'>
-                <div className='flex items-center gap-[8px]'>
-                  <h3 className='text-[#0054ff] text-[18px] font-semibold'>Thêm công ty</h3>
-                </div>
+                <h3 className='text-[#0054ff] dark:text-blue-400 text-[18px] font-semibold'>Thêm công ty</h3>
               </div>
             </Link>
           )}
 
-          <div className='pt-[20px]' style={{ borderTop: "6px solid #e0e0e0a3" }}>
-            {familiarLocations &&
-              familiarLocations.length > 0 &&
+          {/* Địa chỉ thân quen */}
+          <div className='pt-[20px] border-t-[6px] border-[#e0e0e0a3] dark:border-gray-700'>
+            {familiarLocations?.length > 0 &&
               familiarLocations.map((location) => (
                 <div
                   key={location._id}
@@ -282,34 +274,34 @@ const page = () => {
                       lat: location.location.coordinates[1],
                       lon: location.location.coordinates[0],
                     });
-                    if (storeId) {
-                      router.push(`/store/${storeId}/cart`);
-                    }
+                    if (storeId) router.push(`/store/${storeId}/cart`);
                   }}
                   className='flex items-center gap-[15px] mb-[20px] cursor-pointer'
                 >
-                  <div className='p-[8px] bg-[#e0e0e0a3] rounded-full h-fit'>
-                    <div className='relative w-[20px] pt-[20px] md:w-[20px] md:pt-[20px]'>
+                  <div className='p-[8px] bg-[#e0e0e0a3] dark:bg-gray-700 rounded-full h-fit'>
+                    <div className='relative w-[20px] pt-[20px]'>
                       <Image src='/assets/favorite-active.png' alt='' layout='fill' objectFit='contain' />
                     </div>
                   </div>
                   <div className='flex flex-1 items-center justify-between'>
                     <div className='flex flex-col mr-[10px]'>
-                      <h3 className='text-[#4a4b4d] text-[20px] font-bold'>{location.name}</h3>
+                      <h3 className='text-[#4a4b4d] dark:text-gray-100 text-[20px] font-bold'>{location.name}</h3>
                       <div className='flex items-center gap-[4px]'>
                         {currentPosition && (
                           <>
-                            <span className='text-[#a4a5a8] text-[15px]'>
+                            <span className='text-[#a4a5a8] dark:text-gray-400 text-[15px]'>
                               {haversineDistance(currentPosition, [
                                 location.location.coordinates[1],
                                 location.location.coordinates[0],
-                              ]).toFixed(2)}
+                              ]).toFixed(2)}{" "}
                               km
                             </span>
-                            <div className='w-[4px] h-[4px] rounded-full bg-[#a4a5a8]'></div>
+                            <div className='w-[4px] h-[4px] rounded-full bg-[#a4a5a8] dark:bg-gray-500'></div>
                           </>
                         )}
-                        <span className='text-[#a4a5a8] text-[15px] line-clamp-1'>{location.address}</span>
+                        <span className='text-[#a4a5a8] dark:text-gray-400 text-[15px] line-clamp-1'>
+                          {location.address}
+                        </span>
                       </div>
                     </div>
                     <div className='flex gap-[15px]'>
@@ -321,9 +313,7 @@ const page = () => {
                       </Link>
 
                       <div
-                        onClick={() => {
-                          setDeleteLocationId(location._id);
-                        }}
+                        onClick={() => setDeleteLocationId(location._id)}
                         className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px] cursor-pointer'
                       >
                         <Image src='/assets/trash.png' alt='' layout='fill' objectFit='contain' />
@@ -337,17 +327,15 @@ const page = () => {
               href='/account/location/add-location/familiar'
               className='flex items-center gap-[15px] mb-[20px] cursor-pointer'
             >
-              <div className='p-[8px] bg-[#e0e0e0a3] rounded-full h-fit'>
-                <div className='relative w-[20px] pt-[20px] md:w-[20px] md:pt-[20px]'>
+              <div className='p-[8px] bg-[#e0e0e0a3] dark:bg-gray-700 rounded-full h-fit'>
+                <div className='relative w-[20px] pt-[20px]'>
                   <Image src='/assets/plus.png' alt='' layout='fill' objectFit='contain' />
                 </div>
               </div>
               <div className='flex flex-1 items-center justify-between'>
                 <div className='flex flex-col mr-[10px]'>
-                  <h3 className='text-[#0054ff] text-[18px] font-semibold'>Thêm mới</h3>
-                  <div className='flex items-center gap-[4px]'>
-                    <span className='text-[#a4a5a8] text-[15px]'>Lưu làm địa chỉ thân quen</span>
-                  </div>
+                  <h3 className='text-[#0054ff] dark:text-blue-400 text-[18px] font-semibold'>Thêm mới</h3>
+                  <span className='text-[#a4a5a8] dark:text-gray-400 text-[15px]'>Lưu làm địa chỉ thân quen</span>
                 </div>
               </div>
             </Link>

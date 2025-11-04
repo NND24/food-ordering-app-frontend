@@ -25,7 +25,9 @@ const ListDish = ({ storeInfo, cartItems }) => {
         allDishGroups.map((group) =>
           group.dishes.length > 0 ? (
             <div key={group._id} className='mb-[20px]'>
-              <h3 className='text-[#4A4B4D] text-[24px] font-bold mb-[5px] line-clamp-2'>{group.name}</h3>
+              <h3 className='text-[#4A4B4D] dark:text-gray-100 text-[24px] font-bold mb-[5px] line-clamp-2'>
+                {group.name}
+              </h3>
               <div className='grid grid-cols-1 gap-[20px] md:grid-cols-2'>
                 {group.dishes?.map((dish) => (
                   <DishCard key={dish._id} dish={dish} storeInfo={storeInfo} cartItems={cartItems} />

@@ -59,9 +59,11 @@ const DishCard = ({ dish, storeInfo, cartItems }) => {
       <Link
         href={`/store/${dish.storeId}/dish/${dish._id}`}
         name='storeCard'
-        className={`flex gap-4 items-start p-3 rounded-2xl bg-white shadow-sm hover:shadow-xl hover:scale-[1.01] transition-transform duration-200 ${
-          storeInfo?.openStatus === "CLOSED" ? "pointer-events-none" : ""
-        }`}
+        className={`flex gap-4 items-start p-3 rounded-2xl 
+                bg-white dark:bg-gray-900 
+                shadow-sm hover:shadow-xl hover:scale-[1.01] 
+                transition-transform duration-200 
+                dark:hover:shadow-gray-800 ${storeInfo?.openStatus === "CLOSED" ? "pointer-events-none" : ""}`}
       >
         {/* Hình ảnh món ăn */}
         {dish?.image?.url && (
@@ -78,17 +80,26 @@ const DishCard = ({ dish, storeInfo, cartItems }) => {
 
         {/* Nội dung món */}
         <div className='flex flex-col flex-1'>
-          <h4 className='text-[#4A4B4D] text-lg font-semibold line-clamp-1' name='storeName'>
+          <h4 className='text-[#4A4B4D] dark:text-gray-100 text-lg font-semibold line-clamp-1' name='storeName'>
             {dish?.name}
           </h4>
-          {dish?.description && <p className='text-[#a4a5a8] text-sm line-clamp-1'>{dish?.description}</p>}
+
+          {dish?.description && (
+            <p className='text-[#a4a5a8] dark:text-gray-400 text-sm line-clamp-1'>{dish?.description}</p>
+          )}
 
           <div className='flex items-center justify-between mt-2'>
-            <span className='text-black font-bold text-base'>{Number(dish?.price).toLocaleString("vi-VN")}đ</span>
+            <span className='text-black dark:text-white font-bold text-base'>
+              {Number(dish?.price).toLocaleString("vi-VN")}đ
+            </span>
 
             {/* Nút giỏ hàng */}
             {cartItem?.quantity > 0 ? (
-              <div className='flex items-center bg-white border border-[#fc6011] rounded-full px-2 py-1 shadow-md gap-2'>
+              <div
+                className='flex items-center bg-white dark:bg-gray-800 
+                       border border-[#fc6011] rounded-full px-2 py-1 
+                       shadow-md gap-2'
+              >
                 <Image
                   src='/assets/minus.png'
                   alt='minus'
@@ -100,7 +111,9 @@ const DishCard = ({ dish, storeInfo, cartItems }) => {
                     handleChangeQuantity(-1);
                   }}
                 />
-                <span className='text-[#4A4B4D] text-lg font-bold w-[32px] text-center'>{cartItem?.quantity}</span>
+                <span className='text-[#4A4B4D] dark:text-gray-100 text-lg font-bold w-[32px] text-center'>
+                  {cartItem?.quantity}
+                </span>
                 <Image
                   src='/assets/plus_active.png'
                   alt='plus'
@@ -119,7 +132,7 @@ const DishCard = ({ dish, storeInfo, cartItems }) => {
                 alt='add'
                 width={40}
                 height={40}
-                className='bg-white rounded-full shadow-md cursor-pointer hover:scale-110 transition'
+                className='bg-white dark:bg-gray-800 rounded-full shadow-md cursor-pointer hover:scale-110 transition'
                 onClick={(e) => {
                   e.preventDefault();
                   handleChangeQuantity(1);

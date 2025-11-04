@@ -39,7 +39,7 @@ const SearchBar = () => {
     <div className='relative w-full my-3 md:my-0 md:w-[90%] lg:w-[60%]'>
       {/* Icon Search */}
       <button
-        className='absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-400 hover:text-[#fc6011] transition'
+        className='absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-400 dark:text-gray-300 hover:text-[#fc6011] transition'
         onClick={handleSearch}
       >
         <Image src='/assets/search.png' alt='search' width={22} height={22} />
@@ -52,13 +52,22 @@ const SearchBar = () => {
         placeholder='Tìm kiếm quán ăn...'
         onChange={(e) => setSearch(e.target.value)}
         onKeyDown={handleKeyDown}
-        className='w-full pl-12 pr-4 py-3 rounded-full bg-[#f3f3f3] text-gray-700 text-lg placeholder-gray-400 outline-none border border-transparent focus:border-[#fc6011] focus:bg-white focus:shadow-md transition-all'
+        className='w-full pl-12 pr-10 py-3 rounded-full 
+               bg-[#f3f3f3] dark:bg-gray-800 
+               text-gray-700 dark:text-gray-200 
+               placeholder-gray-400 dark:placeholder-gray-500 
+               outline-none border border-transparent 
+               focus:border-[#fc6011] 
+               focus:bg-white dark:focus:bg-gray-900 
+               focus:shadow-md transition-all'
       />
 
       {/* Nút Xóa nhanh */}
       {search && (
         <button
-          className='absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition'
+          className='absolute top-1/2 right-4 transform -translate-y-1/2 
+                 text-gray-400 dark:text-gray-300 
+                 hover:text-gray-600 dark:hover:text-gray-100 transition'
           onClick={() => setSearch("")}
         >
           ✕

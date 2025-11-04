@@ -205,7 +205,11 @@ const page = () => {
   }
 
   return (
-    <div className={` bg-[#fff] md:bg-[#f9f9f9] ${cartQuantity > 0 ? "pb-[90px]" : ""}`}>
+    <div
+      className={`bg-[#fff] md:bg-[#f9f9f9] dark:bg-gray-900 dark:md:bg-gray-950 dark:text-gray-100 ${
+        cartQuantity > 0 ? "pb-[90px]" : ""
+      }`}
+    >
       <Heading title={storeInfo?.name} description='' keywords='' />
       <div className='hidden md:block'>
         <Header />
@@ -213,6 +217,7 @@ const page = () => {
 
       {storeInfo ? (
         <>
+          {/* Header Mobile */}
           <div className='fixed top-0 right-0 left-0 z-10 flex items-center justify-between p-[20px] bg-[#00000036] md:hidden'>
             <Link href='/home'>
               <Image src='/assets/arrow_left_white.png' alt='' width={30} height={30} />
@@ -224,17 +229,15 @@ const page = () => {
                   alt=''
                   width={30}
                   height={30}
-                  onClick={() => {
-                    handleAddToFavorite();
-                  }}
+                  onClick={handleAddToFavorite}
                   className='cursor-pointer'
                 />
                 <Image src='/assets/notification_white.png' alt='' className='cursor-pointer' width={30} height={30} />
 
-                {notifications.filter((noti) => noti.status === "unread").length > 0 && (
-                  <div className='absolute top-[-6px] right-[-6px] w-[21px] h-[21px] text-center rounded-full bg-[#fc6011] border-solid border-[1px] border-white flex items-center justify-center'>
+                {notifications.filter((n) => n.status === "unread").length > 0 && (
+                  <div className='absolute top-[-6px] right-[-6px] w-[21px] h-[21px] text-center rounded-full bg-[#fc6011] border border-white flex items-center justify-center'>
                     <span className='text-[11px] text-white'>
-                      {notifications.filter((noti) => noti.status === "unread").length}
+                      {notifications.filter((n) => n.status === "unread").length}
                     </span>
                   </div>
                 )}
@@ -242,7 +245,8 @@ const page = () => {
             )}
           </div>
 
-          <div className='bg-white lg:w-[75%] md:w-[80%] md:mx-auto md:rounded-2xl md:shadow-md mb-6 overflow-hidden'>
+          {/* Store Card */}
+          <div className='bg-white dark:bg-gray-800 lg:w-[75%] md:w-[80%] md:mx-auto md:rounded-2xl md:shadow-md mb-6 overflow-hidden transition-colors duration-300'>
             {/* Cover */}
             <div className='relative pt-[45%] lg:pt-[30%] overflow-hidden'>
               <Image
@@ -256,9 +260,9 @@ const page = () => {
             </div>
 
             {/* Info Card */}
-            <div className='flex gap-5 mx-5 mt-[-50px] bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-4 relative z-10'>
+            <div className='flex gap-5 mx-5 mt-[-50px] bg-white/90 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg p-4 relative z-10'>
               {/* Avatar */}
-              <div className='relative w-[100px] h-[100px] rounded-xl overflow-hidden ring-4 ring-white shadow-md'>
+              <div className='relative w-[100px] h-[100px] rounded-xl overflow-hidden ring-4 ring-white dark:ring-gray-700 shadow-md'>
                 <Image
                   src={storeInfo?.avatar?.url || "/assets/logo_app.png"}
                   alt='Store Avatar'
@@ -268,47 +272,49 @@ const page = () => {
                 />
               </div>
 
-              {/* Store Info */}
+              {/* Info */}
               <div className='flex flex-1 items-start justify-between min-w-0'>
                 <div className='flex flex-col min-w-0'>
-                  <span className='text-[#4A4B4D] text-xl font-bold truncate'>{storeInfo?.name}</span>
+                  <span className='text-[#4A4B4D] dark:text-gray-100 text-xl font-bold truncate'>
+                    {storeInfo?.name}
+                  </span>
 
                   {/* Categories */}
-                  <div className='text-sm text-gray-500 line-clamp-2'>
-                    {storeInfo?.storeCategory &&
-                      storeInfo?.storeCategory.map((category, index) => (
-                        <div key={category._id || index} className='inline'>
-                          <Link href={`/search?category=${category._id}`} className='hover:text-[#fc6011] transition'>
-                            {category.name}
-                          </Link>
-                          {index !== storeInfo.storeCategory.length - 1 && (
-                            <span className='inline-block w-1 h-1 my-[3px] mx-[5px] bg-[#fc6011] rounded-full'></span>
-                          )}
-                        </div>
-                      ))}
+                  <div className='text-sm text-gray-500 dark:text-gray-400 line-clamp-2'>
+                    {storeInfo?.storeCategory?.map((category, index) => (
+                      <div key={category._id || index} className='inline'>
+                        <Link href={`/search?category=${category._id}`} className='hover:text-[#fc6011] transition'>
+                          {category.name}
+                        </Link>
+                        {index !== storeInfo.storeCategory.length - 1 && (
+                          <span className='inline-block w-1 h-1 my-[3px] mx-[5px] bg-[#fc6011] rounded-full'></span>
+                        )}
+                      </div>
+                    ))}
                   </div>
 
                   {/* Description */}
                   {storeInfo?.description && (
-                    <span className='text-gray-500 text-sm line-clamp-1'>{storeInfo?.description}</span>
+                    <span className='text-gray-500 dark:text-gray-400 text-sm line-clamp-1'>
+                      {storeInfo?.description}
+                    </span>
                   )}
 
-                  {/* Giờ mở cửa & trạng thái */}
+                  {/* Hours */}
                   {storeInfo?.openHour && storeInfo?.closeHour && (
                     <div className='flex flex-col sm:flex-row items-start sm:items-center gap-2 text-sm'>
-                      <span className='text-gray-500 line-clamp-1'>
+                      <span className='text-gray-500 dark:text-gray-400 line-clamp-1'>
                         {`Giờ mở cửa: ${storeInfo.openHour} - ${storeInfo.closeHour}`}
                       </span>
                       <span
                         className={`inline-flex items-center gap-1 px-3 py-[4px] rounded-full text-xs font-semibold shadow-md backdrop-blur-sm border transition-all duration-300 whitespace-nowrap
-    ${
-      storeInfo.openStatus === "OPEN"
-        ? "bg-green-500/60 border-green-400 text-white hover:bg-green-500/80"
-        : "bg-red-500/60 border-red-400 text-white hover:bg-red-500/80"
-    }
-  `}
+                      ${
+                        storeInfo.openStatus === "OPEN"
+                          ? "bg-green-500/60 border-green-400 text-white hover:bg-green-500/80"
+                          : "bg-red-500/60 border-red-400 text-white hover:bg-red-500/80"
+                      }`}
                       >
-                        {storeInfo.openStatus === "OPEN" ? <span>Đang mở cửa</span> : <span>Đã đóng cửa</span>}
+                        {storeInfo.openStatus === "OPEN" ? "Đang mở cửa" : "Đã đóng cửa"}
                       </span>
                     </div>
                   )}
@@ -332,22 +338,15 @@ const page = () => {
 
             {/* Content */}
             <div className='px-5 md:px-6 mt-[20px] pb-6'>
-              {/* {allDish && (
-                <div className='mb-6'>
-                  <h3 className='text-[#4A4B4D] text-xl font-bold mb-3'>Dành cho bạn</h3>
-                  <ListDishBig storeInfo={storeInfo} allDish={allDish} cartItems={storeCart ? storeCart?.items : []} />
-                </div>
-              )} */}
-
               {storeInfo && (
                 <div className='mb-6'>
-                  <ListDish storeInfo={storeInfo} cartItems={storeCart ? storeCart?.items : []} />
+                  <ListDish storeInfo={storeInfo} cartItems={storeCart ? storeCart.items : []} />
                 </div>
               )}
 
               {/* Map */}
-              <div className='w-full h-[150px] my-4 relative rounded-xl overflow-hidden shadow-md z-10'>
-                {typeof window !== "undefined" && storeInfo?.address && storeInfo?.address.lat && (
+              <div className='w-full h-[150px] my-4 relative rounded-xl overflow-hidden shadow-md z-10 dark:border dark:border-gray-700'>
+                {typeof window !== "undefined" && storeInfo?.address?.lat && (
                   <MapContainer
                     key={`${storeInfo.address.lat}-${storeInfo.address.lon}`}
                     center={[storeInfo.address.lat, storeInfo.address.lon]}
@@ -371,16 +370,16 @@ const page = () => {
                 paginationRating?.data?.length > 0 &&
                 ratings && (
                   <>
-                    <div className='p-5 bg-gray-100 md:rounded-xl mb-4 shadow-inner'>
+                    <div className='py-5 bg-gray-100 dark:bg-gray-800 md:rounded-xl mb-4 shadow-inner'>
                       <div className='flex items-center justify-between pb-3'>
-                        <h3 className='text-[#4A4B4D] text-xl font-bold'>Mọi người nhận xét</h3>
+                        <h3 className='text-[#4A4B4D] dark:text-gray-100 text-xl font-bold'>Mọi người nhận xét</h3>
                         <Link href={`/store/${storeId}/rating`} className='block md:hidden'>
                           <Image
                             src='/assets/arrow_right_long.png'
                             alt='arrow'
                             width={40}
                             height={40}
-                            className='bg-white p-2 rounded-full shadow-md'
+                            className='bg-white dark:bg-gray-700 p-2 rounded-full shadow-md'
                           />
                         </Link>
                       </div>
@@ -389,38 +388,38 @@ const page = () => {
 
                     <div className='hidden md:block'>
                       <RatingBar ratings={ratings} />
-                      {paginationRating &&
-                        paginationRating.data.map((rating) => (
-                          <RatingItem
-                            key={rating._id}
-                            rating={rating}
-                            userId={user?._id}
-                            refetchAllStoreRating={getAllStoreRating}
-                            refetchPaginationRating={getPaginationRating}
-                            refetchAllStoreRatingDesc={getAllStoreRatingDesc}
-                          />
-                        ))}
-                      {paginationRating && <Pagination page={page} limit={limit} total={paginationRating.total} />}
+                      {paginationRating?.data.map((rating) => (
+                        <RatingItem
+                          key={rating._id}
+                          rating={rating}
+                          userId={user?._id}
+                          refetchAllStoreRating={getAllStoreRating}
+                          refetchPaginationRating={getPaginationRating}
+                          refetchAllStoreRatingDesc={getAllStoreRatingDesc}
+                        />
+                      ))}
+                      <Pagination page={page} limit={limit} total={paginationRating.total} />
                     </div>
                   </>
                 )}
             </div>
           </div>
 
+          {/* Cart Floating Bar */}
           {cartQuantity > 0 && storeCart && (
             <Link
               name='cartDetailBtn'
               href={`/store/${storeId}/cart`}
-              className='fixed bottom-0 left-0 right-0 bg-[#fff] px-[20px] py-[15px] z-[100] flex items-center justify-center'
+              className='fixed bottom-0 left-0 right-0 bg-[#fff] dark:bg-gray-900 px-[20px] py-[15px] z-[100] flex items-center justify-center transition-colors duration-300'
             >
               <div
                 className='flex items-center justify-between 
-                  rounded-xl 
-                  bg-gradient-to-r from-[#fc6011] to-[#ff7e3c]
-                  text-white py-4 px-6 
-                  lg:w-[75%] md:w-[80%] w-full md:mx-auto 
-                  shadow-md hover:shadow-lg
-                  transition-all duration-300 hover:scale-[1.02]'
+              rounded-xl 
+              bg-gradient-to-r from-[#fc6011] to-[#ff7e3c]
+              text-white py-4 px-6 
+              lg:w-[75%] md:w-[80%] w-full md:mx-auto 
+              shadow-md hover:shadow-lg
+              transition-all duration-300 hover:scale-[1.02]'
               >
                 <div className='flex items-center gap-2'>
                   <span className='text-lg md:text-xl font-semibold'>Giỏ hàng</span>

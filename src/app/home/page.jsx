@@ -31,7 +31,11 @@ const page = () => {
   }
 
   return (
-    <div className='pt-[140px] pb-[100px] md:pt-[75px]' name='home_page'>
+    <div
+      className='pt-[140px] pb-[100px] md:pt-[75px] bg-gray-50 text-gray-800 
+             dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300'
+      name='home_page'
+    >
       <Heading title='Trang chủ' description='' keywords='' />
       <Header />
       {ratingStore && ratingStore?.data?.length > 0 && <Hero allStore={ratingStore.data} />}
@@ -41,22 +45,30 @@ const page = () => {
           <CategorySlider />
         </div>
 
+        {/* Nhà hàng nổi tiếng */}
         <div className='my-[20px] md:hidden'>
           <div className='flex items-center justify-between px-[20px] md:px-0 md:mb-[10px]'>
-            <h3 className='text-[#4A4B4D] text-[24px] font-bold line-clamp-1'>Nhà hàng nổi tiếng</h3>
-            <Link href='/search?sort=standout' className='text-[#fc6011] text-[16px] whitespace-nowrap'>
+            <h3 className='text-[24px] font-bold line-clamp-1 text-[#4A4B4D] dark:text-gray-100'>Nhà hàng nổi tiếng</h3>
+            <Link
+              href='/search?sort=standout'
+              className='text-[#fc6011] text-[16px] whitespace-nowrap hover:underline transition'
+            >
               Xem tất cả
             </Link>
           </div>
 
           {standoutStore && standoutStore?.data?.length > 0 && (
-            <div className=''>
-              <Link href={`/store/${standoutStore.data[0]._id}`} className='my-[20px]'>
+            <div>
+              <Link
+                href={`/store/${standoutStore.data[0]._id}`}
+                className='my-[20px] block bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-md 
+                       hover:shadow-lg transition-all duration-300'
+              >
                 <div className='relative w-full pt-[45%]'>
                   <Image src={standoutStore.data[0].avatar.url} alt='' layout='fill' objectFit='fill' />
                 </div>
 
-                <h4 className='text-[#4A4B4D] text-[20px] font-semibold px-[20px] py-[4px] line-clamp-1'>
+                <h4 className='text-[20px] font-semibold px-[20px] py-[4px] line-clamp-1 text-[#4A4B4D] dark:text-gray-100'>
                   {standoutStore.data[0].name}
                 </h4>
 
@@ -73,7 +85,9 @@ const page = () => {
                       </>
                     )}
                     {standoutStore.data[0].amountRating != 0 && (
-                      <span className='text-[#636464]'>{`(${standoutStore.data[0].amountRating} đánh giá)`}</span>
+                      <span className='text-[#636464] dark:text-gray-400'>
+                        ({standoutStore.data[0].amountRating} đánh giá)
+                      </span>
                     )}
                   </div>
 
@@ -83,7 +97,11 @@ const page = () => {
 
                   <div className='flex items-center gap-[4px] min-w-0 overflow-hidden text-ellipsis whitespace-nowrap'>
                     {standoutStore.data[0].storeCategory.map((category, index) => (
-                      <Link href={`/search?category=${category._id}`} key={category._id} className='text-[#636464]'>
+                      <Link
+                        href={`/search?category=${category._id}`}
+                        key={category._id}
+                        className='text-[#636464] dark:text-gray-400 hover:text-[#fc6011] transition'
+                      >
                         {category.name}
                         {index !== standoutStore.data[0].storeCategory.length - 1 && <span>, </span>}
                       </Link>
@@ -95,10 +113,11 @@ const page = () => {
           )}
         </div>
 
+        {/* Phổ biến nhất */}
         <div className='my-[20px] px-[20px] md:px-0'>
           <div className='flex items-center justify-between mb-[10px]'>
-            <h3 className='text-[#4A4B4D] text-[24px] font-bold'>Phổ biến nhất</h3>
-            <Link href='/search?sort=rating' className='text-[#fc6011] text-[16px]'>
+            <h3 className='text-[24px] font-bold text-[#4A4B4D] dark:text-gray-100'>Phổ biến nhất</h3>
+            <Link href='/search?sort=rating' className='text-[#fc6011] text-[16px] hover:underline transition'>
               Xem tất cả
             </Link>
           </div>
@@ -106,6 +125,7 @@ const page = () => {
           {ratingStore && ratingStore?.data?.length > 0 && <StoreBigSlider allStore={ratingStore.data} />}
         </div>
 
+        {/* Danh sách tất cả cửa hàng */}
         <div className='my-[20px] px-[20px] md:px-0'>
           {allStore && allStore?.data?.length > 0 && <ListStore allStore={allStore.data} />}
         </div>

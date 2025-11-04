@@ -42,8 +42,9 @@ const CartItem = ({ cartItem }) => {
   return (
     <Link
       href={`/store/${cartItem.store._id}/cart`}
-      className='relative block bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 overflow-hidden'
+      className='relative block bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 overflow-hidden'
     >
+      {/* Hình ảnh */}
       <div className='relative w-full h-56 rounded-t-2xl overflow-hidden'>
         {cartItem.items.slice(0, 4).map((item, index) => {
           const total = cartItem.items.length;
@@ -79,12 +80,14 @@ const CartItem = ({ cartItem }) => {
       {/* Nội dung */}
       <div className='p-4'>
         <div className='flex items-center justify-between gap-2'>
-          <h4 className='text-gray-800 text-lg font-semibold line-clamp-1 flex-1'>{cartItem.store.name}</h4>
-          <p className='text-gray-700 font-medium text-sm'>{quantity} món</p>
+          <h4 className='text-gray-800 dark:text-gray-100 text-lg font-semibold line-clamp-1 flex-1'>
+            {cartItem.store.name}
+          </h4>
+          <p className='text-gray-700 dark:text-gray-300 font-medium text-sm'>{quantity} món</p>
         </div>
 
         {/* Danh sách món ăn */}
-        <div className='text-gray-600 text-sm mb-2 line-clamp-1'>
+        <div className='text-gray-600 dark:text-gray-400 text-sm mb-2 line-clamp-1'>
           {cartItem.items.map((item, index) => (
             <span key={index}>
               {item.dishName} x{item.quantity}
@@ -96,7 +99,7 @@ const CartItem = ({ cartItem }) => {
 
       {/* Nút xóa */}
       <div
-        className='absolute top-3 right-3 z-10 p-2 bg-gray-200 hover:bg-gray-300 rounded-full cursor-pointer transition'
+        className='absolute top-3 right-3 z-10 p-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-full cursor-pointer transition'
         onClick={(e) => {
           e.preventDefault();
           confirmClearCartItem();

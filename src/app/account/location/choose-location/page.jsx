@@ -235,39 +235,35 @@ const Page = () => {
   return (
     <>
       {province.lat !== 200 && selectedLocation.lat !== 200 && userLocation.lat !== 200 && (
-        <div className='pt-[85px] pb-[140px] md:pt-[75px] md:mt-[20px] md:px-0 bg-[#fff] md:bg-[#f9f9f9]'>
+        <div className='pt-[85px] pb-[140px] md:pt-[75px] md:mt-[20px] md:px-0 bg-[#fff] dark:bg-gray-900 text-[#4a4b4d] dark:text-gray-100 md:bg-[#f9f9f9]'>
           <Heading title='Thêm địa chỉ' />
           <div className='hidden md:block'>
             <Header page='account' />
           </div>
 
           {!openSelectProvince ? (
-            <div className='bg-[#fff] lg:w-[60%] md:w-[80%] md:mx-auto md:border md:rounded-[10px] md:shadow-md md:p-[20px]'>
-              <div className='fixed top-0 right-0 left-0 z-10 flex items-center gap-2 bg-white h-[85px] px-4 md:static'>
-                <div
-                  onClick={() => {
-                    router.back();
-                  }}
-                  className='relative w-[30px] pt-[30px] cursor-pointer'
-                >
+            <div className='bg-[#fff] dark:bg-gray-900 lg:w-[60%] md:w-[80%] md:mx-auto md:border md:rounded-[10px] md:shadow-md md:p-[20px] dark:border-gray-700'>
+              <div className='fixed top-0 right-0 left-0 z-10 flex items-center gap-2 bg-white dark:bg-gray-900 h-[85px] px-4 md:static'>
+                <div onClick={() => router.back()} className='relative w-[30px] pt-[30px] cursor-pointer'>
                   <Image src='/assets/arrow_left_long.png' alt='' layout='fill' objectFit='contain' />
                 </div>
 
+                {/* Ô tìm kiếm */}
                 <div className='relative flex-1'>
                   <input
                     type='text'
                     value={search}
                     onChange={handleSearchChange}
                     placeholder='Nhập địa điểm'
-                    className='w-full bg-gray-200 text-lg p-2 rounded-lg'
+                    className='w-full bg-gray-200 dark:bg-gray-700 dark:text-gray-100 text-lg p-2 rounded-lg placeholder-gray-400 dark:placeholder-gray-300'
                   />
                   {suggestions.length > 0 && (
-                    <ul className='absolute top-full left-0 w-full bg-white border border-gray-300 rounded-md z-50 max-h-60 overflow-auto shadow-lg'>
+                    <ul className='absolute top-full left-0 w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md z-50 max-h-60 overflow-auto shadow-lg'>
                       {suggestions.map((place, index) => (
                         <li
                           key={index}
                           onClick={() => handleSelectLocation(place)}
-                          className='p-2 hover:bg-gray-200 cursor-pointer'
+                          className='p-2 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer'
                         >
                           {place.name}
                         </li>
@@ -276,6 +272,7 @@ const Page = () => {
                   )}
                 </div>
 
+                {/* Chọn tỉnh */}
                 <div
                   className='flex flex-col items-center gap-[4px]'
                   onClick={() => {
@@ -288,11 +285,11 @@ const Page = () => {
                       <Image src='/assets/star_yellow.png' alt='' layout='fill' objectFit='contain' />
                     </div>
                   </div>
-                  <p className='text-[13px] text-[#4a4b4d] font-semibold'>{province.name}</p>
+                  <p className='text-[13px] text-[#4a4b4d] dark:text-gray-100 font-semibold'>{province.name}</p>
                 </div>
               </div>
 
-              {/* Map component */}
+              {/* Bản đồ */}
               <div className='w-full h-[500px] mt-4 relative z-0'>
                 {typeof window !== "undefined" && (
                   <MapContainer
@@ -307,15 +304,12 @@ const Page = () => {
                     <MapEvents />
 
                     <MarkerComponent lat={selectedLocation.lat} lon={selectedLocation.lon} />
-                    {/* Marker cố định tại vị trí hiện tại */}
                     {userLocation && (
                       <Marker
                         position={[userLocation.lat, userLocation.lon]}
                         icon={homeIcon}
                         eventHandlers={{
-                          click: () => {
-                            setSelectedLocation({ lat: userLocation.lat, lon: userLocation.lon });
-                          },
+                          click: () => setSelectedLocation({ lat: userLocation.lat, lon: userLocation.lon }),
                         }}
                       >
                         <Popup>Vị trí hiện tại</Popup>
@@ -329,24 +323,25 @@ const Page = () => {
                 )}
               </div>
 
-              <div className='fixed bottom-0 left-0 right-0 bg-[#fff] px-[20px] py-[15px] z-[100]'>
+              {/* Nút chọn địa điểm */}
+              <div className='fixed bottom-0 left-0 right-0 bg-[#fff] dark:bg-gray-900 px-[20px] py-[15px] z-[100] border-t border-gray-200 dark:border-gray-700'>
                 <div
                   className='flex items-center justify-center lg:w-[60%] md:w-[80%] md:mx-auto rounded-[8px] bg-[#fc6011] text-[#fff] py-[15px] px-[20px] w-full cursor-pointer shadow-md hover:shadow-lg'
-                  onClick={() => {
+                  onClick={() =>
                     handleChooseLocation({
                       address: dragMarkInput,
                       lat: selectedLocation.lat,
                       lon: selectedLocation.lon,
-                    });
-                  }}
+                    })
+                  }
                 >
                   <span className='text-[#fff] text-[20px] font-semibold'>Chọn địa điểm này</span>
                 </div>
               </div>
             </div>
           ) : (
-            <div className='bg-[#fff] lg:w-[60%] md:w-[80%] md:mx-auto md:border md:rounded-[10px] md:shadow-md md:p-[20px]'>
-              <div className='fixed top-0 right-0 left-0 z-10 flex items-center gap-2 bg-white h-[85px] px-4 md:static'>
+            <div className='bg-[#fff] dark:bg-gray-800 lg:w-[60%] md:w-[80%] md:mx-auto md:border md:rounded-[10px] md:shadow-md md:p-[20px] dark:border-gray-700'>
+              <div className='fixed top-0 right-0 left-0 z-10 flex items-center gap-2 bg-white dark:bg-gray-900 h-[85px] px-4 md:static'>
                 <div
                   className='relative w-[30px] pt-[30px]'
                   onClick={() => {
@@ -363,10 +358,10 @@ const Page = () => {
                     placeholder='Nhập tỉnh'
                     value={searchProvince}
                     onChange={handleSearchProvince}
-                    className='w-full bg-gray-200 text-lg p-2 rounded-lg'
+                    className='w-full bg-gray-200 dark:bg-gray-700 dark:text-gray-100 text-lg p-2 rounded-lg placeholder-gray-400 dark:placeholder-gray-300'
                   />
                   {provinceSuggestions.length > 0 && (
-                    <ul className='absolute top-full left-0 w-full bg-white border border-gray-300 rounded-md z-50 max-h-60 overflow-auto shadow-lg'>
+                    <ul className='absolute top-full left-0 w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md z-50 max-h-60 overflow-auto shadow-lg'>
                       {provinceSuggestions.map((prov) => (
                         <li
                           key={prov.name}
@@ -375,7 +370,7 @@ const Page = () => {
                             handleProvinceChange(prov);
                             setProvinceSuggestions([]);
                           }}
-                          className='p-2 hover:bg-gray-200 cursor-pointer'
+                          className='p-2 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer'
                         >
                           {prov.name}
                         </li>
@@ -390,7 +385,7 @@ const Page = () => {
                       <Image src='/assets/star_yellow.png' alt='' layout='fill' objectFit='contain' />
                     </div>
                   </div>
-                  <p className='text-[13px] text-[#4a4b4d] font-semibold'>{province.name}</p>
+                  <p className='text-[13px] text-[#4a4b4d] dark:text-gray-100 font-semibold'>{province.name}</p>
                 </div>
               </div>
 
@@ -404,11 +399,11 @@ const Page = () => {
                       setProvinceSuggestions([]);
                     }}
                     className={`py-[15px] px-[20px] cursor-pointer ${
-                      prov.name === province.name ? "bg-[#a3a3a3a3]" : "bg-[#fff]"
+                      prov.name === province.name ? "bg-[#a3a3a3a3] dark:bg-gray-700" : "bg-[#fff] dark:bg-gray-800"
                     }`}
-                    style={{ borderBottom: "1px solid #e0e0e0a3" }}
+                    style={{ borderBottom: "1px solid rgba(224,224,224,0.64)" }}
                   >
-                    <span className='text-[#4a4b4d] font-bold'>{prov.name}</span>
+                    <span className='text-[#4a4b4d] dark:text-gray-100 font-bold'>{prov.name}</span>
                   </div>
                 ))}
               </div>

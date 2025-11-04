@@ -45,34 +45,38 @@ const CategoryItem = ({ type }) => {
 
   return (
     <div
-      className='category-item relative flex flex-col items-center gap-[4px] w-fit cursor-pointer'
+      className='category-item relative flex flex-col items-center gap-[6px] w-fit cursor-pointer 
+             transition-transform duration-300 hover:scale-105'
       onClick={handleCategoryClick}
       data-category-name={category.name}
     >
-      <div className='relative w-[100px] h-[100px] pt-[100px]'>
+      {/* Ảnh danh mục */}
+      <div className='relative w-[100px] h-[100px]'>
         <Image
           src={type.image.url}
           layout='fill'
-          alt=''
-          className={`rounded-full w-[100px] h-[100px] justify-center border-[4px] border-solid object-cover ${
-            selectedCategories.includes(type._id) ? "border-[#fc6011]" : "border-[#e8e9e9]"
-          }`}
+          alt={type.name}
+          className={`rounded-full object-cover border-[4px] border-solid 
+        ${selectedCategories.includes(type._id) ? "border-[#fc6011]" : "border-gray-200 dark:border-gray-700"}`}
         />
       </div>
+
+      {/* Tên danh mục */}
       <span
-        className={`text-[16px] text-center font-semibold line-clamp-2 ${
-          selectedCategories.includes(type._id) ? "text-[#fc6011]" : "text-[#4A4B4D]"
-        }`}
+        className={`text-[16px] text-center font-semibold line-clamp-2 transition-colors duration-300
+      ${selectedCategories.includes(type._id) ? "text-[#fc6011]" : "text-[#4A4B4D] dark:text-gray-200"}`}
       >
         {type.name}
       </span>
+
+      {/* Icon check khi chọn */}
       {selectedCategories.includes(type._id) && (
         <Image
           src='/assets/check_box_circle_active.png'
-          alt=''
-          width={30}
-          height={30}
-          className='absolute top-[0px] right-[0px]'
+          alt='selected'
+          width={28}
+          height={28}
+          className='absolute top-1 right-1 drop-shadow-lg'
         />
       )}
     </div>

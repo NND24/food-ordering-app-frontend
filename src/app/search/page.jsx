@@ -39,8 +39,8 @@ const page = () => {
     <>
       <Heading title='Tìm kiếm' description='' keywords='' />
       {openFilter ? (
-        <div className='pb-[160px] pt-[85px]'>
-          <div className='fixed top-0 right-0 left-0 z-10 flex items-center gap-[20px] bg-[#fff] h-[85px] px-[20px]'>
+        <div className='pb-[160px] pt-[85px] dark:bg-gray-900 dark:text-gray-100'>
+          <div className='fixed top-0 right-0 left-0 z-10 flex items-center gap-[20px] bg-white dark:bg-gray-800 h-[85px] px-[20px] border-b border-gray-200 dark:border-gray-700'>
             <Image
               src='/assets/close.png'
               className='cursor-pointer'
@@ -63,7 +63,7 @@ const page = () => {
           )}
         </div>
       ) : (
-        <div className='pt-[150px] pb-[100px]  px-[20px] md:pt-[90px] md:w-[90%] md:mx-auto md:px-0'>
+        <div className='pt-[150px] pb-[100px] px-[20px] md:pt-[90px] md:w-[90%] md:mx-auto md:px-0 dark:bg-gray-900 dark:text-gray-100'>
           <Header />
 
           <div className='py-[20px]'>
@@ -71,10 +71,11 @@ const page = () => {
 
             <div className='grid grid-cols-12 gap-[35px] md:mt-[20px]'>
               <div className='xl:col-span-9 lg:col-span-8 md:col-span-8 col-span-12'>
+                {/* --- Mobile Filter Buttons --- */}
                 <div className='block md:hidden'>
                   <div className='flex items-center gap-[15px] overflow-x-auto whitespace-nowrap my-[15px]'>
                     <div
-                      className='flex items-center gap-[10px] bg-[#e8e9e9] rounded-[15px] px-[15px] py-[10px] md:py-[6px] z-10 cursor-pointer'
+                      className='flex items-center gap-[10px] bg-gray-200 dark:bg-gray-700 rounded-[15px] px-[15px] py-[10px] md:py-[6px] z-10 cursor-pointer'
                       onClick={() => setOpenFilter("All Filter")}
                     >
                       <div className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px]'>
@@ -83,87 +84,95 @@ const page = () => {
                     </div>
 
                     <div
-                      className='relative flex items-center gap-[10px] bg-[#e8e9e9] rounded-[15px] px-[15px] py-[10px] md:py-[6px] cursor-pointer'
+                      className='relative flex items-center gap-[10px] bg-gray-200 dark:bg-gray-700 rounded-[15px] px-[15px] py-[10px] md:py-[6px] cursor-pointer'
                       onClick={() => setOpenFilter("Sort By")}
                     >
                       <div className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px]'>
                         <Image src='/assets/arrow_up_down.png' alt='' layout='fill' objectFit='fill' />
                       </div>
-                      <span className='text-[#4A4B4D] text-[18px] md:text-[16px]'>Sắp xếp theo</span>
+                      <span className='text-gray-800 dark:text-gray-100 text-[18px] md:text-[16px]'>Sắp xếp theo</span>
                     </div>
 
                     <div
-                      className='flex items-center gap-[10px] bg-[#e8e9e9] rounded-[15px] px-[15px] py-[10px] md:py-[6px] cursor-pointer'
+                      className='flex items-center gap-[10px] bg-gray-200 dark:bg-gray-700 rounded-[15px] px-[15px] py-[10px] md:py-[6px] cursor-pointer'
                       onClick={() => setOpenFilter("Category Filter")}
                     >
                       <div className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px]'>
                         <Image src='/assets/promotion.png' alt='' layout='fill' objectFit='fill' />
                       </div>
-                      <span className='text-[#4A4B4D] text-[18px] md:text-[16px]'>Danh mục</span>
+                      <span className='text-gray-800 dark:text-gray-100 text-[18px] md:text-[16px]'>Danh mục</span>
                     </div>
+
                     <Link
                       href='/search'
-                      className='text-[#0054ff] text-[18px] md:text-[16px] font-semibold cursor-pointer'
+                      className='text-blue-600 dark:text-blue-400 text-[18px] md:text-[16px] font-semibold cursor-pointer'
                     >
                       Làm mới
                     </Link>
                   </div>
                 </div>
 
+                {/* --- Store List --- */}
                 <div className='hidden md:block z-0'>
                   <div className='grid lg:grid-cols-2 md:grid-cols-1 gap-[20px]'>
                     {allStore?.data?.length > 0 ? (
                       allStore?.data.map((store) => <StoreBigCard key={store._id} store={store} />)
                     ) : (
-                      <h3 className='text-[20px] text-[#4a4b4d] font-semibold'>Không tìm thấy cửa hàng nào</h3>
+                      <h3 className='text-[20px] text-gray-700 dark:text-gray-300 font-semibold'>
+                        Không tìm thấy cửa hàng nào
+                      </h3>
                     )}
                   </div>
                 </div>
               </div>
 
+              {/* --- Sidebar --- */}
               <div className='xl:col-span-3 lg:col-span-4 md:col-span-4 hidden md:block'>
-                <div className='rounded-md mb-6 bg-[#fff] overflow-hidden shadow-[rgba(0,0,0,0.24)_0px_3px_8px]'>
+                <div className='rounded-md mb-6 bg-white dark:bg-gray-800 overflow-hidden shadow-[rgba(0,0,0,0.24)_0px_3px_8px]'>
                   <SortBy />
                 </div>
 
-                <div className='rounded-xl mb-6 bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow'>
-                  <h3 className='text-[#ffffff] text-[20px] bg-gradient-to-r from-[#fc6011] to-[#ff8743] border-b border-gray-200 text-center px-4 py-3 font-semibold'>
+                <div className='rounded-xl mb-6 bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg transition-shadow'>
+                  <h3 className='text-white text-[20px] bg-gradient-to-r from-[#fc6011] to-[#ff8743] border-b border-gray-200 text-center px-4 py-3 font-semibold'>
                     Quán ăn nổi bật
                   </h3>
                   <ul className='flex flex-col gap-[10px] p-[10px] max-h-[280px] w-full overflow-y-auto overflow-x-hidden small-scrollbar box-border'>
                     {standoutStore?.data?.length > 0 ? (
                       standoutStore.data.map((store) => <StoreSmallCard key={store._id} store={store} />)
                     ) : (
-                      <li className='text-center text-gray-500 italic py-4'>Không có dữ liệu</li>
+                      <li className='text-center text-gray-500 dark:text-gray-400 italic py-4'>Không có dữ liệu</li>
                     )}
                   </ul>
                 </div>
 
-                <div className='rounded-xl mb-6 bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow'>
-                  <h3 className='text-[#ffffff] text-[20px] bg-gradient-to-r from-[#fc6011] to-[#ff8743] border-b border-gray-200 text-center px-4 py-3 font-semibold'>
+                <div className='rounded-xl mb-6 bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg transition-shadow'>
+                  <h3 className='text-white text-[20px] bg-gradient-to-r from-[#fc6011] to-[#ff8743] border-b border-gray-200 text-center px-4 py-3 font-semibold'>
                     Quán ăn được đánh giá tốt
                   </h3>
                   <ul className='flex flex-col gap-[10px] p-[10px] max-h-[280px] w-full overflow-y-auto overflow-x-hidden small-scrollbar box-border'>
                     {ratingStore?.data?.length > 0 ? (
                       ratingStore.data.map((store) => <StoreSmallCard key={store._id} store={store} />)
                     ) : (
-                      <li className='text-center text-gray-500 italic py-4'>Không có dữ liệu</li>
+                      <li className='text-center text-gray-500 dark:text-gray-400 italic py-4'>Không có dữ liệu</li>
                     )}
                   </ul>
                 </div>
 
-                <div className='rounded-md mb-6 bg-[#fff] overflow-hidden shadow-[rgba(0,0,0,0.24)_0px_3px_8px]'>
+                <div className='rounded-md mb-6 bg-white dark:bg-gray-800 overflow-hidden shadow-[rgba(0,0,0,0.24)_0px_3px_8px]'>
                   <CategoryFilter />
                 </div>
               </div>
             </div>
 
+            {/* --- Mobile store list --- */}
             <div className='block md:hidden'>
               <div className='flex flex-col gap-[10px]'>
                 {allStore?.data?.length > 0 ? (
                   allStore.data.map((store) => <StoreBigCard key={store._id} store={store} />)
                 ) : (
-                  <h3 className='text-[20px] text-[#4a4b4d] font-semibold'>Không tìm thấy cửa hàng nào</h3>
+                  <h3 className='text-[20px] text-gray-700 dark:text-gray-300 font-semibold'>
+                    Không tìm thấy cửa hàng nào
+                  </h3>
                 )}
               </div>
             </div>
@@ -173,7 +182,7 @@ const page = () => {
         </div>
       )}
       {!openFilter && (
-        <div className='md:hidden'>
+        <div className='md:hidden dark:bg-gray-900'>
           <NavBar page='' />
         </div>
       )}

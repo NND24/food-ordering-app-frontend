@@ -77,19 +77,26 @@ const page = () => {
   };
 
   return (
-    <div className='bg-[#fff] md:bg-[#f9f9f9] md:pt-[110px]' name='forgot_password_page'>
+    <div
+      className='bg-[#fff] dark:bg-gray-900 dark:text-gray-100 md:bg-[#f9f9f9] md:pt-[110px] transition-colors duration-300'
+      name='forgot_password_page'
+    >
       <Heading title='Xác nhận OTP' description='' keywords='' />
       <div className='hidden md:block'>
         <Header />
       </div>
-      <div className='bg-[#fff] lg:w-[60%] md:w-[90%] md:mx-auto md:border md:border-[#a3a3a3a3] md:border-solid md:rounded-[10px] md:shadow-[rgba(0,0,0,0.24)_0px_3px_8px] md:overflow-hidden'>
+
+      <div className='bg-[#fff] dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-700/30 lg:w-[60%] md:w-[90%] md:mx-auto md:border md:border-[#a3a3a3a3] md:border-solid md:rounded-[10px] md:shadow-[rgba(0,0,0,0.24)_0px_3px_8px] md:overflow-hidden transition-colors duration-300'>
         <div className='flex flex-col items-center py-[30px] h-screen'>
-          <h3 className='text-[#4A4B4D] text-[30px] font-bold pb-[20px]'>Nhập mã OTP</h3>
+          <h3 className='text-[#4A4B4D] dark:text-gray-100 text-[30px] font-bold pb-[20px]'>Nhập mã OTP</h3>
+
           <Image src='/assets/logo_app.png' alt='' height={150} width={150} className='mb-[10px]' />
 
-          <span className='text-[#4A4B4D] text-[30px] font-bold cursor-not-allowed'>{formatTime(countdown)}</span>
+          <span className='text-[#4A4B4D] dark:text-gray-100 text-[30px] font-bold cursor-not-allowed'>
+            {formatTime(countdown)}
+          </span>
 
-          <div className='text-[#636464] text-center my-[20px]'>
+          <div className='text-[#636464] dark:text-gray-300 text-center my-[20px]'>
             <span>Vui lòng kiểm tra email {email}</span> <br />
             <span>để tiếp tục lấy lại mật khẩu</span> <br />
           </div>
@@ -106,7 +113,7 @@ const page = () => {
                 onChange={(e) => handleChange(e, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 placeholder='*'
-                className='w-[50px] h-[50px] text-center text-xl border-2 border-[#7a7a7a] border-solid rounded-lg bg-[#f5f5f5] text-[#636464]'
+                className='w-[50px] h-[50px] text-center text-xl border-2 border-[#7a7a7a] dark:border-gray-600 border-solid rounded-lg bg-[#f5f5f5] dark:bg-gray-700 text-[#636464] dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-[#fc6011] transition-colors'
               />
             ))}
           </div>
@@ -115,20 +122,19 @@ const page = () => {
             name='submitBtn'
             onClick={handleSubmit}
             disabled={otp.join("").length < 6}
-            className={`text-center text-[#fff] font-semibold w-[70%] md:w-[60%] lg:w-[75%] p-[20px] rounded-full my-[10px] shadow-md hover:shadow-lg ${
+            className={`text-center text-[#fff] font-semibold w-[70%] md:w-[60%] lg:w-[75%] p-[20px] rounded-full my-[10px] shadow-md hover:shadow-lg transition-all ${
               otp.join("").length === 6 ? "bg-[#fc6011] cursor-pointer" : "bg-[#f5854d] cursor-not-allowed"
             }`}
           >
             Tiếp
           </button>
 
-          <p className='text-[#636464] font-semibold mt-[20px]'>
+          <p className='text-[#636464] dark:text-gray-300 font-semibold mt-[20px]'>
             Không nhận được mã?{" "}
             <span
               onClick={async () => {
                 try {
                   await authService.forgotPassword({ email });
-
                   toast.success("Gửi thành công!");
                   router.push("/auth/confirm-otp");
                   setOtp(["", "", "", "", "", ""]);
@@ -137,7 +143,7 @@ const page = () => {
                   toast.error(error?.data?.message || "Có lỗi xảy ra!");
                 }
               }}
-              className='text-[#fc6011] cursor-pointer'
+              className='text-[#fc6011] dark:text-orange-400 cursor-pointer'
             >
               Nhấn vào đây
             </span>
