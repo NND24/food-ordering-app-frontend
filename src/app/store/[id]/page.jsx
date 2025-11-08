@@ -280,7 +280,7 @@ const page = () => {
                   </span>
 
                   {/* Categories */}
-                  <div className='text-sm text-gray-500 dark:text-gray-400 line-clamp-2'>
+                  <div className='text-sm text-gray-500 dark:text-gray-200 line-clamp-2'>
                     {storeInfo?.storeCategory?.map((category, index) => (
                       <div key={category._id || index} className='inline'>
                         <Link href={`/search?category=${category._id}`} className='hover:text-[#fc6011] transition'>
@@ -295,7 +295,7 @@ const page = () => {
 
                   {/* Description */}
                   {storeInfo?.description && (
-                    <span className='text-gray-500 dark:text-gray-400 text-sm line-clamp-1'>
+                    <span className='text-gray-500 dark:text-gray-200 text-sm line-clamp-1'>
                       {storeInfo?.description}
                     </span>
                   )}
@@ -303,7 +303,7 @@ const page = () => {
                   {/* Hours */}
                   {storeInfo?.openHour && storeInfo?.closeHour && (
                     <div className='flex flex-col sm:flex-row items-start sm:items-center gap-2 text-sm'>
-                      <span className='text-gray-500 dark:text-gray-400 line-clamp-1'>
+                      <span className='text-gray-500 dark:text-gray-200 line-clamp-1'>
                         {`Giờ mở cửa: ${storeInfo.openHour} - ${storeInfo.closeHour}`}
                       </span>
                       <span

@@ -20,14 +20,15 @@ const ListStore = ({ allStore }) => {
           </div>
 
           <div className='hidden sm:block'>
-            {stores.length > 6 ? (
+            <StoreBigSlider reverse={true} allStore={stores} />
+            {/* {stores.length > 6 ? (
               <>
                 <StoreBigSlider reverse={true} allStore={stores.slice(0, Math.ceil(stores.length / 2))} />
                 <StoreBigSlider reverse={false} allStore={stores.slice(Math.ceil(stores.length / 2))} />
               </>
             ) : (
               <StoreBigSlider reverse={true} allStore={stores} />
-            )}
+            )} */}
           </div>
           <div className='block sm:hidden'>
             <StoreSlider reverse={true} stores={stores} />

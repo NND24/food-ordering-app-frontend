@@ -18,6 +18,7 @@ import { paymentService } from "@/api/paymentService";
 import { shippingFeeService } from "@/api/shippingFeeService";
 import { useSearchParams } from "next/navigation";
 import { useSocket } from "@/context/socketContext";
+import { useTheme } from "next-themes";
 
 const page = () => {
   const router = useRouter();
@@ -37,6 +38,7 @@ const page = () => {
   const { refreshOrder } = useOrder();
   const { storeVouchers } = useVoucher();
   const { sendNotification } = useSocket();
+  const { theme } = useTheme();
 
   const selectedVouchers = storeVouchers[storeId] || [];
 
@@ -403,7 +405,12 @@ const page = () => {
                           {storeLocation.address || "Nhấn chọn để thêm địa chỉ giao hàng"}
                         </p>
                       </div>
-                      <Image src='/assets/arrow_right.png' alt='' width={20} height={20} />
+                      <Image
+                        src={`/assets/arrow_right${theme === "dark" && "_white"}.png`}
+                        alt=''
+                        width={20}
+                        height={20}
+                      />
                     </div>
                   </Link>
 
@@ -430,7 +437,12 @@ const page = () => {
                 {/* Tiền mặt */}
                 <div className='flex gap-[15px] mb-[10px]'>
                   <div className='relative w-[30px] pt-[30px] md:w-[20px] md:pt-[20px]'>
-                    <Image src='/assets/money.png' alt='' layout='fill' objectFit='contain' />
+                    <Image
+                      src={`/assets/money${theme === "dark" && "_white"}.png`}
+                      alt=''
+                      layout='fill'
+                      objectFit='contain'
+                    />
                   </div>
                   <div className='flex flex-1 items-center justify-between' onClick={() => setPaymentMethod("cash")}>
                     <div className='flex items-center gap-[8px]'>
@@ -440,7 +452,11 @@ const page = () => {
                     </div>
                     <div className='relative w-[30px] pt-[30px] md:w-[20px] md:pt-[20px] cursor-pointer'>
                       <Image
-                        src={paymentMethod === "cash" ? "/assets/button_active.png" : "/assets/button.png"}
+                        src={
+                          paymentMethod === "cash"
+                            ? `/assets/button_active.png`
+                            : `/assets/button${theme === "dark" && "_white"}.png`
+                        }
                         alt=''
                         layout='fill'
                         objectFit='contain'
@@ -460,7 +476,11 @@ const page = () => {
                     </div>
                     <div className='relative w-[30px] pt-[30px] md:w-[20px] md:pt-[20px] cursor-pointer'>
                       <Image
-                        src={paymentMethod === "VNPay" ? "/assets/button_active.png" : "/assets/button.png"}
+                        src={
+                          paymentMethod === "VNPay"
+                            ? `/assets/button_active${theme === "dark" && "_white"}.png`
+                            : `/assets/button${theme === "dark" && "_white"}.png`
+                        }
                         alt=''
                         layout='fill'
                         objectFit='contain'
@@ -494,7 +514,7 @@ const page = () => {
 
                 <Link href={`/store/${storeId}/vouchers`} className='flex gap-[15px] mb-[10px] mt-[20px]'>
                   <div className='relative w-[30px] pt-[30px]'>
-                    <Image src='/assets/marketing.png' alt='' layout='fill' objectFit='contain' />
+                    <Image src={`/assets/marketing.png`} alt='' layout='fill' objectFit='contain' />
                   </div>
                   <div className='flex flex-1 items-center justify-between'>
                     <span className='text-[#4A4B4D] dark:text-gray-100 text-[18px]'>

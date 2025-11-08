@@ -9,11 +9,13 @@ import Header from "@/components/header/Header";
 import Heading from "@/components/Heading";
 import { authService } from "@/api/authService";
 import { useForgotPassEmail } from "@/context/forgotPassEmailContext";
+import { useTheme } from "next-themes";
 
 const page = () => {
   const router = useRouter();
 
   const { setEmail } = useForgotPassEmail();
+  const { theme } = useTheme();
 
   const schema = yup.object().shape({
     email: yup.string().email("Email không hợp lệ!").required("Vui lòng nhập Email!"),
@@ -65,7 +67,13 @@ const page = () => {
                   }`}
                 >
                   <div className='relative w-[25px] h-[25px] ml-[20px]'>
-                    <Image src='/assets/email.png' alt='' layout='fill' loading='lazy' className='object-contain' />
+                    <Image
+                      src={`/assets/email${theme === "dark" && "_white"}.png`}
+                      alt=''
+                      layout='fill'
+                      loading='lazy'
+                      className='object-contain'
+                    />
                   </div>
                   <input
                     type='email'

@@ -9,9 +9,12 @@ import Heading from "@/components/Heading";
 import NavBar from "@/components/header/NavBar";
 import { authService } from "@/api/authService";
 import { useAuth } from "@/context/authContext";
+import { useTheme } from "next-themes";
 
 const page = () => {
   const { user, setUser, setUserId } = useAuth();
+
+  const { theme } = useTheme();
 
   const confirmLogout = async () => {
     const result = await Swal.fire({
@@ -43,9 +46,9 @@ const page = () => {
 
       <MobileHeader />
 
-      <div className='bg-[#fff] dark:bg-gray-800 lg:w-[75%] px-[20px] md:w-[80%] pb-[20px] mb-[20px] md:mx-auto md:border md:border-[#a3a3a3a3] dark:md:border-gray-700 md:border-solid md:rounded-[10px] md:shadow-[rgba(0,0,0,0.24)_0px_3px_8px] md:overflow-hidden transition-colors duration-300'>
+      <div className='bg-[#fff] dark:bg-gray-800 lg:w-[75%] px-[20px] md:w-[80%] py-[20px] mb-[20px] md:mx-auto md:border md:border-[#a3a3a3a3] dark:md:border-gray-700 md:border-solid md:rounded-[10px] md:shadow-[rgba(0,0,0,0.24)_0px_3px_8px] md:overflow-hidden transition-colors duration-300'>
         {/* Hồ sơ người dùng */}
-        <Link href='/account/profile' className='flex gap-[15px] my-[20px] cursor-pointer'>
+        <Link href='/account/profile' className='flex gap-[15px] mb-[20px] cursor-pointer'>
           <div className='relative w-[60px] pt-[60px]'>
             <Image
               src={
@@ -78,12 +81,22 @@ const page = () => {
           >
             <div className='flex items-center gap-[10px]'>
               <div className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px]'>
-                <Image src='/assets/favorite.png' alt='' layout='fill' objectFit='contain' />
+                <Image
+                  src={`/assets/favorite${theme === "dark" && "_white"}.png`}
+                  alt=''
+                  layout='fill'
+                  objectFit='contain'
+                />
               </div>
               <span className='text-[20px] font-semibold text-[#4A4B4D] dark:text-gray-100'>Yêu thích</span>
             </div>
             <div className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px]'>
-              <Image src='/assets/arrow_right.png' alt='' layout='fill' objectFit='contain' />
+              <Image
+                src={`/assets/arrow_right${theme === "dark" && "_white"}.png`}
+                alt=''
+                layout='fill'
+                objectFit='contain'
+              />
             </div>
           </Link>
         </div>
@@ -95,12 +108,22 @@ const page = () => {
         >
           <div className='flex items-center gap-[10px]'>
             <div className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px]'>
-              <Image src='/assets/location.png' alt='' layout='fill' objectFit='contain' />
+              <Image
+                src={`/assets/location${theme === "dark" && "_white"}.png`}
+                alt=''
+                layout='fill'
+                objectFit='contain'
+              />
             </div>
             <span className='text-[20px] font-semibold text-[#4A4B4D] dark:text-gray-100'>Địa chỉ</span>
           </div>
           <div className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px]'>
-            <Image src='/assets/arrow_right.png' alt='' layout='fill' objectFit='contain' />
+            <Image
+              src={`/assets/arrow_right${theme === "dark" && "_white"}.png`}
+              alt=''
+              layout='fill'
+              objectFit='contain'
+            />
           </div>
         </Link>
 
@@ -112,12 +135,22 @@ const page = () => {
           >
             <div className='flex items-center gap-[10px]'>
               <div className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px]'>
-                <Image src='/assets/lock.png' alt='' layout='fill' objectFit='contain' />
+                <Image
+                  src={`/assets/lock${theme === "dark" && "_white"}.png`}
+                  alt=''
+                  layout='fill'
+                  objectFit='contain'
+                />
               </div>
               <span className='text-[20px] font-semibold text-[#4A4B4D] dark:text-gray-100'>Đổi mật khẩu</span>
             </div>
             <div className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px]'>
-              <Image src='/assets/arrow_right.png' alt='' layout='fill' objectFit='contain' />
+              <Image
+                src={`/assets/arrow_right${theme === "dark" && "_white"}.png`}
+                alt=''
+                layout='fill'
+                objectFit='contain'
+              />
             </div>
           </Link>
         )}
@@ -129,12 +162,22 @@ const page = () => {
         >
           <div className='flex items-center gap-[10px]'>
             <div className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px]'>
-              <Image src='/assets/setting.png' alt='' layout='fill' objectFit='contain' />
+              <Image
+                src={`/assets/setting${theme === "dark" && "_white"}.png`}
+                alt=''
+                layout='fill'
+                objectFit='contain'
+              />
             </div>
             <span className='text-[20px] font-semibold text-[#4A4B4D] dark:text-gray-100'>Cài đặt</span>
           </div>
           <div className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px]'>
-            <Image src='/assets/arrow_right.png' alt='' layout='fill' objectFit='contain' />
+            <Image
+              src={`/assets/arrow_right${theme === "dark" && "_white"}.png`}
+              alt=''
+              layout='fill'
+              objectFit='contain'
+            />
           </div>
         </Link>
 

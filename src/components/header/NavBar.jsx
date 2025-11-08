@@ -4,6 +4,7 @@ import { useCart } from "@/context/cartContext";
 import { useFavorite } from "@/context/favoriteContext";
 import { useOrder } from "@/context/orderContext";
 import { useSocket } from "@/context/socketContext";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -15,6 +16,8 @@ const NavBar = ({ page }) => {
   const { favorite } = useFavorite();
   const { cart } = useCart();
   const { order } = useOrder();
+
+  const { theme } = useTheme();
 
   const [currentOrders, setCurrentOrders] = useState([]);
 
@@ -56,7 +59,7 @@ const NavBar = ({ page }) => {
             {/* Cart */}
             <Link href='/carts' className='relative group flex flex-col items-center gap-[1px]'>
               <Image
-                src='/assets/cart.png'
+                src={`/assets/cart${theme === "dark" && "_white"}.png`}
                 alt=''
                 width={24}
                 height={24}
@@ -91,7 +94,7 @@ const NavBar = ({ page }) => {
             {/* Orders */}
             <Link href='/orders' className='relative group flex flex-col items-center gap-[1px]'>
               <Image
-                src='/assets/ic_order.png'
+                src={`/assets/ic_order${theme === "dark" && "_white"}.png`}
                 alt=''
                 width={24}
                 height={24}
@@ -145,7 +148,7 @@ const NavBar = ({ page }) => {
             <div className='hidden md:block'>
               <Link href='/notifications' className='relative group flex flex-col items-center gap-[1px]'>
                 <Image
-                  src='/assets/notification.png'
+                  src={`/assets/notification${theme === "dark" && "_white"}.png`}
                   alt=''
                   width={24}
                   height={24}
@@ -184,7 +187,7 @@ const NavBar = ({ page }) => {
             <div className='block md:hidden lg:block'>
               <Link href='/favorite' className='relative group flex flex-col items-center gap-[1px]'>
                 <Image
-                  src='/assets/favorite.png'
+                  src={`/assets/favorite${theme === "dark" && "_white"}.png`}
                   alt=''
                   width={24}
                   height={24}
@@ -220,7 +223,7 @@ const NavBar = ({ page }) => {
             {/* Account */}
             <Link href='/account' className='group flex flex-col items-center gap-[1px]'>
               <Image
-                src='/assets/account.png'
+                src={`/assets/account${theme === "dark" && "_white"}.png`}
                 alt=''
                 width={24}
                 height={24}

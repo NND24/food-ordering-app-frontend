@@ -5,9 +5,11 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { favoriteService } from "@/api/favoriteService";
 import { useFavorite } from "@/context/favoriteContext";
+import { useTheme } from "next-themes";
 
 const FavoriteItem = ({ store }) => {
   const { refreshFavorite } = useFavorite();
+  const { theme } = useTheme();
 
   const handleRemoveFavorite = async () => {
     try {
@@ -91,7 +93,12 @@ const FavoriteItem = ({ store }) => {
         }}
       >
         <div className='relative w-6 h-6'>
-          <Image src='/assets/trash.png' alt='remove' fill className='object-contain' />
+          <Image
+            src={`/assets/trash${theme === "dark" && "_white"}.png`}
+            alt='remove'
+            fill
+            className='object-contain'
+          />
         </div>
       </div>
     </Link>

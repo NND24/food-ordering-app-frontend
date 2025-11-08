@@ -10,6 +10,7 @@ import Heading from "@/components/Heading";
 import { locationService } from "@/api/locationService";
 import { haversineDistance } from "@/utils/functions";
 import { useStoreLocation } from "@/context/storeLocationContext";
+import { useTheme } from "next-themes";
 
 const page = () => {
   const router = useRouter();
@@ -19,6 +20,7 @@ const page = () => {
   const [currentPosition, setCurrentPosition] = useState(null);
   const [deleteLocationId, setDeleteLocationId] = useState("");
   const [userLocations, setUserLocations] = useState(null);
+  const { theme } = useTheme();
 
   const getUserLocations = async () => {
     try {
@@ -103,7 +105,12 @@ const page = () => {
             }}
             className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px] cursor-pointer'
           >
-            <Image src='/assets/arrow_left_long.png' alt='' layout='fill' objectFit='contain' />
+            <Image
+              src={`/assets/arrow_left_long${theme === "dark" && "_white"}.png`}
+              alt=''
+              layout='fill'
+              objectFit='contain'
+            />
           </div>
           <h3 className='text-[#4A4B4D] dark:text-gray-100 text-[24px] font-bold'>Địa chỉ đã lưu</h3>
         </div>
@@ -134,11 +141,16 @@ const page = () => {
               </div>
               <div className='flex flex-1 items-center justify-between'>
                 <div className='flex flex-col mr-[10px]'>
-                  <h3 className='text-[#4a4b4d] dark:text-gray-100 text-[20px] font-bold'>{homeLocation[0].name}</h3>
+                  <h3
+                    className='text-[#4a4b4d] dark:text-gray-100 text-[20px] font-bold text-nowrap
+                  '
+                  >
+                    {homeLocation[0].name}
+                  </h3>
                   <div className='flex items-center gap-[4px]'>
                     {currentPosition && (
                       <>
-                        <span className='text-[#a4a5a8] dark:text-gray-400 text-[15px]'>
+                        <span className='text-[#a4a5a8] dark:text-gray-400 text-[15px] text-nowrap'>
                           {haversineDistance(currentPosition, [
                             homeLocation[0].location.coordinates[1],
                             homeLocation[0].location.coordinates[0],
@@ -158,14 +170,24 @@ const page = () => {
                     href={`/account/location/edit-location/home/${homeLocation[0]?._id}`}
                     className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px] cursor-pointer'
                   >
-                    <Image src='/assets/editing.png' alt='' layout='fill' objectFit='contain' />
+                    <Image
+                      src={`/assets/editing${theme === "dark" && "_white"}.png`}
+                      alt=''
+                      layout='fill'
+                      objectFit='contain'
+                    />
                   </Link>
 
                   <div
                     onClick={() => setDeleteLocationId(homeLocation[0]?._id)}
                     className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px] cursor-pointer'
                   >
-                    <Image src='/assets/trash.png' alt='' layout='fill' objectFit='contain' />
+                    <Image
+                      src={`/assets/trash${theme === "dark" && "_white"}.png`}
+                      alt=''
+                      layout='fill'
+                      objectFit='contain'
+                    />
                   </div>
                 </div>
               </div>
@@ -174,7 +196,12 @@ const page = () => {
             <Link href='/account/location/add-location/home' className='flex gap-[15px] mb-[20px] cursor-pointer'>
               <div className='p-[8px] bg-[#e0e0e0a3] dark:bg-gray-700 rounded-full h-fit'>
                 <div className='relative w-[20px] pt-[20px]'>
-                  <Image src='/assets/add_home.png' alt='' layout='fill' objectFit='contain' />
+                  <Image
+                    src={`/assets/add_home${theme === "dark" && "_white"}.png`}
+                    alt=''
+                    layout='fill'
+                    objectFit='contain'
+                  />
                 </div>
               </div>
               <div className='flex flex-1 items-center justify-between'>
@@ -208,11 +235,13 @@ const page = () => {
               </div>
               <div className='flex flex-1 items-center justify-between'>
                 <div className='flex flex-col mr-[10px]'>
-                  <h3 className='text-[#4a4b4d] dark:text-gray-100 text-[20px] font-bold'>{companyLocation[0].name}</h3>
+                  <h3 className='text-[#4a4b4d] dark:text-gray-100 text-[20px] font-bold text-nowrap'>
+                    {companyLocation[0].name}
+                  </h3>
                   <div className='flex items-center gap-[4px]'>
                     {currentPosition && (
                       <>
-                        <span className='text-[#a4a5a8] dark:text-gray-400 text-[15px]'>
+                        <span className='text-[#a4a5a8] dark:text-gray-400 text-[15px] text-nowrap'>
                           {haversineDistance(currentPosition, [
                             companyLocation[0].location.coordinates[1],
                             companyLocation[0].location.coordinates[0],
@@ -232,14 +261,24 @@ const page = () => {
                     href={`/account/location/edit-location/company/${companyLocation[0]._id}`}
                     className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px] cursor-pointer'
                   >
-                    <Image src='/assets/editing.png' alt='' layout='fill' objectFit='contain' />
+                    <Image
+                      src={`/assets/editing${theme === "dark" && "_white"}.png`}
+                      alt=''
+                      layout='fill'
+                      objectFit='contain'
+                    />
                   </Link>
 
                   <div
                     onClick={() => setDeleteLocationId(companyLocation[0]._id)}
                     className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px] cursor-pointer'
                   >
-                    <Image src='/assets/trash.png' alt='' layout='fill' objectFit='contain' />
+                    <Image
+                      src={`/assets/trash${theme === "dark" && "_white"}.png`}
+                      alt=''
+                      layout='fill'
+                      objectFit='contain'
+                    />
                   </div>
                 </div>
               </div>
@@ -248,7 +287,12 @@ const page = () => {
             <Link href='/account/location/add-location/company' className='flex gap-[15px] mb-[20px] cursor-pointer'>
               <div className='p-[8px] bg-[#e0e0e0a3] dark:bg-gray-700 rounded-full'>
                 <div className='relative w-[20px] pt-[20px]'>
-                  <Image src='/assets/briefcase.png' alt='' layout='fill' objectFit='contain' />
+                  <Image
+                    src={`/assets/briefcase${theme === "dark" && "_white"}.png`}
+                    alt=''
+                    layout='fill'
+                    objectFit='contain'
+                  />
                 </div>
               </div>
               <div className='flex flex-1 items-center justify-between'>
@@ -285,11 +329,13 @@ const page = () => {
                   </div>
                   <div className='flex flex-1 items-center justify-between'>
                     <div className='flex flex-col mr-[10px]'>
-                      <h3 className='text-[#4a4b4d] dark:text-gray-100 text-[20px] font-bold'>{location.name}</h3>
+                      <h3 className='text-[#4a4b4d] dark:text-gray-100 text-[20px] font-bold text-nowrap'>
+                        {location.name}
+                      </h3>
                       <div className='flex items-center gap-[4px]'>
                         {currentPosition && (
                           <>
-                            <span className='text-[#a4a5a8] dark:text-gray-400 text-[15px]'>
+                            <span className='text-[#a4a5a8] dark:text-gray-400 text-[15px] text-nowrap'>
                               {haversineDistance(currentPosition, [
                                 location.location.coordinates[1],
                                 location.location.coordinates[0],
@@ -309,14 +355,24 @@ const page = () => {
                         href={`/account/location/edit-location/familiar/${location._id}`}
                         className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px] cursor-pointer'
                       >
-                        <Image src='/assets/editing.png' alt='' layout='fill' objectFit='contain' />
+                        <Image
+                          src={`/assets/editing${theme === "dark" && "_white"}.png`}
+                          alt=''
+                          layout='fill'
+                          objectFit='contain'
+                        />
                       </Link>
 
                       <div
                         onClick={() => setDeleteLocationId(location._id)}
                         className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px] cursor-pointer'
                       >
-                        <Image src='/assets/trash.png' alt='' layout='fill' objectFit='contain' />
+                        <Image
+                          src={`/assets/trash${theme === "dark" && "_white"}.png`}
+                          alt=''
+                          layout='fill'
+                          objectFit='contain'
+                        />
                       </div>
                     </div>
                   </div>
@@ -329,7 +385,12 @@ const page = () => {
             >
               <div className='p-[8px] bg-[#e0e0e0a3] dark:bg-gray-700 rounded-full h-fit'>
                 <div className='relative w-[20px] pt-[20px]'>
-                  <Image src='/assets/plus.png' alt='' layout='fill' objectFit='contain' />
+                  <Image
+                    src={`/assets/plus${theme === "dark" && "_white"}.png`}
+                    alt=''
+                    layout='fill'
+                    objectFit='contain'
+                  />
                 </div>
               </div>
               <div className='flex flex-1 items-center justify-between'>

@@ -10,11 +10,13 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import Header from "@/components/header/Header";
 import Heading from "@/components/Heading";
 import { authService } from "@/api/authService";
+import { useTheme } from "next-themes";
 
 const page = () => {
   const router = useRouter();
 
   const [showPass, setShowPass] = useState(false);
+  const { theme } = useTheme();
 
   const schema = yup.object().shape({
     email: yup.string().email("Email không hợp lệ!").required("Vui lòng nhập Email!"),
@@ -63,7 +65,12 @@ const page = () => {
                   }`}
                 >
                   <div className='relative w-[25px] h-[25px] ml-[20px]'>
-                    <Image src='/assets/email.png' alt='' layout='fill' loading='lazy' />
+                    <Image
+                      src={`/assets/email${theme === "dark" && "_white"}.png`}
+                      alt=''
+                      layout='fill'
+                      loading='lazy'
+                    />
                   </div>
                   <input
                     type='email'
@@ -90,7 +97,12 @@ const page = () => {
                   }`}
                 >
                   <div className='relative w-[25px] h-[25px] ml-[20px]'>
-                    <Image src='/assets/lock.png' alt='' layout='fill' loading='lazy' />
+                    <Image
+                      src={`/assets/lock${theme === "dark" && "_white"}.png`}
+                      alt=''
+                      layout='fill'
+                      loading='lazy'
+                    />
                   </div>
                   <input
                     type={showPass ? "text" : "password"}
@@ -102,7 +114,11 @@ const page = () => {
                     className='bg-[#f5f5f5] dark:bg-gray-700 text-[18px] py-[20px] pr-[20px] pl-[10px] w-full placeholder-gray-400 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 outline-none'
                   />
                   <Image
-                    src={showPass ? "/assets/eye_show.png" : "/assets/eye_hide.png"}
+                    src={
+                      showPass
+                        ? `/assets/eye_show${theme === "dark" && "_white"}.png`
+                        : `/assets/eye_hide${theme === "dark" && "_white"}.png`
+                    }
                     alt=''
                     width={25}
                     height={25}
@@ -137,7 +153,7 @@ const page = () => {
 
             {/* Divider */}
             <div className='relative bg-[#636464] dark:bg-gray-500 h-[1px] w-[90%] mb-[20px] mt-[30px]'>
-              <span className='absolute right-[45%] top-[-10px] text-[#636464] dark:text-gray-300 font-medium bg-[#fff] dark:bg-gray-900'>
+              <span className='absolute right-[45%] top-[-10px] text-[#636464] dark:text-gray-300 font-medium bg-[#fff] dark:bg-gray-800'>
                 Hoặc
               </span>
             </div>

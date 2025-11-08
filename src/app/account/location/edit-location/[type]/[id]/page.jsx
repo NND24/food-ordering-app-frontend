@@ -10,6 +10,7 @@ import Header from "@/components/header/Header";
 import { useLocation } from "@/context/locationContext";
 import Heading from "@/components/Heading";
 import { locationService } from "@/api/locationService";
+import { useTheme } from "next-themes";
 
 const page = () => {
   const router = useRouter();
@@ -17,6 +18,7 @@ const page = () => {
   const { type, id } = useParams();
 
   const [locationData, setLocationData] = useState(null);
+  const { theme } = useTheme();
 
   const getLocationData = async () => {
     try {
@@ -103,7 +105,12 @@ const page = () => {
       <div className='bg-[#fff] dark:bg-gray-800 dark:border-gray-700 lg:w-[60%] md:w-[80%] md:mx-auto md:border md:border-[#a3a3a3a3] md:border-solid md:rounded-[10px] md:shadow-[rgba(0,0,0,0.24)_0px_3px_8px] md:overflow-hidden md:p-[20px]'>
         <div className='fixed top-0 right-0 left-0 z-10 flex items-center gap-[40px] bg-[#fff] dark:bg-gray-800 h-[85px] px-[10px] md:static border-b-[6px] border-b-[#e0e0e0a3] dark:border-b-gray-700'>
           <Link href='/account/location' className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px]'>
-            <Image src='/assets/arrow_left_long.png' alt='' layout='fill' objectFit='contain' />
+            <Image
+              src={`/assets/arrow_left_long${theme === "dark" && "_white"}.png`}
+              alt=''
+              layout='fill'
+              objectFit='contain'
+            />
           </Link>
           <h3 className='text-[#4A4B4D] dark:text-gray-100 text-[24px] font-bold'>Chỉnh sửa địa điểm</h3>
         </div>
@@ -152,7 +159,12 @@ const page = () => {
               />
             </div>
             <div className='relative w-[20px] pt-[20px] md:w-[20px] md:pt-[20px]'>
-              <Image src='/assets/arrow_right.png' alt='' layout='fill' objectFit='contain' />
+              <Image
+                src={`/assets/arrow_right${theme === "dark" && "_white"}.png`}
+                alt=''
+                layout='fill'
+                objectFit='contain'
+              />
             </div>
           </Link>
           {formik.touched.address && formik.errors.address ? (

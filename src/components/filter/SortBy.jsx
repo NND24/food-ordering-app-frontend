@@ -1,4 +1,5 @@
 "use client";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -6,6 +7,7 @@ import React, { useEffect, useState } from "react";
 const SortBy = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { theme } = useTheme();
 
   const [sort, setSort] = useState(searchParams.get("sort") || "");
 
@@ -29,9 +31,9 @@ const SortBy = () => {
   }, [sort]);
 
   const sortOptions = [
-    { key: "name", label: "Tên", icon: "/assets/store.png" },
-    { key: "standout", label: "Nổi bật", icon: "/assets/ic_fire.png" },
-    { key: "rating", label: "Đánh giá", icon: "/assets/ic_star_outline.png" },
+    { key: "name", label: "Tên", icon: `/assets/store${theme === "dark" && "_white"}.png` },
+    { key: "standout", label: "Nổi bật", icon: `/assets/ic_fire${theme === "dark" && "_white"}.png` },
+    { key: "rating", label: "Đánh giá", icon: `/assets/ic_star_outline${theme === "dark" && "_white"}.png` },
   ];
 
   return (
@@ -59,7 +61,7 @@ const SortBy = () => {
               <h3 className='text-[#4A4B4D] dark:text-gray-100 text-[18px] font-medium'>{option.label}</h3>
               <div className='relative w-[26px] h-[26px]'>
                 <Image
-                  src={`/assets/${sort === option.key ? "button_active" : "button"}.png`}
+                  src={`/assets/${sort === option.key ? "button_active" : `button${theme === "dark" && "_white"}`}.png`}
                   alt=''
                   layout='fill'
                   objectFit='contain'

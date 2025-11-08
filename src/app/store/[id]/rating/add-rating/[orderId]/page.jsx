@@ -12,6 +12,7 @@ import { uploadService } from "@/api/uploadService";
 import { orderService } from "@/api/orderService";
 import { ratingService } from "@/api/ratingService";
 import { Atom } from "react-loading-indicators";
+import { useTheme } from "next-themes";
 
 const Page = () => {
   const { id: storeId, orderId } = useParams();
@@ -22,6 +23,7 @@ const Page = () => {
   const [uploadedFile, setUploadedFile] = useState([]);
   const [dishes, setDishes] = useState([]);
   const [orderDetail, setOrderDetail] = useState(null);
+  const { theme } = useTheme();
 
   const getOrderDetail = async () => {
     try {

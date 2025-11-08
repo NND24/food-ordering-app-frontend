@@ -15,6 +15,7 @@ import { useOrder } from "@/context/orderContext";
 import { useCart } from "@/context/cartContext";
 import { useSearchParams } from "next/navigation";
 import { useSocket } from "@/context/socketContext";
+import { useTheme } from "next-themes";
 
 const Page = () => {
   const router = useRouter();
@@ -25,6 +26,7 @@ const Page = () => {
 
   const [status, setStatus] = useState("");
   const [orderDetail, setOrderDetail] = useState(null);
+  const { theme } = useTheme();
 
   const { user } = useAuth();
   const { refreshOrder } = useOrder();
@@ -159,7 +161,7 @@ const Page = () => {
               {/* Mobile Header */}
               <div className='flex items-center gap-5 px-5 pt-5 md:hidden'>
                 <Image
-                  src='/assets/arrow_left_long.png'
+                  src={`/assets/arrow_left_long${theme === "dark" && "_white"}.png`}
                   alt=''
                   width={40}
                   height={40}
@@ -249,7 +251,7 @@ const Page = () => {
                             orderDetail?.status
                           )
                             ? "_active"
-                            : ""
+                            : `${theme === "dark" && "_white"}`
                         }.png`}
                         alt=''
                         width={25}
@@ -268,7 +270,7 @@ const Page = () => {
 
                       <Image
                         src={`/assets/delivery${
-                          ["taken", "delivering", "delivered", "done"].includes(orderDetail?.status) ? "_active" : ""
+                          ["taken", "delivering", "delivered", "done"].includes(orderDetail?.status) ? "_active" : `${theme === "dark" && "_white"}`
                         }.png`}
                         alt=''
                         width={25}
@@ -284,7 +286,7 @@ const Page = () => {
                       ></div>
 
                       <Image
-                        src={`/assets/home${["done", "delivered"].includes(orderDetail?.status) ? "_active" : ""}.png`}
+                        src={`/assets/home${["done", "delivered"].includes(orderDetail?.status) ? "_active" : `${theme === "dark" && "_white"}`}.png`}
                         alt=''
                         width={25}
                         height={25}
@@ -300,9 +302,9 @@ const Page = () => {
                 <div className='bg-white dark:bg-gray-800 flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
                   <p className='text-[#333] dark:text-gray-100 text-lg font-bold pb-4'>Giao tới</p>
                   {[
-                    { icon: "/assets/account.png", value: orderDetail?.shipInfo?.contactName },
-                    { icon: "/assets/phone.png", value: orderDetail?.shipInfo?.contactPhonenumber },
-                    { icon: "/assets/location.png", value: orderDetail?.shipInfo?.address },
+                    { icon: `/assets/account${theme === "dark" && "_white"}.png`, value: orderDetail?.shipInfo?.contactName },
+                    { icon: `/assets/phone${theme === "dark" && "_white"}.png`, value: orderDetail?.shipInfo?.contactPhonenumber },
+                    { icon: `/assets/location${theme === "dark" && "_white"}.png`, value: orderDetail?.shipInfo?.address },
                   ].map((item, idx) => (
                     <div
                       key={idx}
@@ -337,7 +339,7 @@ const Page = () => {
                   {/* Tiền mặt */}
                   <div className='flex gap-4'>
                     <div className='relative w-7 pt-7'>
-                      <Image src='/assets/money.png' alt='' layout='fill' objectFit='contain' />
+                      <Image src={`/assets/money${theme === "dark" && "_white"}.png`} alt='' layout='fill' objectFit='contain' />
                     </div>
                     <div className='flex flex-1 items-center justify-between'>
                       <h3 className='text-[#333] dark:text-gray-100 text-lg font-bold'>Tiền mặt</h3>
@@ -346,7 +348,7 @@ const Page = () => {
                           src={
                             orderDetail?.paymentMethod !== "vnpay" || orderDetail?.paymentStatus !== "paid"
                               ? "/assets/button_active.png"
-                              : "/assets/button.png"
+                              : `/assets/button${theme === "dark" && "_white"}.png`
                           }
                           alt=''
                           layout='fill'
@@ -368,7 +370,7 @@ const Page = () => {
                           src={
                             orderDetail?.paymentMethod === "vnpay" && orderDetail?.paymentStatus === "paid"
                               ? "/assets/button_active.png"
-                              : "/assets/button.png"
+                              : `/assets/button${theme === "dark" && "_white"}.png`
                           }
                           alt=''
                           layout='fill'

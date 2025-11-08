@@ -10,6 +10,7 @@ import Header from "@/components/header/Header";
 import Heading from "@/components/Heading";
 import { authService } from "@/api/authService";
 import { useForgotPassEmail } from "@/context/forgotPassEmailContext";
+import { useTheme } from "next-themes";
 
 const page = () => {
   const router = useRouter();
@@ -17,6 +18,7 @@ const page = () => {
   const [showPass, setShowPass] = useState(false);
 
   const { email } = useForgotPassEmail();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (email.length === 0) {
@@ -76,7 +78,12 @@ const page = () => {
                   }`}
                 >
                   <div className='relative w-[25px] h-[25px] ml-[20px]'>
-                    <Image src='/assets/lock.png' alt='' layout='fill' loading='lazy' />
+                    <Image
+                      src={`/assets/lock${theme === "dark" && "_white"}.png`}
+                      alt=''
+                      layout='fill'
+                      loading='lazy'
+                    />
                   </div>
                   <input
                     type={showPass ? "text" : "password"}
@@ -87,7 +94,11 @@ const page = () => {
                     className='bg-[#f5f5f5] dark:bg-gray-700 text-[18px] py-[20px] pr-[20px] pl-[10px] w-full placeholder-gray-500 dark:placeholder-gray-300 focus:outline-none'
                   />
                   <Image
-                    src={showPass ? "/assets/eye_show.png" : "/assets/eye_hide.png"}
+                    src={
+                      showPass
+                        ? `/assets/eye_show${theme === "dark" && "_white"}.png`
+                        : `/assets/eye_hide${theme === "dark" && "_white"}.png`
+                    }
                     alt=''
                     width={25}
                     height={25}
@@ -110,7 +121,12 @@ const page = () => {
                   }`}
                 >
                   <div className='relative w-[25px] h-[25px] ml-[20px]'>
-                    <Image src='/assets/lock.png' alt='' layout='fill' loading='lazy' />
+                    <Image
+                      src={`/assets/lock${theme === "dark" && "_white"}.png`}
+                      alt=''
+                      layout='fill'
+                      loading='lazy'
+                    />
                   </div>
                   <input
                     type={showPass ? "text" : "password"}
@@ -122,7 +138,11 @@ const page = () => {
                     className='bg-[#f5f5f5] dark:bg-gray-700 text-[18px] py-[20px] pr-[20px] pl-[10px] w-full placeholder-gray-500 dark:placeholder-gray-300 focus:outline-none'
                   />
                   <Image
-                    src={showPass ? "/assets/eye_show.png" : "/assets/eye_hide.png"}
+                    src={
+                      showPass
+                        ? `/assets/eye_show${theme === "dark" && "_white"}.png`
+                        : `/assets/eye_hide${theme === "dark" && "_white"}.png`
+                    }
                     alt=''
                     width={25}
                     height={25}

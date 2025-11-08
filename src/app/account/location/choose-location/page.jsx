@@ -14,6 +14,7 @@ import Heading from "@/components/Heading";
 import { useLocation } from "@/context/locationContext";
 import { provinces } from "@/utils/constants";
 import { getClosestProvince } from "@/utils/functions";
+import { useTheme } from "next-themes";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -48,6 +49,8 @@ const Page = () => {
   const [userLocation, setUserLocation] = useState({ lat: 200, lon: 200 });
   const [zoomLevel, setZoomLevel] = useState(12);
   const [openSelectProvince, setOpenSelectProvince] = useState(false);
+
+  const { theme } = useTheme();
 
   const { setLocation, location } = useLocation();
 
@@ -245,7 +248,12 @@ const Page = () => {
             <div className='bg-[#fff] dark:bg-gray-900 lg:w-[60%] md:w-[80%] md:mx-auto md:border md:rounded-[10px] md:shadow-md md:p-[20px] dark:border-gray-700'>
               <div className='fixed top-0 right-0 left-0 z-10 flex items-center gap-2 bg-white dark:bg-gray-900 h-[85px] px-4 md:static'>
                 <div onClick={() => router.back()} className='relative w-[30px] pt-[30px] cursor-pointer'>
-                  <Image src='/assets/arrow_left_long.png' alt='' layout='fill' objectFit='contain' />
+                  <Image
+                    src={`/assets/arrow_left_long${theme === "dark" && "_white"}.png`}
+                    alt=''
+                    layout='fill'
+                    objectFit='contain'
+                  />
                 </div>
 
                 {/* Ô tìm kiếm */}
@@ -349,7 +357,12 @@ const Page = () => {
                     setProvinceSuggestions([]);
                   }}
                 >
-                  <Image src='/assets/arrow_left_long.png' alt='' layout='fill' objectFit='contain' />
+                  <Image
+                    src={`/assets/arrow_left_long${theme === "dark" && "_white"}.png`}
+                    alt=''
+                    layout='fill'
+                    objectFit='contain'
+                  />
                 </div>
 
                 <div className='relative flex-1'>

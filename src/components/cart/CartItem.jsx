@@ -5,10 +5,12 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { cartService } from "@/api/cartService";
 import { useCart } from "@/context/cartContext";
+import { useTheme } from "next-themes";
 
 const CartItem = ({ cartItem }) => {
   const [quantity, setQuantity] = useState(0);
   const { refreshCart } = useCart();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const totalQuantity = cartItem.items.reduce((sum, item) => sum + item.quantity, 0);
@@ -106,7 +108,12 @@ const CartItem = ({ cartItem }) => {
         }}
       >
         <div className='relative w-6 h-6'>
-          <Image src='/assets/trash.png' alt='remove' fill className='object-contain' />
+          <Image
+            src={`/assets/trash${theme === "dark" && "_white"}.png`}
+            alt='remove'
+            fill
+            className='object-contain'
+          />
         </div>
       </div>
     </Link>

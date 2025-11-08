@@ -9,11 +9,13 @@ import { useRouter } from "next/navigation";
 import Header from "@/components/header/Header";
 import Heading from "@/components/Heading";
 import { authService } from "@/api/authService";
+import { useTheme } from "next-themes";
 
 const page = () => {
   const router = useRouter();
 
   const [showPass, setShowPass] = useState(false);
+  const { theme } = useTheme();
 
   const schema = yup.object().shape({
     name: yup.string().required("Vui lòng nhập tên!"),
@@ -71,7 +73,12 @@ const page = () => {
                 }`}
               >
                 <div className='relative w-[25px] h-[25px] ml-[20px]'>
-                  <Image src='/assets/account.png' alt='' layout='fill' loading='lazy' />
+                  <Image
+                    src={`/assets/account${theme === "dark" && "_white"}.png`}
+                    alt=''
+                    layout='fill'
+                    loading='lazy'
+                  />
                 </div>
                 <input
                   type='text'
@@ -98,7 +105,7 @@ const page = () => {
                 }`}
               >
                 <div className='relative w-[25px] h-[25px] ml-[20px]'>
-                  <Image src='/assets/email.png' alt='' layout='fill' loading='lazy' />
+                  <Image src={`/assets/email${theme === "dark" && "_white"}.png`} alt='' layout='fill' loading='lazy' />
                 </div>
                 <input
                   type='email'
@@ -125,7 +132,7 @@ const page = () => {
                 }`}
               >
                 <div className='relative w-[25px] h-[25px] ml-[20px]'>
-                  <Image src='/assets/phone.png' alt='' layout='fill' loading='lazy' />
+                  <Image src={`/assets/phone${theme === "dark" && "_white"}.png`} alt='' layout='fill' loading='lazy' />
                 </div>
                 <input
                   type='text'
@@ -152,7 +159,7 @@ const page = () => {
                 }`}
               >
                 <div className='relative w-[25px] h-[25px] ml-[20px]'>
-                  <Image src='/assets/lock.png' alt='' layout='fill' loading='lazy' />
+                  <Image src={`/assets/lock${theme === "dark" && "_white"}.png`} alt='' layout='fill' loading='lazy' />
                 </div>
                 <input
                   type={showPass ? "text" : "password"}
@@ -164,7 +171,11 @@ const page = () => {
                   className='bg-transparent text-[18px] py-[20px] pr-[20px] pl-[10px] w-full focus:outline-none'
                 />
                 <Image
-                  src={showPass ? "/assets/eye_show.png" : "/assets/eye_hide.png"}
+                  src={
+                    showPass
+                      ? `/assets/eye_show${theme === "dark" && "_white"}.png`
+                      : `/assets/eye_hide${theme === "dark" && "_white"}.png`
+                  }
                   alt=''
                   width={25}
                   height={25}

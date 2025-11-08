@@ -13,6 +13,7 @@ import { useSocket } from "@/context/socketContext";
 import { useAuth } from "@/context/authContext";
 import { uploadService } from "@/api/uploadService";
 import { userService } from "@/api/userService";
+import { useTheme } from "next-themes";
 
 const page = () => {
   const { notifications } = useSocket();
@@ -20,6 +21,7 @@ const page = () => {
   const [avatarFile, setAvatarFile] = useState(null);
 
   const { user, fetchUser } = useAuth();
+  const { theme } = useTheme();
 
   const handleUploadAvatar = async () => {
     if (avatarFile) {
@@ -83,7 +85,12 @@ const page = () => {
       <div className='flex items-center justify-between md:hidden'>
         <h3 className='text-[28px] font-bold text-gray-900 dark:text-gray-100'>Thông tin cá nhân</h3>
         <Link href='/notifications' className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px]'>
-          <Image src='/assets/notification.png' alt='' layout='fill' objectFit='contain' />
+          <Image
+            src={`/assets/notification${theme === "dark" && "_white"}.png`}
+            alt=''
+            layout='fill'
+            objectFit='contain'
+          />
           {notifications.filter((noti) => noti.status === "unread").length > 0 && (
             <div
               className='absolute top-[-6px] right-[-6px] w-[21px] h-[21px] text-center rounded-full 
@@ -101,8 +108,8 @@ const page = () => {
       <div
         className='bg-white dark:bg-gray-800 lg:w-[60%] md:w-[80%] md:mx-auto 
                   md:border md:border-gray-300 dark:md:border-gray-700 
-                  md:rounded-[10px] md:shadow-[rgba(0,0,0,0.24)_0px_3px_8px] 
-                  md:overflow-hidden md:p-[20px] transition-all duration-300'
+                  rounded-[10px] shadow-[rgba(0,0,0,0.24)_0px_3px_8px] 
+                  overflow-hidden p-[20px] transition-all duration-300'
       >
         <div className='flex flex-col items-center mt-[20px]'>
           <div className='relative w-[110px] pt-[110px] mt-[20px]'>
@@ -134,7 +141,7 @@ const page = () => {
                   <div {...getRootProps()}>
                     <input {...getInputProps()} />
                     <Image
-                      src='/assets/camera.png'
+                      src={`/assets/camera${theme === "dark" && "_white"}.png`}
                       alt=''
                       width={40}
                       height={40}
