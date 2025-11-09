@@ -370,7 +370,7 @@ const page = () => {
                 paginationRating?.data?.length > 0 &&
                 ratings && (
                   <>
-                    <div className='py-5 bg-gray-100 dark:bg-gray-800 md:rounded-xl mb-4 shadow-inner'>
+                    <div className='py-5 px-[20px] bg-gray-100 dark:bg-gray-800 md:rounded-xl mb-4 shadow-inner'>
                       <div className='flex items-center justify-between pb-3'>
                         <h3 className='text-[#4A4B4D] dark:text-gray-100 text-xl font-bold'>Mọi người nhận xét</h3>
                         <Link href={`/store/${storeId}/rating`} className='block md:hidden'>

@@ -303,12 +303,12 @@ const page = () => {
                 <p className='text-[#a4a5a8] dark:text-gray-400'>{dishInfo?.description}</p>
               </div>
 
-              {/* Divider */}
-              <div className='h-[6px] w-full bg-gray-100 dark:bg-gray-700 my-4 rounded-full'></div>
-
               {/* Topping */}
               {dishInfo.toppingGroups && dishInfo.toppingGroups.length > 0 && (
                 <>
+                  {/* Divider */}
+                  <div className='h-[6px] w-full bg-gray-100 dark:bg-gray-700 my-4 rounded-full'></div>
+
                   <div className='bg-white dark:bg-gray-800 flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md md:p-6 hover:shadow-lg transition'>
                     {dishInfo.toppingGroups.map(
                       (toppingGroup, index) =>

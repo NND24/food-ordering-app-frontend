@@ -8,7 +8,7 @@ const ListDish = ({ storeInfo, cartItems }) => {
 
   const getStoreGroupDish = async () => {
     try {
-      const response = await dishService.getAllDish(storeInfo._id, true);
+      const response = await dishService.getStoreDishGroups(storeInfo._id, true);
       setAllDishGroups(response.data);
     } catch (error) {}
   };
@@ -23,7 +23,7 @@ const ListDish = ({ storeInfo, cartItems }) => {
     <>
       {allDishGroups?.length > 0 &&
         allDishGroups.map((group) =>
-          group.dishes.length > 0 ? (
+          group?.dishes?.length > 0 ? (
             <div key={group._id} className='mb-[20px]'>
               <h3 className='text-[#4A4B4D] dark:text-gray-100 text-[24px] font-bold mb-[5px] line-clamp-2'>
                 {group.name}
