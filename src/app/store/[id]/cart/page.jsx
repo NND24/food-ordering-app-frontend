@@ -406,7 +406,7 @@ const page = () => {
                         </p>
                       </div>
                       <Image
-                        src={`/assets/arrow_right${theme === "dark" && "_white"}.png`}
+                        src={`/assets/arrow_right${theme === "dark" ? "_white" : ""}.png`}
                         alt=''
                         width={20}
                         height={20}
@@ -438,7 +438,7 @@ const page = () => {
                 <div className='flex gap-[15px] mb-[10px]'>
                   <div className='relative w-[30px] pt-[30px] md:w-[20px] md:pt-[20px]'>
                     <Image
-                      src={`/assets/money${theme === "dark" && "_white"}.png`}
+                      src={`/assets/money${theme === "dark" ? "_white" : ""}.png`}
                       alt=''
                       layout='fill'
                       objectFit='contain'
@@ -455,7 +455,7 @@ const page = () => {
                         src={
                           paymentMethod === "cash"
                             ? `/assets/button_active.png`
-                            : `/assets/button${theme === "dark" && "_white"}.png`
+                            : `/assets/button${theme === "dark" ? "_white" : ""}.png`
                         }
                         alt=''
                         layout='fill'
@@ -478,8 +478,8 @@ const page = () => {
                       <Image
                         src={
                           paymentMethod === "VNPay"
-                            ? `/assets/button_active${theme === "dark" && "_white"}.png`
-                            : `/assets/button${theme === "dark" && "_white"}.png`
+                            ? `/assets/button_active${theme === "dark" ? "_white" : ""}.png`
+                            : `/assets/button${theme === "dark" ? "_white" : ""}.png`
                         }
                         alt=''
                         layout='fill'

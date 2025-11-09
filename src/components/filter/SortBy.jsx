@@ -31,9 +31,9 @@ const SortBy = () => {
   }, [sort]);
 
   const sortOptions = [
-    { key: "name", label: "Tên", icon: `/assets/store${theme === "dark" && "_white"}.png` },
-    { key: "standout", label: "Nổi bật", icon: `/assets/ic_fire${theme === "dark" && "_white"}.png` },
-    { key: "rating", label: "Đánh giá", icon: `/assets/ic_star_outline${theme === "dark" && "_white"}.png` },
+    { key: "name", label: "Tên", icon: `/assets/store${theme === "dark" ? "_white" : ""}.png` },
+    { key: "standout", label: "Nổi bật", icon: `/assets/ic_fire${theme === "dark" ? "_white" : ""}.png` },
+    { key: "rating", label: "Đánh giá", icon: `/assets/ic_star_outline${theme === "dark" ? "_white" : ""}.png` },
   ];
 
   return (
@@ -61,7 +61,9 @@ const SortBy = () => {
               <h3 className='text-[#4A4B4D] dark:text-gray-100 text-[18px] font-medium'>{option.label}</h3>
               <div className='relative w-[26px] h-[26px]'>
                 <Image
-                  src={`/assets/${sort === option.key ? "button_active" : `button${theme === "dark" && "_white"}`}.png`}
+                  src={`/assets/${
+                    sort === option.key ? "button_active" : `button${theme === "dark" ? "_white" : ""}`
+                  }.png`}
                   alt=''
                   layout='fill'
                   objectFit='contain'

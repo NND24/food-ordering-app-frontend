@@ -13,7 +13,7 @@ const ChooseStarRating = ({ ratingValue, setRatingValue }) => {
       {Array.from({ length: 5 }, (_, index) => (
         <Image
           key={index}
-          src={index < ratingValue ? "/assets/star_active.png" : `/assets/star${theme === "dark" && "_white"}.png`}
+          src={index < ratingValue ? "/assets/star_active.png" : `/assets/star${theme === "dark" ? "_white" : ""}.png`}
           alt=''
           width={40}
           height={40}

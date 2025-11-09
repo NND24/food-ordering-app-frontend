@@ -94,7 +94,7 @@ const FavoriteItem = ({ store }) => {
       >
         <div className='relative w-6 h-6'>
           <Image
-            src={`/assets/trash${theme === "dark" && "_white"}.png`}
+            src={`/assets/trash${theme === "dark" ? "_white" : ""}.png`}
             alt='remove'
             fill
             className='object-contain'

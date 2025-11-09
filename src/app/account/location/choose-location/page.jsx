@@ -249,7 +249,7 @@ const Page = () => {
               <div className='fixed top-0 right-0 left-0 z-10 flex items-center gap-2 bg-white dark:bg-gray-900 h-[85px] px-4 md:static'>
                 <div onClick={() => router.back()} className='relative w-[30px] pt-[30px] cursor-pointer'>
                   <Image
-                    src={`/assets/arrow_left_long${theme === "dark" && "_white"}.png`}
+                    src={`/assets/arrow_left_long${theme === "dark" ? "_white" : ""}.png`}
                     alt=''
                     layout='fill'
                     objectFit='contain'
@@ -358,7 +358,7 @@ const Page = () => {
                   }}
                 >
                   <Image
-                    src={`/assets/arrow_left_long${theme === "dark" && "_white"}.png`}
+                    src={`/assets/arrow_left_long${theme === "dark" ? "_white" : ""}.png`}
                     alt=''
                     layout='fill'
                     objectFit='contain'

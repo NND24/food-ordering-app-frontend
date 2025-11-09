@@ -106,7 +106,7 @@ const page = () => {
         <div className='fixed top-0 right-0 left-0 z-10 flex items-center gap-[40px] bg-[#fff] dark:bg-gray-800 h-[85px] px-[10px] md:static border-b-[6px] border-b-[#e0e0e0a3] dark:border-b-gray-700'>
           <Link href='/account/location' className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px]'>
             <Image
-              src={`/assets/arrow_left_long${theme === "dark" && "_white"}.png`}
+              src={`/assets/arrow_left_long${theme === "dark" ? "_white" : ""}.png`}
               alt=''
               layout='fill'
               objectFit='contain'
@@ -160,7 +160,7 @@ const page = () => {
             </div>
             <div className='relative w-[20px] pt-[20px] md:w-[20px] md:pt-[20px]'>
               <Image
-                src={`/assets/arrow_right${theme === "dark" && "_white"}.png`}
+                src={`/assets/arrow_right${theme === "dark" ? "_white" : ""}.png`}
                 alt=''
                 layout='fill'
                 objectFit='contain'

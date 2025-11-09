@@ -8,7 +8,6 @@ async function loginAndReturnPage() {
   const page = await context.newPage();
 
   try {
-    console.log("🔄 Logging in...");
     await page.goto("http://localhost:3000/auth/login");
 
     const { LEGIT_EMAIL, LEGIT_PASSWORD } = authData;
@@ -21,7 +20,6 @@ async function loginAndReturnPage() {
     await page.click('button[name="submitBtn"]');
 
     await page.waitForSelector('[name="home_page"]', { timeout: 15000 });
-    console.log("✅ Login successful!");
 
     return { browser, page };
   } catch (error) {
@@ -37,7 +35,6 @@ async function loginNoDataAndReturnPage() {
   const page = await context.newPage();
 
   try {
-    console.log("🔄 Logging in with no data...");
     await page.goto("http://localhost:3000/auth/login");
 
     const { UNLEGIT_EMAIL, UNLEGIT_PASSWORD } = authData;
@@ -50,7 +47,6 @@ async function loginNoDataAndReturnPage() {
     await page.click('button[name="submitBtn"]');
 
     await page.waitForSelector('[name="home_page"]', { timeout: 15000 });
-    console.log("✅ Login successful!");
 
     return { browser, page };
   } catch (error) {

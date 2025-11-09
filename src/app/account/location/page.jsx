@@ -106,7 +106,7 @@ const page = () => {
             className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px] cursor-pointer'
           >
             <Image
-              src={`/assets/arrow_left_long${theme === "dark" && "_white"}.png`}
+              src={`/assets/arrow_left_long${theme === "dark" ? "_white" : ""}.png`}
               alt=''
               layout='fill'
               objectFit='contain'
@@ -171,7 +171,7 @@ const page = () => {
                     className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px] cursor-pointer'
                   >
                     <Image
-                      src={`/assets/editing${theme === "dark" && "_white"}.png`}
+                      src={`/assets/editing${theme === "dark" ? "_white" : ""}.png`}
                       alt=''
                       layout='fill'
                       objectFit='contain'
@@ -183,7 +183,7 @@ const page = () => {
                     className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px] cursor-pointer'
                   >
                     <Image
-                      src={`/assets/trash${theme === "dark" && "_white"}.png`}
+                      src={`/assets/trash${theme === "dark" ? "_white" : ""}.png`}
                       alt=''
                       layout='fill'
                       objectFit='contain'
@@ -197,7 +197,7 @@ const page = () => {
               <div className='p-[8px] bg-[#e0e0e0a3] dark:bg-gray-700 rounded-full h-fit'>
                 <div className='relative w-[20px] pt-[20px]'>
                   <Image
-                    src={`/assets/add_home${theme === "dark" && "_white"}.png`}
+                    src={`/assets/add_home${theme === "dark" ? "_white" : ""}.png`}
                     alt=''
                     layout='fill'
                     objectFit='contain'
@@ -262,7 +262,7 @@ const page = () => {
                     className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px] cursor-pointer'
                   >
                     <Image
-                      src={`/assets/editing${theme === "dark" && "_white"}.png`}
+                      src={`/assets/editing${theme === "dark" ? "_white" : ""}.png`}
                       alt=''
                       layout='fill'
                       objectFit='contain'
@@ -274,7 +274,7 @@ const page = () => {
                     className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px] cursor-pointer'
                   >
                     <Image
-                      src={`/assets/trash${theme === "dark" && "_white"}.png`}
+                      src={`/assets/trash${theme === "dark" ? "_white" : ""}.png`}
                       alt=''
                       layout='fill'
                       objectFit='contain'
@@ -288,7 +288,7 @@ const page = () => {
               <div className='p-[8px] bg-[#e0e0e0a3] dark:bg-gray-700 rounded-full'>
                 <div className='relative w-[20px] pt-[20px]'>
                   <Image
-                    src={`/assets/briefcase${theme === "dark" && "_white"}.png`}
+                    src={`/assets/briefcase${theme === "dark" ? "_white" : ""}.png`}
                     alt=''
                     layout='fill'
                     objectFit='contain'
@@ -356,7 +356,7 @@ const page = () => {
                         className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px] cursor-pointer'
                       >
                         <Image
-                          src={`/assets/editing${theme === "dark" && "_white"}.png`}
+                          src={`/assets/editing${theme === "dark" ? "_white" : ""}.png`}
                           alt=''
                           layout='fill'
                           objectFit='contain'
@@ -368,7 +368,7 @@ const page = () => {
                         className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px] cursor-pointer'
                       >
                         <Image
-                          src={`/assets/trash${theme === "dark" && "_white"}.png`}
+                          src={`/assets/trash${theme === "dark" ? "_white" : ""}.png`}
                           alt=''
                           layout='fill'
                           objectFit='contain'
@@ -386,7 +386,7 @@ const page = () => {
               <div className='p-[8px] bg-[#e0e0e0a3] dark:bg-gray-700 rounded-full h-fit'>
                 <div className='relative w-[20px] pt-[20px]'>
                   <Image
-                    src={`/assets/plus${theme === "dark" && "_white"}.png`}
+                    src={`/assets/plus${theme === "dark" ? "_white" : ""}.png`}
                     alt=''
                     layout='fill'
                     objectFit='contain'

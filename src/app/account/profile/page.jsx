@@ -86,7 +86,7 @@ const page = () => {
         <h3 className='text-[28px] font-bold text-gray-900 dark:text-gray-100'>Thông tin cá nhân</h3>
         <Link href='/notifications' className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px]'>
           <Image
-            src={`/assets/notification${theme === "dark" && "_white"}.png`}
+            src={`/assets/notification${theme === "dark" ? "_white" : ""}.png`}
             alt=''
             layout='fill'
             objectFit='contain'
@@ -141,7 +141,7 @@ const page = () => {
                   <div {...getRootProps()}>
                     <input {...getInputProps()} />
                     <Image
-                      src={`/assets/camera${theme === "dark" && "_white"}.png`}
+                      src={`/assets/camera${theme === "dark" ? "_white" : ""}.png`}
                       alt=''
                       width={40}
                       height={40}

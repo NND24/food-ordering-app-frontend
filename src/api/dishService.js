@@ -1,7 +1,13 @@
 import { config, instance } from "../utils/axiosConfig";
 
-const getAllDish = async (storeId) => {
-  const response = await instance.get(`/customer-store/${storeId}/dish`, config());
+const getAllDish = async (storeId, activeOnly = false) => {
+  const response = await instance.get(
+    `/customer-store/${storeId}/dish`,
+    {
+      params: { activeOnly },
+    },
+    config()
+  );
   if (response.data) {
     return response.data;
   }
@@ -14,17 +20,7 @@ const getDish = async (dishId) => {
   }
 };
 
-const getActiveStoreDishGroups = async (storeId) => {
-  try {
-    const response = await instance.get(`/dish-group/store/${storeId}/active`);
-    return response.data;
-  } catch (error) {
-    return error.response?.data || { message: "Unknown error occurred" };
-  }
-};
-
 export const dishService = {
   getAllDish,
   getDish,
-  getActiveStoreDishGroups,
 };

@@ -68,7 +68,7 @@ const page = () => {
                 >
                   <div className='relative w-[25px] h-[25px] ml-[20px]'>
                     <Image
-                      src={`/assets/email${theme === "dark" && "_white"}.png`}
+                      src={`/assets/email${theme === "dark" ? "_white" : ""}.png`}
                       alt=''
                       layout='fill'
                       loading='lazy'

@@ -82,7 +82,7 @@ const page = () => {
             <div className='flex items-center gap-[10px]'>
               <div className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px]'>
                 <Image
-                  src={`/assets/favorite${theme === "dark" && "_white"}.png`}
+                  src={`/assets/favorite${theme === "dark" ? "_white" : ""}.png`}
                   alt=''
                   layout='fill'
                   objectFit='contain'
@@ -92,7 +92,7 @@ const page = () => {
             </div>
             <div className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px]'>
               <Image
-                src={`/assets/arrow_right${theme === "dark" && "_white"}.png`}
+                src={`/assets/arrow_right${theme === "dark" ? "_white" : ""}.png`}
                 alt=''
                 layout='fill'
                 objectFit='contain'
@@ -109,7 +109,7 @@ const page = () => {
           <div className='flex items-center gap-[10px]'>
             <div className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px]'>
               <Image
-                src={`/assets/location${theme === "dark" && "_white"}.png`}
+                src={`/assets/location${theme === "dark" ? "_white" : ""}.png`}
                 alt=''
                 layout='fill'
                 objectFit='contain'
@@ -119,7 +119,7 @@ const page = () => {
           </div>
           <div className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px]'>
             <Image
-              src={`/assets/arrow_right${theme === "dark" && "_white"}.png`}
+              src={`/assets/arrow_right${theme === "dark" ? "_white" : ""}.png`}
               alt=''
               layout='fill'
               objectFit='contain'
@@ -136,7 +136,7 @@ const page = () => {
             <div className='flex items-center gap-[10px]'>
               <div className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px]'>
                 <Image
-                  src={`/assets/lock${theme === "dark" && "_white"}.png`}
+                  src={`/assets/lock${theme === "dark" ? "_white" : ""}.png`}
                   alt=''
                   layout='fill'
                   objectFit='contain'
@@ -146,7 +146,7 @@ const page = () => {
             </div>
             <div className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px]'>
               <Image
-                src={`/assets/arrow_right${theme === "dark" && "_white"}.png`}
+                src={`/assets/arrow_right${theme === "dark" ? "_white" : ""}.png`}
                 alt=''
                 layout='fill'
                 objectFit='contain'
@@ -163,7 +163,7 @@ const page = () => {
           <div className='flex items-center gap-[10px]'>
             <div className='relative w-[30px] pt-[30px] md:w-[25px] md:pt-[25px]'>
               <Image
-                src={`/assets/setting${theme === "dark" && "_white"}.png`}
+                src={`/assets/setting${theme === "dark" ? "_white" : ""}.png`}
                 alt=''
                 layout='fill'
                 objectFit='contain'
@@ -173,7 +173,7 @@ const page = () => {
           </div>
           <div className='relative w-[25px] pt-[25px] md:w-[20px] md:pt-[20px]'>
             <Image
-              src={`/assets/arrow_right${theme === "dark" && "_white"}.png`}
+              src={`/assets/arrow_right${theme === "dark" ? "_white" : ""}.png`}
               alt=''
               layout='fill'
               objectFit='contain'

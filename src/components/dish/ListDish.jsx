@@ -8,7 +8,7 @@ const ListDish = ({ storeInfo, cartItems }) => {
 
   const getStoreGroupDish = async () => {
     try {
-      const response = await dishService.getActiveStoreDishGroups(storeInfo._id);
+      const response = await dishService.getAllDish(storeInfo._id, true);
       setAllDishGroups(response.data);
     } catch (error) {}
   };

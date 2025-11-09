@@ -59,7 +59,7 @@ const NavBar = ({ page }) => {
             {/* Cart */}
             <Link href='/carts' className='relative group flex flex-col items-center gap-[1px]'>
               <Image
-                src={`/assets/cart${theme === "dark" && "_white"}.png`}
+                src={`/assets/cart${theme === "dark" ? "_white" : ""}.png`}
                 alt=''
                 width={24}
                 height={24}
@@ -94,7 +94,7 @@ const NavBar = ({ page }) => {
             {/* Orders */}
             <Link href='/orders' className='relative group flex flex-col items-center gap-[1px]'>
               <Image
-                src={`/assets/ic_order${theme === "dark" && "_white"}.png`}
+                src={`/assets/ic_order${theme === "dark" ? "_white" : ""}.png`}
                 alt=''
                 width={24}
                 height={24}
@@ -148,7 +148,7 @@ const NavBar = ({ page }) => {
             <div className='hidden md:block'>
               <Link href='/notifications' className='relative group flex flex-col items-center gap-[1px]'>
                 <Image
-                  src={`/assets/notification${theme === "dark" && "_white"}.png`}
+                  src={`/assets/notification${theme === "dark" ? "_white" : ""}.png`}
                   alt=''
                   width={24}
                   height={24}
@@ -187,7 +187,7 @@ const NavBar = ({ page }) => {
             <div className='block md:hidden lg:block'>
               <Link href='/favorite' className='relative group flex flex-col items-center gap-[1px]'>
                 <Image
-                  src={`/assets/favorite${theme === "dark" && "_white"}.png`}
+                  src={`/assets/favorite${theme === "dark" ? "_white" : ""}.png`}
                   alt=''
                   width={24}
                   height={24}
@@ -223,7 +223,7 @@ const NavBar = ({ page }) => {
             {/* Account */}
             <Link href='/account' className='group flex flex-col items-center gap-[1px]'>
               <Image
-                src={`/assets/account${theme === "dark" && "_white"}.png`}
+                src={`/assets/account${theme === "dark" ? "_white" : ""}.png`}
                 alt=''
                 width={24}
                 height={24}
