@@ -378,7 +378,7 @@ const Page = () => {
                   </div>
 
                   {/* VNPay */}
-                  <div className='flex gap-4'>
+                  {/* <div className='flex gap-4'>
                     <div className='relative w-7 pt-7'>
                       <Image src='/assets/vnpay.jpg' alt='' layout='fill' objectFit='contain' />
                     </div>
@@ -397,7 +397,7 @@ const Page = () => {
                         />
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className='h-[6px] w-full bg-gray-100 dark:bg-gray-700 my-4 rounded-full'></div>
