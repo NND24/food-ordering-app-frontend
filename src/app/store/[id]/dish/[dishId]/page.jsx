@@ -169,34 +169,31 @@ const page = () => {
     const isRadio = toppingGroup.onlyOnce === true;
 
     if (isRadio) {
-      const prevTopping = toppingsValue.find((item) => item.groupId === toppingGroup._id);
+      // Xóa tất cả topping trong cùng group (kể cả checkbox)
+      setToppings((prev) =>
+        prev.filter((id) => {
+          const tp = toppingsValue.find((t) => t._id === id);
+          return tp?.groupId !== toppingGroup._id;
+        })
+      );
 
-      if (prevTopping) {
-        if (prevTopping._id === topping._id) {
-          const priceChange = -prevTopping.price * quantity;
-          setPrice((prev) => prev + priceChange);
+      setToppingsValue((prev) => prev.filter((tp) => tp.groupId !== toppingGroup._id));
 
-          setToppings((prev) => prev.filter((id) => id !== topping._id));
-          setToppingsValue((prev) => prev.filter((tp) => tp.toppingId !== topping._id));
-          return;
-        } else {
-          const priceChange = -prevTopping.price * quantity;
-          setPrice((prev) => prev + priceChange);
-
-          setToppings((prev) => prev.filter((id) => id !== prevTopping._id));
-          setToppingsValue((prev) => prev.filter((tp) => tp.toppingId !== prevTopping._id));
-        }
+      // Nếu click lại vào topping đang được chọn → bỏ chọn
+      const isSelected = toppingsValue.some((tp) => tp._id === topping._id);
+      if (isSelected) {
+        // Trừ giá vì bỏ chọn
+        setPrice((prev) => prev - toppingPrice * quantity);
+        return;
       }
 
-      setToppingsValue((prev) => {
-        const updated = prev.filter((item) => item.groupId !== toppingGroup._id);
-        return [...updated, { ...topping, groupId: toppingGroup._id, _id: topping._id }];
-      });
-
+      // Thêm topping mới
       setToppings((prev) => [...prev, topping._id]);
+      setToppingsValue((prev) => [...prev, { ...topping, groupId: toppingGroup._id, _id: topping._id }]);
 
-      const priceChange = toppingPrice * quantity;
-      setPrice((prev) => prev + priceChange);
+      // Thêm giá
+      setPrice((prev) => prev + toppingPrice * quantity);
+      return;
     } else {
       let priceChange = 0;
 

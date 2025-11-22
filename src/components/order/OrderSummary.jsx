@@ -29,29 +29,46 @@ const OrderSummary = ({ detailItems, subtotalPrice, shippingFee, totalDiscount }
                   </span>
                 </div>
 
-                <div className='flex flex-1 justify-between'>
-                  <div className='flex flex-col'>
-                    <h3
-                      className='text-[#4A4B4D] dark:text-gray-100 text-[18px] font-bold line-clamp-1 pr-1'
-                      name='dishName'
-                    >
+                <div className='flex flex-col flex-1 justify-between'>
+                  <div
+                    className='flex justify-between cursor-pointer'
+                    onClick={() => {
+                      setSelectedId(item.dishId);
+                      setOpenDetailDish(true);
+                    }}
+                  >
+                    <span className='text-[#4A4B4D] text-[18px] font-bold line-clamp-1 pr-1' name='dishName'>
                       {item?.dishName}
-                    </h3>
-                    {item.toppings.length > 0 &&
-                      item.toppings.map((topping) => (
-                        <p className='text-[#a4a5a8]' name='toppingName'>
-                          {topping.toppingName}
-                        </p>
-                      ))}
-                    {item.note && (
-                      <p className='text-[#a4a5a8]' name='toppingName'>
-                        Ghi chú: {item.note}
-                      </p>
-                    )}
+                    </span>
+
+                    <span className='text-[#4A4B4D]' name='price'>
+                      {Number(item.price.toFixed(0)).toLocaleString("vi-VN")}đ
+                    </span>
                   </div>
-                  <span className='text-[#4A4B4D] dark:text-gray-100' name='price'>
-                    {Number(totalPrice.toFixed(0)).toLocaleString("vi-VN")}đ
-                  </span>
+                  {item.toppings.length > 0 &&
+                    item.toppings.map((topping) => (
+                      <div
+                        key={topping._id}
+                        className='flex justify-between cursor-pointer'
+                        onClick={() => {
+                          setSelectedToppingId(topping._id);
+                          setOpenDetailTopping(true);
+                        }}
+                      >
+                        <span className='text-[#a4a5a8]' name='toppingName'>
+                          {topping.toppingName}
+                        </span>
+
+                        <span className='text-[#a4a5a8]' name='price'>
+                          {Number(topping.price.toFixed(0)).toLocaleString("vi-VN")}đ
+                        </span>
+                      </div>
+                    ))}
+                  {item.note && (
+                    <p className='text-[#a4a5a8]' name='toppingName'>
+                      Ghi chú: {item.note}
+                    </p>
+                  )}
                 </div>
               </div>
             );
