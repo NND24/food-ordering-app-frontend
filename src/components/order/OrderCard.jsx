@@ -13,8 +13,8 @@ const OrderCard = ({ order }) => {
       confirmed: "Quán đã xác nhận đơn hàng",
       preparing: "Quán đang chuẩn bị món ăn",
       finished: "Món ăn đã hoàn thành",
-      taken: "Shipper đã lấy món ăn",
-      delivering: "Shipper đang vận chuyển đến chỗ bạn",
+      taken: "Người giao hàng đã lấy món ăn",
+      delivering: "Người giao hàng đang vận chuyển đến chỗ bạn",
       delivered: "Đơn hàng đã được giao tới nơi",
       done: "Đơn hàng được giao hoàn tất",
     };

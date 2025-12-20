@@ -31,7 +31,7 @@ const Page = () => {
   const { user } = useAuth();
   const { refreshOrder } = useOrder();
   const { refreshCart } = useCart();
-  const { sendNotification } = useSocket();
+  const { sendNotification, notifications } = useSocket();
 
   const getOrderDetail = async () => {
     try {
@@ -57,6 +57,15 @@ const Page = () => {
   }, []);
 
   useEffect(() => {
+    if (notifications) {
+      const newOrderNotification = notifications.find((notif) => notif.orderId === orderId);
+      if (newOrderNotification) {
+        getOrderDetail();
+      }
+    }
+  }, [notifications]);
+
+  useEffect(() => {
     if (orderDetail) {
       const statusMap = {
         cancelled: "Đơn hàng đã bị hủy",
@@ -64,8 +73,8 @@ const Page = () => {
         confirmed: "Quán đã xác nhận đơn hàng",
         preparing: "Quán đang chuẩn bị món ăn",
         finished: "Món ăn đã hoàn thành",
-        taken: "Shipper đã lấy món ăn",
-        delivering: "Shipper đang vận chuyển đến chỗ bạn",
+        taken: "Người giao hàng đã lấy món ăn",
+        delivering: "Đã bàn giao đơn hàng cho người giao hàng",
         delivered: "Đơn hàng đã được giao tới nơi",
         done: "Đơn hàng được giao hoàn tất",
       };
@@ -216,7 +225,7 @@ const Page = () => {
                       </button>
                     </div>
                   )}
-                  {orderDetail?.status === "taken" && (
+                  {orderDetail?.status === "delivering" && (
                     <div className='hidden sm:block'>
                       <button
                         className='flex items-center gap-2 px-4 py-2 text-nowrap rounded-full bg-gradient-to-r from-[#fc6011] to-[#ff8743] text-white font-semibold shadow-md hover:shadow-xl transition hover:scale-105'
@@ -341,12 +350,57 @@ const Page = () => {
                   ))}
                 </div>
 
+                {orderDetail?.shipInfo?.deliverer && (
+                  <>
+                    <div className='h-[6px] w-full bg-gray-100 dark:bg-gray-700 my-4 rounded-full'></div>
+
+                    {/* Shipping Info */}
+                    <div className='bg-white dark:bg-gray-800 flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md md:p-6 hover:shadow-lg transition space-y-4'>
+                      <div className='flex items-center justify-between'>
+                        <span className='text-[#333] dark:text-gray-100 text-lg font-bold'>
+                          Thông tin người giao hàng
+                        </span>
+                      </div>
+
+                      {[
+                        {
+                          icon: `/assets/account${theme === "dark" ? "_white" : ""}.png`,
+                          value: orderDetail?.shipInfo?.deliverer?.name,
+                        },
+                        {
+                          icon: `/assets/phone${theme === "dark" ? "_white" : ""}.png`,
+                          value: orderDetail?.shipInfo?.deliverer?.phone,
+                        },
+                      ].map((item, idx) => (
+                        <div
+                          key={idx}
+                          className='relative flex items-center bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-200 rounded-xl border border-gray-200 dark:border-gray-600 overflow-hidden mb-3'
+                        >
+                          <Image
+                            src={item.icon}
+                            alt=''
+                            width={20}
+                            height={20}
+                            className='absolute left-3 top-1/2 transform -translate-y-1/2'
+                          />
+                          <input
+                            type='text'
+                            readOnly
+                            value={item.value}
+                            className='bg-gray-50 dark:bg-gray-700 text-base py-2 pr-3 pl-9 w-full text-gray-700 dark:text-gray-200'
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+
                 {/* Divider */}
                 <div className='h-[6px] w-full bg-gray-100 dark:bg-gray-700 my-4 rounded-full'></div>
 
                 {/* Payment Info */}
                 <div className='bg-white dark:bg-gray-800 flex flex-col p-5 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md md:p-6 hover:shadow-lg transition space-y-4'>
-                  <div className='pb-5 flex items-center justify-between'>
+                  <div className='flex items-center justify-between'>
                     <span className='text-[#333] dark:text-gray-100 text-lg font-bold'>Thông tin thanh toán</span>
                   </div>
 
