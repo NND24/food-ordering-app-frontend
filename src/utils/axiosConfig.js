@@ -1,9 +1,11 @@
 import { authService } from "@/api/authService";
 import axios from "axios";
 
+const API_BASE = process.env.NEXT_PUBLIC_SERVER_URI || "http://localhost:5000";
+
 export const instance = axios.create({
   withCredentials: true,
-  baseURL: "http://localhost:5000/api/v1",
+  baseURL: `${API_BASE}/api/v1`,
 });
 
 // Hàm config header với token hiện tại
@@ -30,7 +32,7 @@ instance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         // Gọi API refresh
-        const refreshResponse = await axios.get("http://localhost:5000/api/v1/auth/refresh", {
+        const refreshResponse = await axios.get(`${API_BASE}/api/v1/auth/refresh`, {
           withCredentials: true,
         });
 
